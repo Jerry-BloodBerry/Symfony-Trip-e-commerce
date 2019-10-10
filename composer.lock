@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0329eddba2fa7c2fa81692f7111062f",
+    "content-hash": "b8bd0dbfb982d13121489b56a78ff8bd",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2231,6 +2231,28 @@
                 "mailer"
             ],
             "time": "2019-06-28T15:39:50+00:00"
+        },
+        {
+            "name": "symfony/apache-pack",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/apache-pack.git",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/apache-pack/zipball/3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "shasum": ""
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for Apache support in Symfony",
+            "time": "2017-12-12T01:46:35+00:00"
         },
         {
             "name": "symfony/asset",
@@ -6741,7 +6763,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "easycorp/easyadmin-bundle": 20
+        "easycorp/easyadmin-bundle": 20,
+        "sensio/framework-extra-bundle": 20,
+        "symfony/apache-pack": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
