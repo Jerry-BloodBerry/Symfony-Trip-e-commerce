@@ -11,7 +11,7 @@
         "easycorp/easyadmin-bundle": "^2.0@dev",
         "sensio/framework-extra-bundle": "^5.4@dev",
         "symfony/apache-pack": "dev-master",
-        "symfony/asset": "*",
+        "symfony/asset": "4.3.*",
         "symfony/console": "*",
         "symfony/dotenv": "*",
         "symfony/expression-language": "*",
