@@ -2,17 +2,118 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Trip Advisor{% endblock %}</title>
+        <title>{% block title %}Dream Holiday{% endblock %}</title>
         <link rel="SHORTCUT ICON" type="image/x-icon" href="{{ asset('images/ico.png') }}">
-        {% block stylesheets %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/322f761de3.js"></script> {# tiny pics from font-awesome#}
 
+        {% block stylesheets %}
         {% endblock %}
     </head>
     <body>
         {% block navbar %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">Dream Holiday</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Destinations</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Holiday
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">First Minute</a>
+                                <a class="dropdown-item" href="#">Last Minute</a>
+                                <a class="dropdown-item" href="#">All Inclusive</a>
+                                <a class="dropdown-item" href="#">For Children</a>
+                                <a class="dropdown-item" href="#">Group Tours</a>
+                                <a class="dropdown-item" href="#">Cruises</a>
+                                <a class="dropdown-item" href="#">Bargain Zone</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Customer Ratings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Forum</a>
+                        </li>
+                    </ul>
+                    <a id="user-nav-icon">Sign in<i class="fa fa-user mx-2" style="color: white; font-size: 20px;"></i></a>
+                </div>
+            </nav>
+
         {% endblock %}
 
         {% block body %}
+        {% endblock %}
+
+        {% block footer %}
+            <footer class="footer-custom bg-dark">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-2">
+                            <h5 class="mt-4 ml-2">Information</h5>
+                            <ul class="list list-unstyled ml-2">
+                                <li class="mt-1 footer-link"><a href="#">How to book?</a></li>
+                                <li class="footer-link"><a href="#">Privacy Policy</a></li>
+                                <li class="footer-link"><a href="#">Cookies</a></li>
+                                <li class="footer-link"><a href="#">Help Center</a></li>
+                                <li class="footer-link"><a href="#">Forum</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2">
+                            <h5 class="mt-4 ml-2">Account</h5>
+                            <ul class="list list-unstyled ml-2">
+                                <li class="mt-1 footer-link"><a href="#">Your bookings</a></li>
+                                <li class="footer-link"><a href="#">Register</a></li>
+                                <li class="footer-link"><a href="#">Login</a></li>
+                                <li class="footer-link"><a href="#">Edit Data</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2">
+                            <h5 class="mt-4 ml-2">Promotions</h5>
+                            <ul class="list list-unstyled ml-2">
+                                <li class="mt-1 footer-link"><a href="#">First Minute</a></li>
+                                <li class="footer-link"><a href="#">Last Minute</a></li>
+                                <li class="footer-link"><a href="#">Bargain Zone</a></li>
+                                <li class="footer-link"><a href="#">All our promotions</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2">
+                            <h5 class="mt-4 ml-2">Dream Holiday</h5>
+                            <ul class="list list-unstyled ml-2">
+                                <li class="mt-1 footer-link"><a href="#">About us</a></li>
+                                <li class="footer-link"><a href="#">Contact</a></li>
+                                <li class="footer-link"><a href="#">Career</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3">
+                            <h5 class="mt-4">Sign up for Newsletter</h5>
+
+                        </div>
+                    </div>
+                </div>
+            </footer>
         {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
