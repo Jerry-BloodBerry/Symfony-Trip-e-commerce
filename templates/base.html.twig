@@ -57,7 +57,11 @@
                             <a class="nav-link" href="#">Forum</a>
                         </li>
                     </ul>
-                    <a id="user-nav-icon" href="{{ path('app_login') }}">Sign in<i class="fa fa-user mx-2" style="color: white; font-size: 20px;"></i></a>
+                    {% if is_granted('ROLE_USER') %}
+                        <a id="user-nav-icon" href="{{ path('app_logout') }}">Sign out<i class="fa fa-sign-out mx-2" style="color: white; font-size: 20px;"></i></a>
+                    {% else %}
+                        <a id="user-nav-icon" href="{{ path('app_login') }}">Sign in<i class="fa fa-user mx-2" style="color: white; font-size: 20px;"></i></a>
+                    {% endif %}
                 </div>
             </nav>
 

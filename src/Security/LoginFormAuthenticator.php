@@ -2,10 +2,12 @@
 
 namespace App\Security;
 
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use App\Repository\UserRepository;
@@ -34,10 +36,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $postData = $request->request->get('login');
         $email = $postData['email'];
         $pass = $postData['password'];
-        return [
+        $credentials = [
             'email' => $email,
             'password' => $pass
         ];
+
+        $request->getSession()->set(
+            Security::LAST_USERNAME,
+            $credentials['email']
+        );
+        return $credentials;
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
