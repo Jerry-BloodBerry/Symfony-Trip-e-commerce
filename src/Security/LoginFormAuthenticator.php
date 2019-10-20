@@ -13,9 +13,11 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use App\Repository\UserRepository;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
+
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
-
+    use TargetPathTrait;
     private $userRepository;
     private $router;
     private $passwordEncoder;
@@ -64,6 +66,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        if($targetPath = $this->getTargetPath($request->getSession(), $providerKey))
+        {
+            return new RedirectResponse($targetPath);
+        }
+
         return new RedirectResponse($this->router->generate('home'));
     }
 
