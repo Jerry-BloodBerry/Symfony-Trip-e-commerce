@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,15 +28,6 @@ class LoginType extends AbstractType
                 'label' => 'Password',
                 'attr' => [
                     'class' => 'form-control'
-                ]
-            ])
-            ->add('checkbox', CheckboxType::class, [
-                'label' => 'Remember me',
-                'required' => false,
-                'data' => true,
-                'mapped' => false,
-                'attr' => [
-                    'class' => 'form-check-input',
                 ]
             ])
             ->add('submit', SubmitType::class, [

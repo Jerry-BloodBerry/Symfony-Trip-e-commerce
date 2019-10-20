@@ -25,7 +25,8 @@
                             {{ form_widget(form.password) }}
                         </div>
                         <div class="form-check">
-                            {{ form_widget(form.checkbox) }} {{ form_label(form.checkbox) }}
+                            <input type="checkbox" name="_remember_me">
+                            <label class="form-check-label">Remember me</label>
                         </div>
                         <div class="my-custom-class-for-errors">
                             {% if error %}

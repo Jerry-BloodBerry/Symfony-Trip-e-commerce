@@ -12,16 +12,19 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use App\Repository\UserRepository;
 use Symfony\Component\Routing\RouterInterface;
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
 
     private $userRepository;
     private $router;
-    public function __construct(UserRepository $userRepository, RouterInterface $router)
+    private $passwordEncoder;
+
+    public function __construct(UserRepository $userRepository, RouterInterface $router, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->userRepository = $userRepository;
         $this->router = $router;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function supports(Request $request)
@@ -55,15 +58,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        if($user==null) return false;
-        else
-        {
-            if($user->getPassword()==$credentials['password'])
-            {
-                return true;
-            }
-            return false;
-        }
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
 
