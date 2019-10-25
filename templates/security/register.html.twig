@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register - Dream Holiday{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                {{ form_start(form) }}
+
+                <div class="row login-form-row">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6 form-space">
+                        <h3 class="form-title">Register</h3>
+                        <div class="form-group">
+                            <label for="inputFirstName">{{ form_label(form.firstName) }}</label>
+                            {{ form_widget(form.firstName) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLastName">{{ form_label(form.lastName) }}</label>
+                            {{ form_widget(form.lastName) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail">{{ form_label(form.email) }}</label>
+                            {{ form_widget(form.email) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">{{ form_label(form.password) }}</label>
+                            {{ form_widget(form.password) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="inputRepeatPassword">{{ form_label(form.repeatPassword) }}</label>
+                            {{ form_widget(form.repeatPassword) }}
+                        </div>
+                        <div class="my-custom-class-for-errors">
+                            {% if error %}
+                                <small id="emailHelp" class="form-text text-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</small>
+                            {% endif %}
+                        </div>
+                        {{ form_widget(form.submit) }}
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

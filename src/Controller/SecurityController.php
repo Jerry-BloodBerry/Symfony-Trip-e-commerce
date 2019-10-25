@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\LoginType;
 
+use App\Form\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -35,5 +36,18 @@ class SecurityController extends AbstractController
     public function logout()
     {
         throw new \Exception('Action forbidden');
+    }
+    /**
+     * @Route("/register", name="app_register")
+     */
+    public function register(AuthenticationUtils $authenticationUtils)
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationType::class, $user);
+        $error = $authenticationUtils->getLastAuthenticationError();
+        return $this->render('security/register.html.twig', [
+            'form' => $form->createView(),
+            'error' => $error
+        ]);
     }
 }
