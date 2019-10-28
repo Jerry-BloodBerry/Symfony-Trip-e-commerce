@@ -6,8 +6,10 @@ use App\Entity\User;
 use App\Form\LoginType;
 
 use App\Form\RegistrationType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
@@ -40,14 +42,27 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(AuthenticationUtils $authenticationUtils)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
-        $error = $authenticationUtils->getLastAuthenticationError();
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $formUser = $form->getData();
+            $registrationFields = $request->request->get('registration');
+
+            $formUser->setPassword($passwordEncoder->encodePassword(
+                $formUser,
+                $registrationFields['password']
+                ));
+
+        }
+
         return $this->render('security/register.html.twig', [
             'form' => $form->createView(),
-            'error' => $error
+
         ]);
     }
 }
