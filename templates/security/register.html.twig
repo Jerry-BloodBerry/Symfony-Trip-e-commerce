@@ -27,6 +27,19 @@
                         <div class="form-group">
                             <label for="inputEmail"><span class="red">*</span>{{ form_label(form.email) }}</label>
                             {{ form_widget(form.email) }}
+                            <div class="my-custom-class-for-errors">
+                                {% if errors is defined %}
+                                    {% for error in errors %}
+                                        <small id="emailHelp" class="form-text text-danger">{{ error.message }}</small>
+                                    {% endfor %}
+                                    {% if errors|length > 0 %}
+                                        <script>
+                                                //$('#registration_email').focus().css('border-color','red');
+                                                $('#registration_email').focus();
+                                        </script>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword"><span class="red">*</span>{{ form_label(form.password) }}</label>
@@ -36,11 +49,6 @@
                             <label for="inputRepeatPassword"><span class="red">*</span>{{ form_label(form.repeatPassword) }}</label>
                             {{ form_widget(form.repeatPassword) }}
                         </div>
-{#                        <div class="my-custom-class-for-errors">#}
-{#                            {% if error %}#}
-{#                                <small id="emailHelp" class="form-text text-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</small>#}
-{#                            {% endif %}#}
-{#                        </div>#}
                         <div class="form-check">
                             {{ form_widget(form.subscribeNewsletter) }}
                             <label class="form-check-label">{{ form_label(form.subscribeNewsletter) }}</label>
