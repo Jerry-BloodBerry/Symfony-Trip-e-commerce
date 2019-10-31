@@ -1,3 +1,20 @@
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+.page-wrapper {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -250px;
+}
+.page-wrapper:after {
+    content: "";
+    display: block;
+    height:250px;
+    clear:both;
+ }
 #user-nav-icon {
     color: white;
     font-size: 18px;
@@ -9,8 +26,7 @@
 }
 
 .footer-custom {
-    position: absolute;
-    bottom: 0;
+    bottom:0;
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 250px;
@@ -24,4 +40,5 @@
 .footer-link a:hover {
     color: white;
 }
+
 
