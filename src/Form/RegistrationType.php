@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,20 +40,13 @@ class RegistrationType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('password', PasswordType::class, [
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Passwords do not match.',
+                'options' => ['attr' => ['class' => 'form-control']],
                 'required' => true,
-                'label' => 'Password',
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
-            ->add('repeatPassword', PasswordType::class, [
-                'mapped' => false,
-                'required' => true,
-                'label' => 'Repeat Password',
-                'attr' => [
-                    'class' => 'form-control'
-                ]
+                'first_options'  => ['label' => 'Password'],
+                'second_options' => ['label' => 'Repeat Password'],
             ])
             ->add('subscribeNewsletter', CheckboxType::class, [
                 'mapped' => false,

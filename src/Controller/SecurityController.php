@@ -67,7 +67,7 @@ class SecurityController extends AbstractController
 
             $formUser->setPassword($passwordEncoder->encodePassword(
                 $formUser,
-                $registrationFields['password']
+                $registrationFields['password']['first']
                 ));
             $formUser->setRegistrationDate(new \DateTime('now'));
 

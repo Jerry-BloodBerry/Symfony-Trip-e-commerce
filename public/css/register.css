@@ -17,6 +17,15 @@
 {
     margin: 10px auto;
 }
+.fa-times
+{
+    color: red;
+}
+.progress
+{
+    height: 5px;
+}
+
 .btn-register
 {
     width: 100%;
