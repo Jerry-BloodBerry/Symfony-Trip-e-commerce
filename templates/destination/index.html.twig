@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DestinationController!{% endblock %}
+
+{% block body %}
+{% for destination in destinations %}
+    <button class="btn btn-primary">{{ destination.destinationName }}</button>
+{% endfor %}
+{% endblock %}
