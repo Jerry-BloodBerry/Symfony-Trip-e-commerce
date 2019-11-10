@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Destinations - Dream Holiday{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/destinations/all.css') }}">
+{% endblock %}
 {% block body %}
     {% set counter = 0 %}
     {% for destination in destinations %}
         {% if counter == 0 %}
-            <div class="row mt-2">
+            <div class="row mt-2 mb-2">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6 text-center">
-                    <div class="row">
+                    <div class="row mb-2">
         {% endif %}
 
-            {% include 'destination/country_card.html.twig' with {'country_name': destination.destinationName} %}
+            {% include 'destination/country_card.html.twig' with {'country_name': destination.destinationName, 'country_image': destination.image} %}
             {% set counter = counter + 1 %}
 
         {% if counter == 3 %}

@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Destination;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Validator\Constraints\File;
 
 class DestinationFixture extends Fixture
 {
@@ -19,6 +20,7 @@ class DestinationFixture extends Fixture
     public const CHINA_REFERENCE = 'china';
     public function load(ObjectManager $manager)
     {
+
         $destination = $this->createDestination('Spain');
         $manager->persist($destination);
         $this->addReference(self::SPAIN_REFERENCE,$destination);
@@ -62,6 +64,7 @@ class DestinationFixture extends Fixture
     {
         $destination = new Destination();
         $destination->setDestinationName($name);
+        $destination->setImage('images/country_cards/' . $destination->getDestinationName() . '_card.jpg');
         return $destination;
     }
 }

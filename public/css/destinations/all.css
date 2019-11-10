@@ -1,0 +1,13 @@
+.card
+{
+    margin-bottom: 10px;
+}
+.card-body
+{
+    padding-bottom: 0 !important;
+    padding-top: 0.3rem !important;
+}
+.card-img-top
+{
+    margin-top: 0;
+}
