@@ -15,6 +15,9 @@ html, body {
     height:250px;
     clear:both;
  }
+.nav-link:focus {
+    outline: 0;
+}
 #user-nav-icon {
     color: white;
     font-size: 18px;
@@ -45,6 +48,7 @@ html, body {
 .footer-link a:hover {
     color: white;
 }
+
 
 
 

@@ -1,3 +1,11 @@
+.card-link
+{
+    color: #1d2124;
+}
+.card-link:hover
+{
+    color: #ffca43;
+}
 .card
 {
     margin-bottom: 10px;
