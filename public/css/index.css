@@ -1,0 +1,75 @@
+#hero-presentation {
+    background: url("../images/hero.jpg") no-repeat top;
+    padding-bottom: 4rem;
+}
+#title
+{
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 900;
+    font-size: 4rem;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: .5rem;
+}
+#subtitle
+{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #ffffff;
+}
+.subtitle-ndash {
+    color: #f3dc39;
+    font-weight: 700;
+}
+#search-form-container {
+    background-color: #ffffff;
+    padding: .4rem 2rem;
+    margin-top: 3rem;
+}
+form[name="booking_offer_search"] {
+    justify-content: center;
+}
+form[name="booking_offer_search"] div.input-group {
+    border-right: 1px #a09f9f solid;
+    padding-right: 1rem;
+}
+form[name="booking_offer_search"] input:last-child, form[name="booking_offer_search"] select:last-child {
+    border-radius: 0;
+    font-family: "Montserrat", sans-serif;
+    text-indent: .3em;
+    font-size: 1rem;
+    border: none;
+}
+form[name="booking_offer_search"] select {
+    /* Remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    font-family: "Montserrat", sans-serif;
+    min-width: 13rem;
+    padding-right: 2rem;
+    background: transparent url("data:image/svg+xml;utf8,<svg fill='rgb(0,58,110)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat center right;
+    color: #1d2124;
+}
+form[name="booking_offer_search"] input {
+    border: none;
+    font-family: "Montserrat", sans-serif;
+}
+.datepicker {
+    font-size: 0.875em;
+    padding-left: .3em;
+    padding-right: .3em;
+}
+.datepicker td, .datepicker th {
+    width: 1.5em;
+    height: 1.5em;
+}
+.datepicker:hover {
+    cursor: pointer;
+}
+.datepicker .today.active.day {
+    background-color: #f3dc39;
+    border-radius: 15px;
+}

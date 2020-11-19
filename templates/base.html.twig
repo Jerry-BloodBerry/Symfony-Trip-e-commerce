@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Dream Holiday{% endblock %}</title>
-    <link rel="SHORTCUT ICON" type="image/x-icon" href="{{ asset('images/ico.png') }}">
+    <link rel="SHORTCUT ICON" type="image/x-icon" href="{{ asset('images/logo.png') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://use.fontawesome.com/322f761de3.js"></script> {# tiny pics from font-awesome #}
+    <script src="https://kit.fontawesome.com/9bfed1b833.js" crossorigin="anonymous"></script> {# tiny pics from font-awesome #}
     <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto+Condensed&display=swap"
             rel="stylesheet"
@@ -27,8 +27,8 @@
                         <a class="navbar-brand" href="{{ path('home') }}">
                             <img class="d-inline-block align-top"
                                  height="39"
-                                 loading="lazy"
-                                 src="{{ asset('images/ico.png') }}"/>
+                                 src="{{ asset('images/logo.png') }}"
+                                 alt="dream holiday logo"/>
                         </a>
                         <a class="navbar-brand" id="brand-name-text" href="{{ path('home') }}">Dream Holiday</a>
                         <button class="navbar-toggler"
@@ -67,6 +67,9 @@
                                     <a class="nav-link" href="#">About Us</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="#">Ratings</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="#">Forum</a>
                                 </li>
                             </ul>
@@ -95,10 +98,8 @@
                     </div>
                 </nav>
             {% endblock %}
-            <div id="">
-                <h1 class="text-center mt-5" id="title">travel the world</h1>
-                <h2 class="text-center mt-2" id="subtitle"><span class="subtitle-ndash">&ndash;&ndash;</span> Book Today with Dream Holiday <span class="subtitle-ndash">&ndash;&ndash;</span></h2>
-            </div>
+            {% block page_content %}
+            {% endblock %}
         </div>
         <div id="hero-bottom">
             {% block footer %}
