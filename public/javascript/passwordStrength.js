@@ -31,7 +31,7 @@ function checkPasswordStrength(password) {
     }
 
     //If it has one special character, increase strength value.
-    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) {
+    if (password.match(/([!%&@#$^*?_~])/)) {
         strength += 1;
         $('.one-special-char').addClass('text-success');
         $('.one-special-char i').removeClass('fa-times').addClass('fa-check');
