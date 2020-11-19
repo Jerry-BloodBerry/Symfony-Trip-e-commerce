@@ -98,6 +98,6 @@ function checkPasswordStrength(password) {
             break;
     }
 
-    return password.length>=8 && password.length<=16;
+    return password.length>=8;
 
 }
