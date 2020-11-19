@@ -1,132 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Dream Holiday{% endblock %}</title>
-        <link rel="SHORTCUT ICON" type="image/x-icon" href="{{ asset('images/ico.png') }}">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="https://use.fontawesome.com/322f761de3.js"></script> {# tiny pics from font-awesome#}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Dream Holiday{% endblock %}</title>
+    <link rel="SHORTCUT ICON" type="image/x-icon" href="{{ asset('images/ico.png') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/322f761de3.js"></script> {# tiny pics from font-awesome #}
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto+Condensed&display=swap"
+            rel="stylesheet"
+    />
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <section class="d-flex flex-column justify-content-between" id="hero">
+        <div id="hero-top">
+            {% block navbar %}
+                <nav class="navbar navbar-light navbar-expand-lg navbar-text primary-bg w-100">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="{{ path('home') }}">
+                            <img class="d-inline-block align-top"
+                                 height="39"
+                                 loading="lazy"
+                                 src="{{ asset('images/ico.png') }}"/>
+                        </a>
+                        <a class="navbar-brand" id="brand-name-text" href="{{ path('home') }}">Dream Holiday</a>
+                        <button class="navbar-toggler"
+                                data-target="#navcol1"
+                                data-toggle="collapse"
+                                id="menu-toggle-button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
-        {% block stylesheets %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block navbar %}
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="{{ path('home') }}">Dream Holiday</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('destinations') }}">Destinations</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Holiday
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">First Minute</a>
-                                <a class="dropdown-item" href="#">Last Minute</a>
-                                <a class="dropdown-item" href="#">All Inclusive</a>
-                                <a class="dropdown-item" href="#">For Children</a>
-                                <a class="dropdown-item" href="#">Group Tours</a>
-                                <a class="dropdown-item" href="#">Cruises</a>
-                                <a class="dropdown-item" href="#">Bargain Zone</a>
-                            </div>
-                        </li>
-                        {% if not is_granted('ROLE_USER') %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_register') }}">Register</a>
-                        </li>
-                        {% endif %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Customer Ratings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Forum</a>
-                        </li>
-                    </ul>
-                    {% if is_granted('ROLE_USER') %}
-                        <a id="user-nav-icon" href="{{ path('app_logout') }}">Sign out<i class="fa fa-sign-out mx-2" style="color: white; font-size: 20px;"></i></a>
-                    {% else %}
-                        <a id="user-nav-icon" href="{{ path('app_login') }}">Sign in<i class="fa fa-user mx-2" style="color: white; font-size: 20px;"></i></a>
-                    {% endif %}
-                </div>
-            </nav>
-
-        {% endblock %}
-        <div class="page-wrapper">
-        {% block body %}
-        {% endblock %}
+                        <div class="collapse navbar-collapse" id="navcol1">
+                            <ul class="nav navbar-nav text-center mx-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('home') }}">Home <span
+                                                class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('destinations') }}">Destinations</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Holiday
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">First Minute</a>
+                                        <a class="dropdown-item" href="#">Last Minute</a>
+                                        <a class="dropdown-item" href="#">All Inclusive</a>
+                                        <a class="dropdown-item" href="#">For Children</a>
+                                        <a class="dropdown-item" href="#">Group Tours</a>
+                                        <a class="dropdown-item" href="#">Cruises</a>
+                                        <a class="dropdown-item" href="#">Bargain Zone</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Forum</a>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav text-center">
+                                {% if is_granted('ROLE_USER') %}
+                                    <li class="nav-item">
+                                        <a id="user-nav-icon"
+                                           href="{{ path('app_logout') }}"
+                                           class="nav-link">
+                                            Sign out
+                                            <i class="fa fa-sign-out mx-2"></i>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a id="user-nav-icon"
+                                           href="{{ path('app_login') }}"
+                                           class="nav-link">
+                                            Sign in
+                                            <i class="fa fa-user mx-2"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            {% endblock %}
+            <div id="">
+                <h1 class="text-center mt-5" id="title">travel the world</h1>
+                <h2 class="text-center mt-2" id="subtitle"><span class="subtitle-ndash">&ndash;&ndash;</span> Book Today with Dream Holiday <span class="subtitle-ndash">&ndash;&ndash;</span></h2>
+            </div>
         </div>
-        {% block footer %}
-            <footer class="footer-custom bg-dark">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-2">
-                            <h5 class="mt-4 ml-2">Information</h5>
-                            <ul class="list list-unstyled ml-2">
-                                <li class="mt-1 footer-link"><a href="#">How to book?</a></li>
-                                <li class="footer-link"><a href="#">Privacy Policy</a></li>
-                                <li class="footer-link"><a href="#">Cookies</a></li>
-                                <li class="footer-link"><a href="#">Help Center</a></li>
-                                <li class="footer-link"><a href="#">Forum</a></li>
-                            </ul>
+        <div id="hero-bottom">
+            {% block footer %}
+                <footer class="footer-custom primary-bg">
+                    <div class="container-fluid">
+                        <div class="row text-center justify-content-center">
+                            <div class="col-md-3 col-lg-2">
+                                <h5 class="mt-4 ml-2">Information</h5>
+                                <ul class="list list-unstyled ml-2">
+                                    <li class="mt-1 footer-link"><a href="#">How to book?</a></li>
+                                    <li class="footer-link"><a href="#">Privacy Policy</a></li>
+                                    <li class="footer-link"><a href="#">Cookies</a></li>
+                                    <li class="footer-link"><a href="#">Help Center</a></li>
+                                    <li class="footer-link"><a href="#">Forum</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-lg-2">
+                                <h5 class="mt-4 ml-2">Account</h5>
+                                <ul class="list list-unstyled ml-2">
+                                    <li class="mt-1 footer-link"><a href="#">Your bookings</a></li>
+                                    <li class="footer-link"><a href="{{ path('app_register') }}">Register</a></li>
+                                    <li class="footer-link"><a href="{{ path('app_login') }}">Sign in</a></li>
+                                    <li class="footer-link"><a href="#">Edit Data</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-lg-2">
+                                <h5 class="mt-4 ml-2">Promotions</h5>
+                                <ul class="list list-unstyled ml-2">
+                                    <li class="mt-1 footer-link"><a href="#">First Minute</a></li>
+                                    <li class="footer-link"><a href="#">Last Minute</a></li>
+                                    <li class="footer-link"><a href="#">Bargain Zone</a></li>
+                                    <li class="footer-link"><a href="#">All our promotions</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-lg-2">
+                                <h5 class="mt-4 ml-2">Dream Holiday</h5>
+                                <ul class="list list-unstyled ml-2">
+                                    <li class="mt-1 footer-link"><a href="#">About us</a></li>
+                                    <li class="footer-link"><a href="#">Contact</a></li>
+                                    <li class="footer-link"><a href="#">Career</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3">
+                                <h5 class="mt-4">Sign up for Newsletter</h5>
+                            </div>
                         </div>
-                        <div class="col-lg-2">
-                            <h5 class="mt-4 ml-2">Account</h5>
-                            <ul class="list list-unstyled ml-2">
-                                <li class="mt-1 footer-link"><a href="#">Your bookings</a></li>
-                                <li class="footer-link"><a href="{{ path('app_register') }}">Register</a></li>
-                                <li class="footer-link"><a href="{{ path('app_login') }}">Sign in</a></li>
-                                <li class="footer-link"><a href="#">Edit Data</a></li>
-                            </ul>
+                        <div class="row text-center">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-6 text-center">
+                                <p class="text-center">Copyright &copy; 2020 Dream Holiday</p>
+                            </div>
                         </div>
-                        <div class="col-lg-2">
-                            <h5 class="mt-4 ml-2">Promotions</h5>
-                            <ul class="list list-unstyled ml-2">
-                                <li class="mt-1 footer-link"><a href="#">First Minute</a></li>
-                                <li class="footer-link"><a href="#">Last Minute</a></li>
-                                <li class="footer-link"><a href="#">Bargain Zone</a></li>
-                                <li class="footer-link"><a href="#">All our promotions</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2">
-                            <h5 class="mt-4 ml-2">Dream Holiday</h5>
-                            <ul class="list list-unstyled ml-2">
-                                <li class="mt-1 footer-link"><a href="#">About us</a></li>
-                                <li class="footer-link"><a href="#">Contact</a></li>
-                                <li class="footer-link"><a href="#">Career</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-3">
-                            <h5 class="mt-4">Sign up for Newsletter</h5>
+                    </div>
+                </footer>
+            {% endblock %}
+        </div>
+    </section>
+{% endblock %}
 
-                        </div>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-lg-3"></div>
-                        <div class="col-lg-6 text-center">
-                            <p class="text-center">Copyright &copy;2019 DevJerry <a href="mailto:kcwikowski007@gmail.com">kcwikowski007@gmail.com</a></p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        {% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+{% block javascripts %}{% endblock %}
+</body>
 </html>
