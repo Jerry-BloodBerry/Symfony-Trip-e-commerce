@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,19 +32,45 @@ class BookingOffer
     private $rating;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\BookingOfferType", inversedBy="bookingOffers")
-     */
-    private $offerType;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Destination", inversedBy="bookingOffers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $destination;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $bookingStartDate;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $bookingEndDate;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $departureDate;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $comebackDate;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $departureSpot;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\BookingOfferType", inversedBy="bookingOffers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $offerType;
+
     public function __construct()
     {
-        $this->offerType = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -90,32 +114,6 @@ class BookingOffer
         return $this;
     }
 
-    /**
-     * @return Collection|BookingOfferType[]
-     */
-    public function getOfferType(): Collection
-    {
-        return $this->offerType;
-    }
-
-    public function addOfferType(BookingOfferType $offerType): self
-    {
-        if (!$this->offerType->contains($offerType)) {
-            $this->offerType[] = $offerType;
-        }
-
-        return $this;
-    }
-
-    public function removeOfferType(BookingOfferType $offerType): self
-    {
-        if ($this->offerType->contains($offerType)) {
-            $this->offerType->removeElement($offerType);
-        }
-
-        return $this;
-    }
-
     public function getDestination(): ?Destination
     {
         return $this->destination;
@@ -124,6 +122,78 @@ class BookingOffer
     public function setDestination(?Destination $destination): self
     {
         $this->destination = $destination;
+
+        return $this;
+    }
+
+    public function getBookingStartDate(): ?\DateTimeInterface
+    {
+        return $this->bookingStartDate;
+    }
+
+    public function setBookingStartDate(\DateTimeInterface $bookingStartDate): self
+    {
+        $this->bookingStartDate = $bookingStartDate;
+
+        return $this;
+    }
+
+    public function getBookingEndDate(): ?\DateTimeInterface
+    {
+        return $this->bookingEndDate;
+    }
+
+    public function setBookingEndDate(\DateTimeInterface $bookingEndDate): self
+    {
+        $this->bookingEndDate = $bookingEndDate;
+
+        return $this;
+    }
+
+    public function getDepartureDate(): ?\DateTimeInterface
+    {
+        return $this->departureDate;
+    }
+
+    public function setDepartureDate(\DateTimeInterface $departureDate): self
+    {
+        $this->departureDate = $departureDate;
+
+        return $this;
+    }
+
+    public function getComebackDate(): ?\DateTimeInterface
+    {
+        return $this->comebackDate;
+    }
+
+    public function setComebackDate(\DateTimeInterface $comebackDate): self
+    {
+        $this->comebackDate = $comebackDate;
+
+        return $this;
+    }
+
+    public function getDepartureSpot(): ?string
+    {
+        return $this->departureSpot;
+    }
+
+    public function setDepartureSpot(string $departureSpot): self
+    {
+        $this->departureSpot = $departureSpot;
+
+        return $this;
+    }
+
+    public function getOfferType(): ?BookingOfferType
+    {
+        return $this->offerType;
+    }
+
+    public function setOfferType(?BookingOfferType $offerType): self
+    {
+        $this->offerType = $offerType;
 
         return $this;
     }

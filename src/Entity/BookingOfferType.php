@@ -24,7 +24,7 @@ class BookingOfferType
     private $typeName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\BookingOffer", mappedBy="offerType")
+     * @ORM\OneToMany(targetEntity="App\Entity\BookingOffer", mappedBy="offerType", orphanRemoval=true)
      */
     private $bookingOffers;
 
@@ -62,7 +62,7 @@ class BookingOfferType
     {
         if (!$this->bookingOffers->contains($bookingOffer)) {
             $this->bookingOffers[] = $bookingOffer;
-            $bookingOffer->addOfferType($this);
+            $bookingOffer->setOfferType($this);
         }
 
         return $this;
@@ -72,7 +72,10 @@ class BookingOfferType
     {
         if ($this->bookingOffers->contains($bookingOffer)) {
             $this->bookingOffers->removeElement($bookingOffer);
-            $bookingOffer->removeOfferType($this);
+            // set the owning side to null (unless already changed)
+            if ($bookingOffer->getOfferType() === $this) {
+                $bookingOffer->setOfferType(null);
+            }
         }
 
         return $this;
