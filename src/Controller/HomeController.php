@@ -18,11 +18,13 @@ class HomeController extends AbstractController
      * @Route("/", name="home")
      * @param Request $request
      * @return Response
+     * @throws \Exception
      */
     public function index(Request $request)
     {
         $bookingOffer = new BookingOffer();
         $destinations = $this->getDoctrine()->getRepository(Destination::class)->findAll();
+        $destinations = Destination::sortDestinationsByName($destinations);
         $form = $this->createForm(BookingOfferSearchType::class, $bookingOffer, [
             'attr' => [
                 'class' => 'form-inline'

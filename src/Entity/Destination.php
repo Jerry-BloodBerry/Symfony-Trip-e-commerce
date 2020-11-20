@@ -106,4 +106,19 @@ class Destination
     {
         return $this->destinationName;
     }
+
+    /**
+     * @param array $destinations
+     * @return array
+     * @throws \Exception
+     */
+    public static function sortDestinationsByName(array $destinations)
+    {
+        $doctrineDestinationCollection = new ArrayCollection($destinations);
+        $iterator = $doctrineDestinationCollection->getIterator();
+        $iterator->uasort(function ($d1, $d2) {
+            return (strtolower($d1->getDestinationName()) < strtolower($d2->getDestinationName())) ? -1 : 1;
+        });
+        return iterator_to_array($iterator);
+    }
 }
