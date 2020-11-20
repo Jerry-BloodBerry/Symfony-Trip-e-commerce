@@ -1,6 +1,6 @@
 #hero-presentation {
     background: url("../images/hero.jpg") no-repeat top;
-    padding-bottom: 4rem;
+    padding-bottom: 6rem;
 }
 #title
 {
@@ -57,6 +57,9 @@ form[name="booking_offer_search"] input {
     border: none;
     font-family: "Montserrat", sans-serif;
 }
+form[name="booking_offer_search"] .input-group select:hover {
+    cursor: pointer;
+}
 .datepicker {
     padding-left: .3em;
     padding-right: .3em;
@@ -70,16 +73,18 @@ form[name="booking_offer_search"] input {
 .datepicker th.next {
     text-align: right;
 }
+.datepicker th.clear {
+    text-align: center;
+    border-radius: 8px;
+    background-color: #a21111;
+    color: #ffffff;
+}
 .datepicker td, .datepicker th {
-    width: 2.2em;
-    height: 2.2em;
+    width: 1.5em;
+    height: 1.5em;
 }
 .datepicker:hover {
     cursor: pointer;
-}
-.datepicker .today.active.day {
-    background-color: #f3dc39;
-    border-radius: 15px;
 }
 .search-form-submit-btn {
     background: transparent url("../images/search-icon.svg") no-repeat center center;
