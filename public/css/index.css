@@ -168,6 +168,7 @@ form[name="booking_offer_search"] .input-group select:hover {
 .f-offer-card-link {
     text-decoration: none !important;
     color: #1d2124;
+    margin-bottom: 1rem;
 }
 .f-offer-card-link:hover .f-offer-card{
     box-shadow: 8px 8px 8px 1px rgba(0, 0, 0, 0.2);
