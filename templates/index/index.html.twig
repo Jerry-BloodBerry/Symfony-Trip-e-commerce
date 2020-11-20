@@ -6,40 +6,41 @@
     <div id="hero-presentation">
         <h1 class="text-center pt-5" id="title">travel the world</h1>
         <h2 class="text-center mt-2" id="subtitle"><span class="subtitle-ndash">&ndash;&ndash;</span> Book Today with Dream Holiday <span class="subtitle-ndash">&ndash;&ndash;</span></h2>
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div id="search-form-container">
-                    {{ form_start(form) }}
-                        {{ form_label(form.departureSpot) }}
-                        <div class="input-group mb-2 mt-2 mr-sm-2">
-                            <div class="input-group-prepend mt-2 mb-2 mr-1">
-                                <i class="fa fa-map-marker"></i>
-                            </div>
-                            {{ form_widget(form.departureSpot) }}
+        <div class="row justify-content-center mt-4">
+            <div id="search-form-container">
+                {{ form_start(form) }}
+                    {{ form_label(form.departureSpot) }}
+                    <div class="input-group mb-2 mt-2 mr-sm-2">
+                        <div class="input-group-prepend mt-2 mb-2 mr-1">
+                            <i class="fa fa-map-marker"></i>
                         </div>
-                        {{ form_label(form.destination) }}
-                        <div class="input-group mb-2 mt-2 mr-sm-2">
-                            <div class="input-group-prepend mt-2 mb-2 mr-1">
-                                <i class="fa fa-map-marker"></i>
-                            </div>
-                            {{ form_widget(form.destination) }}
+                        {{ form_widget(form.departureSpot) }}
+                    </div>
+                    {{ form_label(form.destination) }}
+                    <div class="input-group mb-2 mt-2 mr-sm-2">
+                        <div class="input-group-prepend mt-2 mb-2 mr-1">
+                            <i class="fa fa-map-marker"></i>
                         </div>
-                        {{ form_label(form.departureDate) }}
-                        <div class="input-group mb-2 mt-2 mr-sm-2">
-                            {{ form_widget(form.departureDate) }}
-                            <div class="input-group-append mt-2 mb-2">
-                                <i class="far fa-calendar-check"></i>
-                            </div>
+                        {{ form_widget(form.destination) }}
+                    </div>
+                    {{ form_label(form.departureDate) }}
+                    <div class="input-group mb-2 mt-2 mr-sm-2">
+                        {{ form_widget(form.departureDate) }}
+                        <div class="input-group-append mt-2 mb-2">
+                            <i class="far fa-calendar-check"></i>
                         </div>
-                        {{ form_label(form.comebackDate) }}
-                        <div class="input-group mb-2 mt-2 mr-sm-2" style="border-right: none">
-                            {{ form_widget(form.comebackDate) }}
-                            <div class="input-group-append mt-2 mb-2">
-                                <i class="far fa-calendar-check"></i>
-                            </div>
+                    </div>
+                    {{ form_label(form.comebackDate) }}
+                    <div class="input-group mb-2 mt-2 mr-sm-2">
+                        {{ form_widget(form.comebackDate) }}
+                        <div class="input-group-append mt-2 mb-2">
+                            <i class="far fa-calendar-check"></i>
                         </div>
-                    {{ form_end(form) }}
-                </div>
+                    </div>
+                    <div class="input-group mb-2 mt-2 mr-sm-2 search-input-group">
+                    {{ form_widget(form.submit, {'attr': {'class': 'search-form-submit-btn pr-2 pb-3 pt-3 pl-2'}}) }}
+                    </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
@@ -53,6 +54,7 @@
             format: "dd/mm/yyyy",
             autoclose: true,
             todayHighlight: true,
+            orientation: "bottom left"
         });
     </script>
 {% endblock %}

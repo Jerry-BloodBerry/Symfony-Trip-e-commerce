@@ -59,7 +59,9 @@ class BookingOfferSearchType extends AbstractType
                 ],
                 'required' => false
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => false
+            ])
         ;
     }
 

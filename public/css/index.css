@@ -25,13 +25,12 @@
 #search-form-container {
     background-color: #ffffff;
     padding: .4rem 2rem;
-    margin-top: 3rem;
 }
 form[name="booking_offer_search"] {
     justify-content: center;
 }
 form[name="booking_offer_search"] div.input-group {
-    border-right: 1px #a09f9f solid;
+    border-right: 1px solid #a09f9f;
     padding-right: 1rem;
 }
 form[name="booking_offer_search"] input:last-child, form[name="booking_offer_search"] select:last-child {
@@ -52,19 +51,28 @@ form[name="booking_offer_search"] select {
     padding-right: 2rem;
     background: transparent url("data:image/svg+xml;utf8,<svg fill='rgb(0,58,110)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat center right;
     color: #1d2124;
+    padding-left: 0;
 }
 form[name="booking_offer_search"] input {
     border: none;
     font-family: "Montserrat", sans-serif;
 }
 .datepicker {
-    font-size: 0.875em;
     padding-left: .3em;
     padding-right: .3em;
 }
+.datepicker th.datepicker-switch {
+    text-align: center;
+}
+.datepicker th.prev {
+    text-align: left;
+}
+.datepicker th.next {
+    text-align: right;
+}
 .datepicker td, .datepicker th {
-    width: 1.5em;
-    height: 1.5em;
+    width: 2.2em;
+    height: 2.2em;
 }
 .datepicker:hover {
     cursor: pointer;
@@ -72,4 +80,75 @@ form[name="booking_offer_search"] input {
 .datepicker .today.active.day {
     background-color: #f3dc39;
     border-radius: 15px;
+}
+.search-form-submit-btn {
+    background: transparent url("../images/search-icon.svg") no-repeat center center;
+    border: none;
+    display: inline-block;
+    width: 100%;
+}
+.search-next-row {
+    display: block;
+}
+.search-input-group {
+    border: none !important;
+    margin-left: 2rem;
+}
+@media(max-width: 576px) {
+    form[name="booking_offer_search"] div.input-group {
+        border-right: none;
+        padding-right: 1rem;
+    }
+}
+@media(max-width: 1317px) {
+    #search-form-container {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .search-container {
+        padding-left: 0;
+    }
+}
+@media(max-width: 1316px) {
+    form[name="booking_offer_search"] div.input-group {
+        border-right: none;
+        border-bottom: 1px solid #a09f9f;
+        display: inline-block;
+        width: 40%;
+        margin-right: 1%;
+    }
+    form[name="booking_offer_search"] div.input-group div.input-group-prepend, form[name="booking_offer_search"] div.input-group div.input-group-append {
+        display: inline-block;
+        width: 1%;
+    }
+    form[name="booking_offer_search"] div.input-group select, form[name="booking_offer_search"] div.input-group input {
+        display: inline-block;
+        width: 95%;
+    }
+    .input-group.search-input-group {
+        display: block;
+        border: 6px double rgb(0,58,110) !important;
+        text-align: center;
+        padding-right: 0 !important;
+        margin-left: 0;
+    }
+    .search-form-submit-btn {
+        display: inline-block;
+        width: 100%;
+    }
+}
+@media(max-width: 586px) {
+    form[name="booking_offer_search"] div.input-group {
+        border-right: none;
+        border-bottom: 1px solid #a09f9f;
+        display: inline-block;
+        width: 80%;
+    }
+    form[name="booking_offer_search"] div.input-group div.input-group-prepend, form[name="booking_offer_search"] div.input-group div.input-group-append {
+        display: inline-block;
+    }
+    .search-input-group {
+        margin-left: 0;
+    }
 }
