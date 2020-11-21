@@ -6,41 +6,42 @@
 {% block page_content %}
     <div id="hero-presentation">
         <h1 class="text-center pt-5" id="title">travel the world</h1>
-        <h2 class="text-center mt-2" id="subtitle"><span class="subtitle-ndash">&ndash;&ndash;</span> Book Today with Dream Holiday <span class="subtitle-ndash">&ndash;&ndash;</span></h2>
+        <h2 class="text-center mt-2" id="subtitle"><span class="subtitle-ndash">&ndash;&ndash;</span> Book Today with
+            Dream Holiday <span class="subtitle-ndash">&ndash;&ndash;</span></h2>
         <div class="row justify-content-center mt-4">
             <div id="search-form-container">
                 {{ form_start(form) }}
-                    {{ form_label(form.departureSpot) }}
-                    <div class="input-group mb-2 mt-2 mr-sm-2">
-                        <div class="input-group-prepend mt-2 mb-2 mr-1">
-                            <i class="fa fa-map-marker"></i>
-                        </div>
-                        {{ form_widget(form.departureSpot) }}
+                {{ form_label(form.departureSpot) }}
+                <div class="input-group mb-2 mt-2 mr-sm-2">
+                    <div class="input-group-prepend mt-2 mb-2 mr-1">
+                        <i class="fa fa-map-marker"></i>
                     </div>
-                    {{ form_label(form.destination) }}
-                    <div class="input-group mb-2 mt-2 mr-sm-2">
-                        <div class="input-group-prepend mt-2 mb-2 mr-1">
-                            <i class="fa fa-map-marker"></i>
-                        </div>
-                        {{ form_widget(form.destination) }}
+                    {{ form_widget(form.departureSpot) }}
+                </div>
+                {{ form_label(form.destination) }}
+                <div class="input-group mb-2 mt-2 mr-sm-2">
+                    <div class="input-group-prepend mt-2 mb-2 mr-1">
+                        <i class="fa fa-map-marker"></i>
                     </div>
-                    {{ form_label(form.departureDate) }}
-                    <div class="input-group mb-2 mt-2 mr-sm-2">
-                        {{ form_widget(form.departureDate) }}
-                        <div class="input-group-append mt-2 mb-2">
-                            <i class="far fa-calendar-check"></i>
-                        </div>
+                    {{ form_widget(form.destination) }}
+                </div>
+                {{ form_label(form.departureDate) }}
+                <div class="input-group mb-2 mt-2 mr-sm-2">
+                    {{ form_widget(form.departureDate) }}
+                    <div class="input-group-append mt-2 mb-2">
+                        <i class="far fa-calendar-check"></i>
                     </div>
-                    {{ form_label(form.comebackDate) }}
-                    <div class="input-group mb-2 mt-2 mr-sm-2">
-                        {{ form_widget(form.comebackDate) }}
-                        <div class="input-group-append mt-2 mb-2">
-                            <i class="far fa-calendar-check"></i>
-                        </div>
+                </div>
+                {{ form_label(form.comebackDate) }}
+                <div class="input-group mb-2 mt-2 mr-sm-2">
+                    {{ form_widget(form.comebackDate) }}
+                    <div class="input-group-append mt-2 mb-2">
+                        <i class="far fa-calendar-check"></i>
                     </div>
-                    <div class="input-group mb-2 mt-2 mr-sm-2 search-input-group">
+                </div>
+                <div class="input-group mb-2 mt-2 mr-sm-2 search-input-group">
                     {{ form_widget(form.submit, {'attr': {'class': 'search-form-submit-btn pr-2 pb-3 pt-3 pl-2'}}) }}
-                    </div>
+                </div>
                 {{ form_end(form) }}
             </div>
         </div>
@@ -50,11 +51,14 @@
             <div class="row justify-content-center">
                 <a href="#" class="f-offer-card-link">
                     <div class="card f-offer-card">
-                        <img class="card-img-top" src="{{ asset('images/country_cards/Australia_card.jpg') }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ asset('images/country_cards/Australia_card.jpg') }}"
+                             alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">Australia Tour</h5>
-                            <p class="card-offer-duration"><i class="fas fa-clock duration-icon"></i> Duration: 14 days</p>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-offer-duration"><i class="fas fa-clock duration-icon"></i> Duration: 14 days
+                            </p>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
                             <span class="fas fa-star"></span>
                             <span class="fas fa-star"></span>
                             <span class="fas fa-star"></span>
@@ -66,11 +70,14 @@
                 </a>
                 <a href="#" class="f-offer-card-link">
                     <div class="card f-offer-card">
-                        <img class="card-img-top" src="{{ asset('images/country_cards/China_card.jpg') }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ asset('images/country_cards/China_card.jpg') }}"
+                             alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">Discover China</h5>
-                            <p class="card-offer-duration"><i class="fas fa-clock duration-icon"></i> Duration: 14 days</p>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-offer-duration"><i class="fas fa-clock duration-icon"></i> Duration: 14 days
+                            </p>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
                             <span class="fas fa-star"></span>
                             <span class="fas fa-star"></span>
                             <span class="fas fa-star"></span>
@@ -82,11 +89,14 @@
                 </a>
                 <a href="#" class="f-offer-card-link">
                     <div class="card f-offer-card">
-                        <img class="card-img-top" src="{{ asset('images/country_cards/Thailand_card.jpg') }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ asset('images/country_cards/Thailand_card.jpg') }}"
+                             alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">Thai Paradise</h5>
-                            <p class="card-offer-duration"><i class="fas fa-clock duration-icon"></i> Duration: 14 days</p>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-offer-duration"><i class="fas fa-clock duration-icon"></i> Duration: 14 days
+                            </p>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
                             <span class="fas fa-star"></span>
                             <span class="fas fa-star"></span>
                             <span class="fas fa-star"></span>
@@ -96,6 +106,64 @@
                         </div>
                     </div>
                 </a>
+            </div>
+        </div>
+    </div>
+    <div id="offer-types-presentation">
+        <h3 class="text-center">Follow your dreams</h3>
+        <p class="text-center"><span class="subtitle-ndash">&ndash;&ndash;</span> Make them come true <span
+                    class="subtitle-ndash">&ndash;&ndash;</span></p>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-calendar-day"></i> First
+                    minute</a>
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-stopwatch"></i> Last
+                    minute</a>
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-star"></i> All inclusive</a>
+            </div>
+            <div class="row justify-content-center">
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-child"></i> For children</a>
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-users"></i> Group
+                    Tours</a>
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-anchor"></i> Cruises</a>
+            </div>
+        </div>
+    </div>
+    <div id="offer-benefits-presentation">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-4 col-lg-2 text-center offer-benefit-col">
+                    <i class="fas fa-plane-departure"></i>
+                    <p>Plane tickets?</p>
+                </div>
+                <div class="col-4 col-lg-2 text-center offer-benefit-col">
+                    <i class="fas fa-hotel"></i>
+                    <p>Hotel reservation?</p>
+                </div>
+                <div class="col-4 col-lg-2 text-center offer-benefit-col">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>Guides?</p>
+                </div>
+            </div>
+            <h4 class="text-center">We got it all covered for you!</h4>
+        </div>
+    </div>
+    <div id="why-us-section">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda dolor id itaque iusto
+                        maxime molestias repellendus tempore. A ad alias amet animi atque aut, culpa cum dolore dolorem
+                        dolores eaque, eligendi error ex expedita facere fuga fugiat impedit iure libero mollitia neque
+                        odit pariatur, quam quas quibusdam rem repellendus tempore tenetur totam veritatis! Atque aut
+                        blanditiis corporis dolorum illo inventore, laudantium maxime nihil provident quasi quisquam
+                        ratione reprehenderit similique temporibus ut. Cupiditate distinctio dolorem et nisi quisquam
+                        repudiandae. Accusamus et laborum nam reiciendis reprehenderit saepe soluta tempora? Aperiam,
+                        autem blanditiis consequatur fugit hic illo laborum quasi voluptatibus? Odit, soluta!</p>
+                    <div class="text-center">
+                        <img src="{{ asset('images/compass.svg') }}" alt="compass">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
