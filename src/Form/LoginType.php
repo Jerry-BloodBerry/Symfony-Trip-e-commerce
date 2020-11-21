@@ -17,7 +17,7 @@ class LoginType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'required' => true,
-                'label' => 'Email',
+                'label' => 'Email Address',
                 'attr' => [
                     'class' => 'form-control',
                     'autofocus' => true
