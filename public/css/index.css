@@ -226,6 +226,7 @@ form[name="booking_offer_search"] .input-group select:hover {
 }
 #offer-types-presentation h3 {
     color: #ffffff;
+    text-transform: capitalize;
     font-family: "Roboto Condensed", sans-serif;
 }
 #offer-types-presentation p {
