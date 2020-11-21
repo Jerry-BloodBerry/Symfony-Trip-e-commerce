@@ -7,9 +7,11 @@
     font-family: "Montserrat", sans-serif;
 }
 #hero .container-fluid {
-    transform: translate(-50%,50%);
     position: absolute;
     left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -75%);
+    transform: translate(-50%, -75%);
 }
 .form-check
 {
@@ -79,7 +81,8 @@
 {
     color: white;
     z-index: 10;
-    background-color: rgb(0,58,110);
+    background-color: darkorange;
+    border-color: darkorange;
 }
 label {
     margin-bottom: 0;
