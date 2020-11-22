@@ -29,12 +29,18 @@ class HomeController extends AbstractController
             'attr' => [
                 'class' => 'form-inline'
             ],
+            'method' => 'GET',
             'destinations' => $destinations
         ]);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-            //TODO: Redirect user to offers
+            return $this->forward('App\Controller\Offer\OfferController::getOffers', [
+               'departureSpot' => null,
+               'destination' => $bookingOffer->getDestination(),
+               'departureDate' => $bookingOffer->getDepartureDate(),
+               'comebackDate' => $bookingOffer->getComebackDate()
+            ]);
         }
         return $this->render('index/index.html.twig', [
             'form' => $form->createView()
