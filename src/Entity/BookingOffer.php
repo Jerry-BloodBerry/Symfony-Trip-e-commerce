@@ -27,11 +27,6 @@ class BookingOffer
     private $offerPrice;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    private $rating;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Destination", inversedBy="bookingOffers")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -63,10 +58,20 @@ class BookingOffer
     private $departureSpot;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $comebackSpot;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\BookingOfferType", inversedBy="bookingOffers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $offerType;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFeatured;
 
     public function __construct()
     {
@@ -102,7 +107,7 @@ class BookingOffer
         return $this;
     }
 
-    public function getRating(): ?float
+    /*public function getRating(): ?float
     {
         return $this->rating;
     }
@@ -112,7 +117,7 @@ class BookingOffer
         $this->rating = $rating;
 
         return $this;
-    }
+    }*/
 
     public function getDestination(): ?Destination
     {
@@ -186,6 +191,18 @@ class BookingOffer
         return $this;
     }
 
+    public function getComebackSpot(): ?string
+    {
+        return $this->comebackSpot;
+    }
+
+    public function setComebackSpot(string $comebackSpot): self
+    {
+        $this->comebackSpot = $comebackSpot;
+
+        return $this;
+    }
+
     public function getOfferType(): ?BookingOfferType
     {
         return $this->offerType;
@@ -194,6 +211,18 @@ class BookingOffer
     public function setOfferType(?BookingOfferType $offerType): self
     {
         $this->offerType = $offerType;
+
+        return $this;
+    }
+
+    public function getIsFeatured(): ?bool
+    {
+        return $this->isFeatured;
+    }
+
+    public function setIsFeatured(bool $isFeatured): self
+    {
+        $this->isFeatured = $isFeatured;
 
         return $this;
     }
