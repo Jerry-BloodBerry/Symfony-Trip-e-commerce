@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -48,6 +50,17 @@ class User implements UserInterface
      * @ORM\Column(type="date")
      */
     private $registrationDate;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user_id")
+     */
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->customersRatings = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -166,6 +179,66 @@ class User implements UserInterface
     public function setRegistrationDate(\DateTimeInterface $registrationDate): self
     {
         $this->registrationDate = $registrationDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CustomersRating[]
+     */
+    public function getCustomersRatings(): Collection
+    {
+        return $this->customersRatings;
+    }
+
+    public function addCustomersRating(CustomersRating $customersRating): self
+    {
+        if (!$this->customersRatings->contains($customersRating)) {
+            $this->customersRatings[] = $customersRating;
+            $customersRating->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCustomersRating(CustomersRating $customersRating): self
+    {
+        if ($this->customersRatings->removeElement($customersRating)) {
+            // set the owning side to null (unless already changed)
+            if ($customersRating->getUserId() === $this) {
+                $customersRating->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getUserId() === $this) {
+                $reservation->setUserId(null);
+            }
+        }
 
         return $this;
     }
