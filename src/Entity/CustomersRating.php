@@ -23,7 +23,6 @@ class CustomersRating
      */
     private $user;
 
-
     /**
      * @ORM\ManyToOne(targetEntity=BookingOffer::class)
      * @ORM\JoinColumn(nullable=false)
@@ -31,7 +30,7 @@ class CustomersRating
     private $booking_offer;
 
     /**
-     * @ORM\Column(type="decimal", precision=3, scale=1)
+     * @ORM\Column(type="decimal", precision=2, scale=1)
      */
     private $rating;
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CareerRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,7 +21,7 @@ class Career
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $job_title;
+    private $jobTitle;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,19 +34,19 @@ class Career
     private $requirements;
 
     /**
-     * @ORM\Column(type="decimal", precision=7, scale=2)
+     * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true)
      */
     private $salary;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $start_date;
+    private $recruitmentStartDate;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $end_date;
+    private $recruitmentEndDate;
 
     public function getId(): ?int
     {
@@ -54,12 +55,12 @@ class Career
 
     public function getJobTitle(): ?string
     {
-        return $this->job_title;
+        return $this->jobTitle;
     }
 
-    public function setJobTitle(string $job_title): self
+    public function setJobTitle(string $jobTitle): self
     {
-        $this->job_title = $job_title;
+        $this->jobTitle = $jobTitle;
 
         return $this;
     }
@@ -100,26 +101,26 @@ class Career
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getRecruitmentStartDate(): ?DateTimeInterface
     {
-        return $this->start_date;
+        return $this->recruitmentStartDate;
     }
 
-    public function setStartDate(\DateTimeInterface $start_date): self
+    public function setRecruitmentStartDate(DateTimeInterface $recruitmentStartDate): self
     {
-        $this->start_date = $start_date;
+        $this->recruitmentStartDate = $recruitmentStartDate;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getRecruitmentEndDate(): ?DateTimeInterface
     {
-        return $this->end_date;
+        return $this->recruitmentEndDate;
     }
 
-    public function setEndDate(\DateTimeInterface $end_date): self
+    public function setRecruitmentEndDate(DateTimeInterface $recruitmentEndDate): self
     {
-        $this->end_date = $end_date;
+        $this->recruitmentEndDate = $recruitmentEndDate;
 
         return $this;
     }

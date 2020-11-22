@@ -34,11 +34,10 @@ class Reservation
      */
     private $dateOfBooking;
 
-
     /**
      * @ORM\Column(type="boolean")
      */
-    private $paid;
+    private $isPaidFor;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -86,14 +85,14 @@ class Reservation
         return $this;
     }
 
-    public function getPaid(): ?bool
+    public function getIsPaidFor(): ?bool
     {
-        return $this->paid;
+        return $this->isPaidFor;
     }
 
-    public function setPaid(bool $paid): self
+    public function setIsPaidFor(bool $isPaidFor): self
     {
-        $this->paid = $paid;
+        $this->isPaidFor = $isPaidFor;
 
         return $this;
     }
