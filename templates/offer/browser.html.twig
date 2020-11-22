@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Browse Offers - Dream Holiday{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/offer-browser.css') }}">
+{% endblock %}
+{% block page_content %}
+    Offer Count: {{ offers|length }}
+{% endblock %}
+
+

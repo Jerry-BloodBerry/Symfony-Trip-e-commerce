@@ -3,29 +3,57 @@
 
 namespace App\Controller\Offer;
 
-use App\Entity\Destination;
-use App\Entity\BookingOffer;
+use App\Service\BookingOfferService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-
+/**
+ * @Route("/offer", name="offer_")
+ */
 class OfferController extends AbstractController
 {
     /**
-     * @Route("/offers/{destination}", name="offers")
+     * @param Request $request
+     * @param BookingOfferService $offerService
+     * @param double|null $priceMin
+     * @param double|null $priceMax
+     * @return RedirectResponse|Response
      */
-    public function OffersForDestination(string $destination)
+    public function getOffers(Request $request, BookingOfferService $offerService, float $priceMin = null,
+                                  float $priceMax = null)
     {
-        $em = $this->getDoctrine()->getManager();
-        $fetchedDestination = $em->getRepository(Destination::class)->findOneBy(["destinationName" => $destination]);
-        if($fetchedDestination == null) return new RedirectResponse($this->generateUrl('destinations'));
-        $offers = $em->getRepository(BookingOffer::class)->findBy(["destination" => $fetchedDestination]);
-        return $this->render('offer/for_destination.html.twig', [
-            'controller_name' => 'OfferController',
+        $requestAttr = $request->attributes->all();
+        $departureSpot = $requestAttr['departureSpot'] ?? null;
+        $destination = $requestAttr['destination'] ?? null;
+        $departureDate = $requestAttr['departureDate'] ?? null;
+        $comebackDate = $requestAttr['comebackDate'] ?? null;
+        $fetchedOffers = $offerService->findOffers($departureSpot,
+            $destination,
+            $departureDate,
+            $comebackDate,
+            $priceMin,
+            $priceMax);
+        return $this->displayOfferList($request, $offerService, $fetchedOffers);
+    }
+
+    /**
+     * @Route("/browse", name="browse", defaults={"offers": null})
+     * @param Request $request
+     * @param BookingOfferService $offerService
+     * @param $offers
+     * @return Response
+     */
+    public function displayOfferList(Request $request, BookingOfferService $offerService, $offers)
+    {
+        if($offers == null) {
+            $offers = $offerService->findOffers();
+        }
+        return $this->render('offer/browser.html.twig', [
             'offers' => $offers,
-            'destination' => $destination
+            'parameters' => $request->attributes->all()
         ]);
     }
 }

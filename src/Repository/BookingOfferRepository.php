@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\BookingOffer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,33 @@ class BookingOfferRepository extends ServiceEntityRepository
         parent::__construct($registry, BookingOffer::class);
     }
 
-    // /**
-    //  * @return BookingOffer[] Returns an array of BookingOffer objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    private static function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null)
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $criteria = new Criteria();
+        if($departureSpot != null)
+            $criteria->andWhere(Criteria::expr()->eq('departureSpot', $departureSpot));
+        if($destination != null)
+            $criteria->andWhere(Criteria::expr()->eq('destination', $destination));
+        if($departureDate != null)
+            $criteria->andWhere(Criteria::expr()->gte('departureDate', $departureDate));
+        if($comebackDate != null)
+            $criteria->andWhere(Criteria::expr()->lte('comebackDate', $comebackDate));
+        if($priceMin != null)
+            $criteria->andWhere(Criteria::expr()->gte('offerPrice', $priceMin));
+        if($priceMax != null)
+            $criteria->andWhere(Criteria::expr()->lte('offerPrice', $priceMax));
+        return $criteria;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?BookingOffer
+    public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null)
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb = $this->createQueryBuilder('offer')->addCriteria(self::createSearchCriteria(
+            $departureSpot,
+            $destination,
+            $departureDate,
+            $comebackDate,
+            $priceMin,
+            $priceMax));
+        return $qb->getQuery()->getResult();
     }
-    */
 }
