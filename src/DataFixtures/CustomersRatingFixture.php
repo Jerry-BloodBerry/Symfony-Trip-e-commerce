@@ -51,7 +51,7 @@ class CustomersRatingFixture extends Fixture implements DependentFixtureInterfac
     private function createRating($user, $bookingOffer, $rating) :CustomersRating
     {
         $customersRating = new CustomersRating();
-        $customersRating->getUser($user);
+        $customersRating->setUser($user);
         $customersRating->setBookingOffer($bookingOffer);
         $customersRating->setRating($rating);
         return $customersRating;
@@ -66,6 +66,6 @@ class CustomersRatingFixture extends Fixture implements DependentFixtureInterfac
 
     public function getDependencies()
     {
-        return [UserFixture::class, BookingOfferFixtures::class];
+        return [UserFixture::class, BookingOfferFixture::class];
     }
 }

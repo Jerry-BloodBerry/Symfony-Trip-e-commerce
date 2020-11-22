@@ -71,6 +71,6 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [UserFixture::class, BookingOfferFixtures::class];
+        return [UserFixture::class, BookingOfferFixture::class];
     }
 }

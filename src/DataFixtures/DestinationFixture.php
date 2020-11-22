@@ -25,53 +25,63 @@ class DestinationFixture extends Fixture implements DependentFixtureInterface
 
         $destination = $this->createDestination('Spain',
             $this->getReference(ContinentFixture::EUROPE_REFERENCE));
-        $manager->persist($destination);
         $this->addReference(self::SPAIN_REFERENCE,$destination);
+        $manager->persist($destination);
+
 
         $destination = $this->createDestination('Turkey',
             $this->getReference(ContinentFixture::ASIA_REFERENCE));
-        $manager->persist($destination);
         $this->addReference(self::TURKEY_REFERENCE,$destination);
+        $manager->persist($destination);
+
 
         $destination = $this->createDestination('India',
             $this->getReference(ContinentFixture::ASIA_REFERENCE));
-        $manager->persist($destination);
         $this->addReference(self::INDIA_REFERENCE,$destination);
+        $manager->persist($destination);
+
 
         $destination = $this->createDestination('Japan',
             $this->getReference(ContinentFixture::ASIA_REFERENCE));
-        $manager->persist($destination);
         $this->addReference(self::JAPAN_REFERENCE,$destination);
+        $manager->persist($destination);
+
 
         $destination = $this->createDestination('Australia',
-            $this->getReference(ContinentFixture::AUSTRALIA_REFERENCE));
-        $manager->persist($destination);
+            $this->getReference(ContinentFixture::OCEANIA_REFERENCE));
         $this->addReference(self::AUSTRALIA_REFERENCE,$destination);
+        $manager->persist($destination);
+
 
         $destination = $this->createDestination('New Zealand',
-            $this->getReference(ContinentFixture::AUSTRALIA_REFERENCE));
-        $manager->persist($destination);
+            $this->getReference(ContinentFixture::OCEANIA_REFERENCE));
         $this->addReference(self::NEW_ZEALAND_REFERENCE,$destination);
+        $manager->persist($destination);
+
 
         $destination = $this->createDestination('Italy',
             $this->getReference(ContinentFixture::EUROPE_REFERENCE));
-        $manager->persist($destination);
         $this->addReference(self::ITALY_REFERENCE,$destination);
+        $manager->persist($destination);
+
 
         $destination = $this->createDestination('Thailand',
             $this->getReference(ContinentFixture::ASIA_REFERENCE));
-        $manager->persist($destination);
         $this->addReference(self::THAILAND_REFERENCE,$destination);
+        $manager->persist($destination);
+
 
         $destination = $this->createDestination('China',
             $this->getReference(ContinentFixture::ASIA_REFERENCE));
-        $manager->persist($destination);
         $this->addReference(self::CHINA_REFERENCE,$destination);
+        $manager->persist($destination);
+
 
         $destination = $this->createDestination('Argentina',
             $this->getReference(ContinentFixture::SOUTH_AMERICA_REFERENCE));
-        $manager->persist($destination);
         $this->addReference(self::ARGENTINA_REFERENCE,$destination);
+        $manager->persist($destination);
+
 
         $manager->flush();
     }

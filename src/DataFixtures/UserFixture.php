@@ -22,14 +22,17 @@ class UserFixture extends Fixture
     public function load(ObjectManager $manager)
     {
         $user1 = $this->createUser('Jan', 'Kowalski', 'jan_kowalski@dreamholiday.com');
+        $this->addReference(self::USER1_REFERENCE,$user1);
         $manager->persist($user1);
-        $this->addRefernce(self::USER1_REFERENCE,$user1);
+
         $user2 = $this->createUser('John', 'Cena', 'john_cena@holidaydream.com');
+        $this->addReference(self::USER2_REFERENCE,$user2);
         $manager->persist($user2);
-        $this->addRefernce(self::USER2_REFERENCE,$user2);
+
         $admin = $this->createAdmin('Jacob', 'Ćwikowski', 'kcwikowski007@gmail.com');
+        $this->addReference(self::ADMIN_REFERENCE,$admin);
         $manager->persist($admin);
-        $this->addRefernce(self::ADMIN_REFERENCE,$admin);
+
         $manager->flush();
 
     }

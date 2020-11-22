@@ -18,6 +18,7 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
     public const BUDDHA_REFERENCE = 'H- Buddha\'s way';
     public const BEIJING_REFERENCE = 'H- Bei-JING';
     public const PATAGONIA_REFERENCE = 'H- Patagonia';
+
     public function load(ObjectManager $manager)
     {
         $bookingOffer = $this->createBookingOffer(
@@ -33,8 +34,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Warsaw Chopin Airport',
             false
         );
-        $manager->persist($bookingOffer);
         $this->addReference(self::SUMMER_CHILL_REFERENCE,$bookingOffer);
+        $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::TURKEY_REFERENCE),
@@ -49,8 +50,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Warsaw Chopin Airport',
             false
         );
-        $manager->persist($bookingOffer);
         $this->addReference(self::FAMOUS_TURK_REFERENCE,$bookingOffer);
+        $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::INDIA_REFERENCE),
@@ -65,8 +66,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Balice Airport',
             false
         );
-        $manager->persist($bookingOffer);
         $this->addReference(self::MAHARAJA_REFERENCE,$bookingOffer);
+        $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::JAPAN_REFERENCE),
@@ -81,8 +82,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Warsaw Chopin Airport',
             true
         );
-        $manager->persist($bookingOffer);
         $this->addReference(self::AKASAKA_REFERENCE,$bookingOffer);
+        $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::AUSTRALIA_REFERENCE),
@@ -97,8 +98,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Warsaw Chopin Airport',
             false
         );
-        $manager->persist($bookingOffer);
         $this->addReference(self::SYDNEY_REFERENCE,$bookingOffer);
+        $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::ITALY_REFERENCE),
@@ -113,8 +114,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Warsaw Chopin Airport',
             false
         );
-        $manager->persist($bookingOffer);
         $this->addReference(self::MAFIOSO_REFERENCE,$bookingOffer);
+        $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::THAILAND_REFERENCE),
@@ -129,8 +130,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Warsaw Chopin Airport',
             false
         );
-        $manager->persist($bookingOffer);
         $this->addReference(self::BUDDHA_REFERENCE,$bookingOffer);
+        $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::CHINA_REFERENCE),
@@ -145,8 +146,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Warsaw Chopin Airport',
             true
         );
-        $manager->persist($bookingOffer);
         $this->addReference(self::BEIJING_REFERENCE,$bookingOffer);
+        $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::ARGENTINA_REFERENCE),
@@ -161,8 +162,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Warsaw Chopin Airport',
             true
         );
-        $manager->persist($bookingOffer);
         $this->addReference(self::PATAGONIA_REFERENCE,$bookingOffer);
+        $manager->persist($bookingOffer);
 
         $manager->flush();
     }
