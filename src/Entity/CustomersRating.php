@@ -21,14 +21,14 @@ class CustomersRating
      * @ORM\ManyToOne(targetEntity=user::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user_id;
+    private $user;
 
 
     /**
      * @ORM\ManyToOne(targetEntity=BookingOffer::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $booking_offer_id;
+    private $booking_offer;
 
     /**
      * @ORM\Column(type="decimal", precision=3, scale=1)
@@ -45,26 +45,26 @@ class CustomersRating
         return $this->id;
     }
 
-    public function getUserId(): ?user
+    public function getUser(): ?user
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?user $user_id): self
+    public function setUser(?user $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getBookingOfferId(): ?BookingOffer
+    public function getBookingOffer(): ?BookingOffer
     {
-        return $this->booking_offer_id;
+        return $this->booking_offer;
     }
 
-    public function setBookingOfferId(?BookingOffer $booking_offer_id): self
+    public function setBookingOffer(?BookingOffer $booking_offer): self
     {
-        $this->booking_offer_id = $booking_offer_id;
+        $this->booking_offer = $booking_offer;
 
         return $this;
     }

@@ -8,6 +8,10 @@ use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserFixture extends Fixture
 {
+    public const USER1_REFERENCE = 'user1';
+    public const USER2_REFERENCE = 'user2';
+    public const ADMIN_REFERENCE = 'admin';
+
     private $passwordEncoder;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
@@ -19,10 +23,13 @@ class UserFixture extends Fixture
     {
         $user1 = $this->createUser('Jan', 'Kowalski', 'jan_kowalski@dreamholiday.com');
         $manager->persist($user1);
+        $this->addRefernce(self::USER1_REFERENCE,$user1);
         $user2 = $this->createUser('John', 'Cena', 'john_cena@holidaydream.com');
         $manager->persist($user2);
+        $this->addRefernce(self::USER2_REFERENCE,$user2);
         $admin = $this->createAdmin('Jacob', 'Ćwikowski', 'kcwikowski007@gmail.com');
         $manager->persist($admin);
+        $this->addRefernce(self::ADMIN_REFERENCE,$admin);
         $manager->flush();
 
     }

@@ -21,44 +21,67 @@ class Reservation
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservations")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user_id;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=BookingOffer::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $booking_offer_id;
+    private $booking_offer;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateOfBooking;
+
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $paid;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $bankTransferDate;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?User $user_id): self
+    public function setUser(?User $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getBookingOfferId(): ?BookingOffer
+    public function getBookingOffer(): ?BookingOffer
     {
-        return $this->booking_offer_id;
+        return $this->booking_offer;
     }
 
-    public function setBookingOfferId(?BookingOffer $booking_offer_id): self
+    public function setBookingOffer(?BookingOffer $booking_offer): self
     {
-        $this->booking_offer_id = $booking_offer_id;
+        $this->booking_offer = $booking_offer;
+
+        return $this;
+    }
+
+    public function getDateOfBooking(): ?\DateTimeInterface
+    {
+        return $this->dateOfBooking;
+    }
+
+    public function setDateOfBooking(\DateTimeInterface $dateOfBooking): self
+    {
+        $this->dateOfBooking = $dateOfBooking;
 
         return $this;
     }
@@ -71,6 +94,18 @@ class Reservation
     public function setPaid(bool $paid): self
     {
         $this->paid = $paid;
+
+        return $this;
+    }
+
+    public function getBankTransferDate(): ?\DateTimeInterface
+    {
+        return $this->bankTransferDate;
+    }
+
+    public function setBankTransferDate(\DateTimeInterface $bankTransferDate): self
+    {
+        $this->bankTransferDate = $bankTransferDate;
 
         return $this;
     }
