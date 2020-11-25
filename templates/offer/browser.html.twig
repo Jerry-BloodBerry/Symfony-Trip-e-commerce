@@ -3,9 +3,84 @@
 {% block title %}Browse Offers - Dream Holiday{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/offer-browser.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker3.min.css') }}">
 {% endblock %}
 {% block page_content %}
-    Offer Count: {{ offers|length }}
+    <div id="side-menu">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-3 hidden-md-down" id="filters-column">
+                    {{ form_start(filtersForm) }}
+                    <div id="filters-header-container">
+                        <h3>Filters</h3>
+                        <div class="text-right">
+                            <button>Reset</button>
+                        </div>
+                    </div>
+                    <div class="filter-form-section">
+                        <h4>{{ form_label(filtersForm.offerType) }}</h4>
+                        {% for i in 1 .. filtersForm.offerType|length %}
+                            <div class="form-check">
+                                {{ form_widget(filtersForm.offerType[i]) }}
+                                {{ form_label(filtersForm.offerType[i]) }}
+                            </div>
+                        {% endfor %}
+                        <h4>Price range</h4>
+                        <div class="d-inline-block">
+                            {{ form_label(filtersForm.priceMin) }}
+                            {{ form_widget(filtersForm.priceMin) }}
+
+                            {{ form_label(filtersForm.priceMax) }}
+                            {{ form_widget(filtersForm.priceMax) }}
+                        </div>
+                        <h4>Depart and return date</h4>
+                        <div class="d-inline-block">
+                            {{ form_label(filtersForm.departureDate) }}
+                            {{ form_widget(filtersForm.departureDate) }}
+
+                            {{ form_label(filtersForm.comebackDate) }}
+                            {{ form_widget(filtersForm.comebackDate) }}
+                        </div>
+                        <h4>Departure spot</h4>
+                        <div class="form-group">
+                            {{ form_label(filtersForm.departureSpot) }}
+                            {{ form_widget(filtersForm.departureSpot) }}
+                        </div>
+                        <h4>Destination</h4>
+                        <div class="form-group">
+                            {{ form_label(filtersForm.destination) }}
+                            {{ form_widget(filtersForm.destination) }}
+                        </div>
+                    </div>
+                    {{ form_end(filtersForm) }}
+                </div>
+                <div class="col-10 col-sm-10 col-md-10 col-lg-8 col-xl-8">
+                    Offers go here
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        $('.datepicker').datepicker({
+            weekStart: 1,
+            startDate: '-0d',
+            daysOfWeekHighlighted: "6,0",
+            format: "yyyy/mm/dd",
+            autoclose: true,
+            todayHighlight: true,
+            clearBtn: true,
+            orientation: "bottom left",
+        });
+    </script>
 {% endblock %}
 
 

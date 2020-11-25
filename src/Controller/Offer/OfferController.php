@@ -3,6 +3,8 @@
 
 namespace App\Controller\Offer;
 
+use App\Entity\BookingOffer;
+use App\Form\BookingOfferFiltersType;
 use App\Service\BookingOfferService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -51,9 +53,12 @@ class OfferController extends AbstractController
         if($offers == null) {
             $offers = $offerService->findOffers();
         }
+        $bookingOffer = new BookingOffer();
+        $filtersForm = $this->createForm(BookingOfferFiltersType::class, $bookingOffer);
         return $this->render('offer/browser.html.twig', [
             'offers' => $offers,
-            'parameters' => $request->attributes->all()
+            'parameters' => $request->attributes->all(),
+            'filtersForm' => $filtersForm->createView()
         ]);
     }
 }
