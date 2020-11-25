@@ -37,6 +37,12 @@ class Destination
      */
     private $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Continent")
+     * * @ORM\JoinColumn(nullable=false)
+     */
+    private $continent;
+
     public function __construct()
     {
         $this->bookingOffers = new ArrayCollection();
@@ -98,6 +104,18 @@ class Destination
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getContinent(): ?continent
+    {
+        return $this->continent;
+    }
+
+    public function setContinent(?continent $continent): self
+    {
+        $this->continent = $continent;
 
         return $this;
     }

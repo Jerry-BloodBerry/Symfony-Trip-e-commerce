@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,14 +23,20 @@ class BookingOffer
     private $offerName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\BookingOfferType", inversedBy="bookingOffers")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $offerPrice;
+    private $offerType;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="integer")
      */
-    private $rating;
+    private $packageId;
+
+    /**
+     * @ORM\Column(type="decimal", precision=6, scale=2)
+     */
+    private $offerPrice;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Destination", inversedBy="bookingOffers")
@@ -63,10 +70,14 @@ class BookingOffer
     private $departureSpot;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\BookingOfferType", inversedBy="bookingOffers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $offerType;
+    private $comebackSpot;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFeatured;
 
     public function __construct()
     {
@@ -90,7 +101,7 @@ class BookingOffer
         return $this;
     }
 
-    public function getOfferPrice(): ?int
+    public function getOfferPrice(): ?string
     {
         return $this->offerPrice;
     }
@@ -102,14 +113,14 @@ class BookingOffer
         return $this;
     }
 
-    public function getRating(): ?float
+    public function getPackageId(): ?int
     {
-        return $this->rating;
+        return $this->packageId;
     }
 
-    public function setRating(float $rating): self
+    public function setPackageId(int $packageId): self
     {
-        $this->rating = $rating;
+        $this->packageId = $packageId;
 
         return $this;
     }
@@ -126,48 +137,48 @@ class BookingOffer
         return $this;
     }
 
-    public function getBookingStartDate(): ?\DateTimeInterface
+    public function getBookingStartDate(): ?DateTimeInterface
     {
         return $this->bookingStartDate;
     }
 
-    public function setBookingStartDate(\DateTimeInterface $bookingStartDate): self
+    public function setBookingStartDate(DateTimeInterface $bookingStartDate): self
     {
         $this->bookingStartDate = $bookingStartDate;
 
         return $this;
     }
 
-    public function getBookingEndDate(): ?\DateTimeInterface
+    public function getBookingEndDate(): ?DateTimeInterface
     {
         return $this->bookingEndDate;
     }
 
-    public function setBookingEndDate(\DateTimeInterface $bookingEndDate): self
+    public function setBookingEndDate(DateTimeInterface $bookingEndDate): self
     {
         $this->bookingEndDate = $bookingEndDate;
 
         return $this;
     }
 
-    public function getDepartureDate(): ?\DateTimeInterface
+    public function getDepartureDate(): ?DateTimeInterface
     {
         return $this->departureDate;
     }
 
-    public function setDepartureDate(\DateTimeInterface $departureDate): self
+    public function setDepartureDate(DateTimeInterface $departureDate): self
     {
         $this->departureDate = $departureDate;
 
         return $this;
     }
 
-    public function getComebackDate(): ?\DateTimeInterface
+    public function getComebackDate(): ?DateTimeInterface
     {
         return $this->comebackDate;
     }
 
-    public function setComebackDate(\DateTimeInterface $comebackDate): self
+    public function setComebackDate(DateTimeInterface $comebackDate): self
     {
         $this->comebackDate = $comebackDate;
 
@@ -186,6 +197,18 @@ class BookingOffer
         return $this;
     }
 
+    public function getComebackSpot(): ?string
+    {
+        return $this->comebackSpot;
+    }
+
+    public function setComebackSpot(string $comebackSpot): self
+    {
+        $this->comebackSpot = $comebackSpot;
+
+        return $this;
+    }
+
     public function getOfferType(): ?BookingOfferType
     {
         return $this->offerType;
@@ -194,6 +217,18 @@ class BookingOffer
     public function setOfferType(?BookingOfferType $offerType): self
     {
         $this->offerType = $offerType;
+
+        return $this;
+    }
+
+    public function getIsFeatured(): ?bool
+    {
+        return $this->isFeatured;
+    }
+
+    public function setIsFeatured(bool $isFeatured): self
+    {
+        $this->isFeatured = $isFeatured;
 
         return $this;
     }
