@@ -11,7 +11,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 class ReservationFixture extends Fixture implements DependentFixtureInterface
 {
 
-    public function load(\Doctrine\Persistence\ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $reservation = $this->createReservation(
             $this->getReference(UserFixture::USER1_REFERENCE),
