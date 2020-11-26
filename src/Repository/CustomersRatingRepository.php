@@ -52,9 +52,13 @@ class CustomersRatingRepository extends ServiceEntityRepository
             ->andWhere('rating.package = :val')
             ->setParameter('val', $packageId);
         $result = $qb->getQuery()->getResult();
-        $avg = 0;
-        foreach ($result as $row)
-            $avg+=$row->getRating();
-        return round($avg/count($result));
+        if(count($result) == 0)
+            return null;
+        else {
+            $avg = 0;
+            foreach ($result as $row)
+                $avg += $row->getRating();
+            return round($avg / count($result));
+        }
     }
 }
