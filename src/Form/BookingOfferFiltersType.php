@@ -90,7 +90,7 @@ class BookingOfferFiltersType extends AbstractType
                 ],
                 'required' => false
             ])
-            ->add('offerType', EntityType::class, [
+            ->add('offerTypes', EntityType::class, [
                 'class' => BookingOfferType::class,
                 'choices' => $options['offer_types'],
                 'choice_attr' => function() {
@@ -100,7 +100,8 @@ class BookingOfferFiltersType extends AbstractType
                     'class' => 'form-check-label'
                 ],
                 'expanded' => true,
-                'multiple' => true
+                'multiple' => true,
+                'mapped' => false
             ])
             ->add('submit', SubmitType::class)
             ->add('reset', ResetType::class)
@@ -112,7 +113,10 @@ class BookingOfferFiltersType extends AbstractType
                 return null;
             },
             function ($date) {
-                return new \DateTime($date);
+                if($date!=null) {
+                    return new \DateTime($date);
+                }
+                return null;
             }
         ));
         $builder->get('comebackDate')->addModelTransformer( new CallbackTransformer(
@@ -122,7 +126,10 @@ class BookingOfferFiltersType extends AbstractType
                 return null;
             },
             function ($date) {
-                return new \DateTime($date);
+                if($date!=null) {
+                    return new \DateTime($date);
+                }
+                return null;
             }
         ));
     }

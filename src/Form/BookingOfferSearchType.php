@@ -74,7 +74,10 @@ class BookingOfferSearchType extends AbstractType
                     return null;
                 },
                 function ($date) {
-                    return new \DateTime($date);
+                    if($date!=null) {
+                        return new \DateTime($date);
+                    }
+                    return null;
                 }
             ));
             $builder->get('comebackDate')->addModelTransformer( new CallbackTransformer(
@@ -84,7 +87,10 @@ class BookingOfferSearchType extends AbstractType
                     return null;
                 },
                 function ($date) {
-                    return new \DateTime($date);
+                    if($date!=null) {
+                        return new \DateTime($date);
+                    }
+                    return null;
                 }
             ));
     }
