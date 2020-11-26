@@ -58,7 +58,7 @@
                     </div>
                     {{ form_end(filtersForm) }}
                 </div>
-                <div class="col-9 col-sm-9 col-md-9 col-lg-6 col-xl-6" id="offers-column">
+                <div class="col-11 col-sm-11 col-md-9 col-lg-6 col-xl-6" id="offers-column">
                     <div class="row justify-content-end" id="sorting-row">
                         <label for="sorting-select">Sort by:</label>
                         <select id="sorting-select">
@@ -68,14 +68,54 @@
                             <option>Return date</option>
                         </select>
                     </div>
+                    {% for offer in offers %}
                     <div class="row offer-table-row">
                         <div class="offer-image-container">
                             <img src="{{ asset('images/country_cards/Spain_card.jpg') }}" alt="Spain card"/>
                         </div>
                         <div class="offer-info-container">
-                            aaa
+                            <div class="country-continent">{{ offer.destination }} / {{ offer.destination.continent }}</div>
+                            <div class="offer-rating">
+                                <span class="fas fa-star"></span>
+                                <span class="fas fa-star"></span>
+                                <span class="fas fa-star"></span>
+                                <span class="fas fa-star"></span>
+                                <span class="far fa-star"></span>
+                            </div>
+                            <div class="offer-name">{{ offer.offerName }}</div>
+                            <div class="offer-info-list">
+                                <div class="offer-info-list-item">
+                                    <div class="icon-container">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </div>
+                                    {{ offer.departureDate|date("d.m.Y") }} - {{ offer.comebackDate|date("d.m.Y") }}
+                                </div>
+                                <div class="offer-info-list-item">
+                                    <div class="icon-container">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
+                                    {{ difference.days }} days
+                                </div>
+                                <div class="offer-info-list-item">
+                                    <div class="icon-container">
+                                        <i class="fas fa-plane-departure"></i>
+                                    </div>
+                                    Warsaw Chopin Airport
+                                </div>
+                                <div class="offer-info-list-item">
+                                    <div class="icon-container">
+                                        <i class="fas fa-anchor"></i>
+                                    </div>
+                                    {{ offer.offerType }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offer-price-container justify-content-end">
+                            <p>&dollar;{{ offer.offerPrice|number_format(0, '.', ',') }}<span>/person</span></p>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
