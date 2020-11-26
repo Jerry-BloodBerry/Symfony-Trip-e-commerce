@@ -95,10 +95,6 @@ body {
 }
 
 /*Datepicker*/
-.datepicker {
-    padding-left: .3em;
-    padding-right: .3em;
-}
 .datepicker th.datepicker-switch {
     text-align: center;
 }
