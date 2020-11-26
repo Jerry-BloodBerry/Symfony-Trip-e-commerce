@@ -39,7 +39,7 @@ class Destination
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Continent")
-     * * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $continent;
 
@@ -108,12 +108,12 @@ class Destination
         return $this;
     }
 
-    public function getContinent(): ?continent
+    public function getContinent(): ?Continent
     {
         return $this->continent;
     }
 
-    public function setContinent(?continent $continent): self
+    public function setContinent(?Continent $continent): self
     {
         $this->continent = $continent;
 
