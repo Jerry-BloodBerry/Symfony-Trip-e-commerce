@@ -58,7 +58,7 @@ class OfferController extends AbstractController
         return $this->render('offer/browser.html.twig', [
             'offers' => $offers,
             'parameters' => $request->attributes->all(),
-            'filtersForm' => $filtersForm->createView()
+            'filtersForm' => $filtersForm
         ]);
     }
 }
