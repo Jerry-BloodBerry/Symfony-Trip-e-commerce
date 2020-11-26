@@ -39,6 +39,22 @@ class OfferController extends AbstractController
         }
         $bookingOffer = new BookingOffer();
         $filtersForm = $this->createForm(BookingOfferFiltersType::class, $bookingOffer);
+        $filtersForm->handleRequest($request);
+
+        if($filtersForm->isSubmitted() && $filtersForm->isValid()) {
+            $priceMin = $filtersForm->get('priceMin')->getData();
+            $priceMax = $filtersForm->get('priceMax')->getData();
+            $offerTypes = $filtersForm->get('offerTypes')->getData();
+            $offers = $offerService->findOffers(
+                $bookingOffer->getDepartureSpot(),
+                $bookingOffer->getDestination(),
+                $bookingOffer->getDepartureDate(),
+                $bookingOffer->getComebackDate(),
+                $priceMin,
+                $priceMax
+            );
+        }
+
         return $this->render('offer/browser.html.twig', [
             'offers' => $offers,
             'parameters' => $request->attributes->all(),
