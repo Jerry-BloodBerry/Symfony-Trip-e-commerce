@@ -52,7 +52,7 @@ class User implements UserInterface
     private $registrationDate;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user_id")
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
      */
     private $reservations;
 
@@ -184,36 +184,6 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|CustomersRating[]
-     */
-    public function getCustomersRatings(): Collection
-    {
-        return $this->customersRatings;
-    }
-
-    public function addCustomersRating(CustomersRating $customersRating): self
-    {
-        if (!$this->customersRatings->contains($customersRating)) {
-            $this->customersRatings[] = $customersRating;
-            $customersRating->setUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCustomersRating(CustomersRating $customersRating): self
-    {
-        if ($this->customersRatings->removeElement($customersRating)) {
-            // set the owning side to null (unless already changed)
-            if ($customersRating->getUserId() === $this) {
-                $customersRating->setUserId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Reservation[]
      */
     public function getReservations(): Collection
@@ -225,7 +195,7 @@ class User implements UserInterface
     {
         if (!$this->reservations->contains($reservation)) {
             $this->reservations[] = $reservation;
-            $reservation->setUserId($this);
+            $reservation->setUser($this);
         }
 
         return $this;
@@ -235,8 +205,8 @@ class User implements UserInterface
     {
         if ($this->reservations->removeElement($reservation)) {
             // set the owning side to null (unless already changed)
-            if ($reservation->getUserId() === $this) {
-                $reservation->setUserId(null);
+            if ($reservation->getUser() === $this) {
+                $reservation->setUser(null);
             }
         }
 

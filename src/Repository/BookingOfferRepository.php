@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\BookingOffer;
+use App\Entity\CustomersRating;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use function Sodium\add;
 
 /**
  * @method BookingOffer|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,9 +17,11 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class BookingOfferRepository extends ServiceEntityRepository
 {
+    private $registry;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, BookingOffer::class);
+        $this->registry=$registry;
     }
 
     private static function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null)
@@ -47,6 +51,17 @@ class BookingOfferRepository extends ServiceEntityRepository
             $comebackDate,
             $priceMin,
             $priceMax));
-        return $qb->getQuery()->getResult();
+        $result=$qb->getQuery()->getResult();
+        foreach ($result as $row){
+            $package_id = $row->getPackageId();
+            $rating = $this->findOfferRating($package_id);
+            $row->setRating($rating);
+        }
+        return $result;
     }
+
+    private function findOfferRating(int $packageId): ?int{
+        return $this->registry->getRepository(CustomersRating::class)->findAvgRatingForPackage($packageId);
+    }
+
 }

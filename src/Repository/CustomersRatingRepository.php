@@ -47,4 +47,18 @@ class CustomersRatingRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findAvgRatingForPackage($packageId): ?int{
+        $qb = $this->createQueryBuilder('rating')
+            ->andWhere('rating.package = :val')
+            ->setParameter('val', $packageId);
+        $result = $qb->getQuery()->getResult();
+        if(count($result) == 0)
+            return null;
+        else {
+            $avg = 0;
+            foreach ($result as $row)
+                $avg += $row->getRating();
+            return round($avg / count($result));
+        }
+    }
 }

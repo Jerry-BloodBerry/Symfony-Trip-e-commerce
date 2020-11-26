@@ -14,33 +14,33 @@ class CustomersRatingFixture extends Fixture implements DependentFixtureInterfac
     {
         $rating = $this->createRating(
             $this->getReference(UserFixture::USER1_REFERENCE),
-            $this->getReference(BookingOfferFixture::PATAGONIA_REFERENCE),
-            5.0
+            10,
+            5
         );
         $manager->persist($rating);
         $rating = $this->createRating(
             $this->getReference(UserFixture::USER2_REFERENCE),
-            $this->getReference(BookingOfferFixture::PATAGONIA_REFERENCE),
-            5.0
+            10,
+            5
         );
         $manager->persist($rating);
         $rating = $this->createRating(
-            $this->getReference(UserFixture::USER1_REFERENCE),
-            $this->getReference(BookingOfferFixture::BEIJING_REFERENCE),
-            4.0
+            $this->getReference(UserFixture::USER2_REFERENCE),
+            9,
+            4
         );
         $manager->persist($rating);
         $rating = $this->createRatingWithComment(
             $this->getReference(UserFixture::USER1_REFERENCE),
-            $this->getReference(BookingOfferFixture::MAHARAJA_REFERENCE),
-            4.5,
+            4,
+            4,
             'Great tour'
         );
         $manager->persist($rating);
         $rating = $this->createRatingWithComment(
             $this->getReference(UserFixture::USER2_REFERENCE),
-            $this->getReference(BookingOfferFixture::BEIJING_REFERENCE),
-            3.0,
+            9,
+            3,
             'Accommodation could have been better'
         );
         $manager->persist($rating);
@@ -48,18 +48,18 @@ class CustomersRatingFixture extends Fixture implements DependentFixtureInterfac
         $manager->flush();
     }
 
-    private function createRating($user, $bookingOffer, $rating) :CustomersRating
+    private function createRating($user, $package_id, $rating) :CustomersRating
     {
         $customersRating = new CustomersRating();
         $customersRating->setUser($user);
-        $customersRating->setBookingOffer($bookingOffer);
+        $customersRating->setPackage($package_id);
         $customersRating->setRating($rating);
         return $customersRating;
     }
 
-    private function createRatingWithComment($user, $bookingOffer, $rating, $comment) :CustomersRating
+    private function createRatingWithComment($user, $package_id, $rating, $comment) :CustomersRating
     {
-        $customersRating= $this->createRating($user, $bookingOffer, $rating);
+        $customersRating= $this->createRating($user, $package_id, $rating);
         $customersRating->setComment($comment);
         return $customersRating;
     }
