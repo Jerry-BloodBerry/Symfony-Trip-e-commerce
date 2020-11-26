@@ -1,3 +1,6 @@
-{% for career in careers %}
-    {{career.jobTitle}}
-{% endfor %}
+{% extends 'base.html.twig' %}
+{% block page_content %}
+    {% for career in careers %}
+        {{ career.jobTitle }}
+    {% endfor %}
+{% endblock %}
