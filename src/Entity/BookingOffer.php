@@ -79,9 +79,21 @@ class BookingOffer
      */
     private $isFeatured;
 
+    private $rating;
+
     public function __construct()
     {
 
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating($rating): ?int
+    {
+        return $this->rating = $rating;
     }
 
     public function getId(): ?int
