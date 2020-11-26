@@ -11,62 +11,29 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-3 d-none d-lg-block" id="filters-column">
-                    {{ form_start(filtersForm) }}
-                    <div id="filters-header-container">
-                        <h3>Filters</h3>
-                        <div class="text-right">
-                            {{ form_widget(filtersForm.reset) }}
-                        </div>
-                    </div>
-                    <div class="filter-form-section">
-                        <h4>{{ form_label(filtersForm.offerTypes) }}</h4>
-                        {% for offer_type_field in filtersForm.offerTypes %}
-                            <div class="form-check">
-                                {{ form_widget(offer_type_field) }}
-                                {{ form_label(offer_type_field) }}
-                            </div>
-                        {% endfor %}
-                        <h4>Price range</h4>
-                        <div class="d-inline-block">
-                            {{ form_label(filtersForm.priceMin) }}
-                            {{ form_widget(filtersForm.priceMin) }}
-
-                            {{ form_label(filtersForm.priceMax) }}
-                            {{ form_widget(filtersForm.priceMax) }}
-                        </div>
-                        <h4>Depart and return date</h4>
-                        <div class="d-inline-block">
-                            {{ form_label(filtersForm.departureDate) }}
-                            {{ form_widget(filtersForm.departureDate) }}
-
-                            {{ form_label(filtersForm.comebackDate) }}
-                            {{ form_widget(filtersForm.comebackDate) }}
-                        </div>
-                        <h4>Departure spot</h4>
-                        <div class="form-group">
-                            {{ form_label(filtersForm.departureSpot) }}
-                            {{ form_widget(filtersForm.departureSpot) }}
-                        </div>
-                        <h4>Destination</h4>
-                        <div class="form-group">
-                            {{ form_label(filtersForm.destination) }}
-                            {{ form_widget(filtersForm.destination) }}
-                        </div>
-                        <div id="filters-submit-container">
-                            {{ form_widget(filtersForm.submit) }}
-                        </div>
-                    </div>
-                    {{ form_end(filtersForm) }}
+                    {% set filters_desktop=filtersForm.createView %}
+                    {% include 'offer/filters_form.html.twig' with {'filtersForm': filters_desktop}%}
                 </div>
                 <div class="col-11 col-sm-11 col-md-9 col-lg-6 col-xl-6" id="offers-column">
-                    <div class="row justify-content-end" id="sorting-row">
-                        <label for="sorting-select">Sort by:</label>
-                        <select id="sorting-select">
-                            <option>Price</option>
-                            <option>Popularity</option>
-                            <option>Depart date</option>
-                            <option>Return date</option>
-                        </select>
+                    <div class="row justify-content-between" id="sorting-row">
+                        <div class="d-none d-lg-block"></div>
+                        <div class="d-lg-none">
+                            <button id="filters-btn-mobile"
+                                    type="button"
+                                    data-toggle="modal"
+                                    data-target="#filtersFormModal">
+                                Filters
+                            </button>
+                        </div>
+                        <div id="select-sort-container">
+                            <label for="sorting-select">Sort by:</label>
+                            <select id="sorting-select">
+                                <option>Price</option>
+                                <option>Popularity</option>
+                                <option>Depart date</option>
+                                <option>Return date</option>
+                            </select>
+                        </div>
                     </div>
                     {% for offer in offers %}
                     <div class="row offer-table-row">
@@ -116,6 +83,21 @@
                         </div>
                     </div>
                     {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="filtersFormModal" tabindex="-1" role="dialog" aria-labelledby="filtersFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% set filters_mobile=filtersForm.createView %}
+                    {% include 'offer/filters_form.html.twig' with {'filtersForm': filters_mobile}%}
                 </div>
             </div>
         </div>
