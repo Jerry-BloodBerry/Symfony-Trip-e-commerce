@@ -52,7 +52,7 @@ class User implements UserInterface
     private $registrationDate;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user_id")
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
      */
     private $reservations;
 
