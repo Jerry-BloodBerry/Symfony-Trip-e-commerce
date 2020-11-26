@@ -7,7 +7,6 @@ use App\Entity\BookingOffer;
 use App\Form\BookingOfferFiltersType;
 use App\Service\BookingOfferService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,39 +17,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class OfferController extends AbstractController
 {
     /**
+     * @Route("/browse", name="browse")
      * @param Request $request
      * @param BookingOfferService $offerService
-     * @param double|null $priceMin
-     * @param double|null $priceMax
-     * @return RedirectResponse|Response
-     */
-    public function getOffers(Request $request, BookingOfferService $offerService, float $priceMin = null,
-                                  float $priceMax = null)
-    {
-        $requestAttr = $request->attributes->all();
-        $departureSpot = $requestAttr['departureSpot'] ?? null;
-        $destination = $requestAttr['destination'] ?? null;
-        $departureDate = $requestAttr['departureDate'] ?? null;
-        $comebackDate = $requestAttr['comebackDate'] ?? null;
-        $fetchedOffers = $offerService->findOffers($departureSpot,
-            $destination,
-            $departureDate,
-            $comebackDate,
-            $priceMin,
-            $priceMax);
-        return $this->displayOfferList($request, $offerService, $fetchedOffers);
-    }
-
-    /**
-     * @Route("/browse", name="browse", defaults={"offers": null})
-     * @param Request $request
-     * @param BookingOfferService $offerService
-     * @param $offers
      * @return Response
      */
-    public function displayOfferList(Request $request, BookingOfferService $offerService, $offers)
+    public function displayOfferList(Request $request, BookingOfferService $offerService)
     {
-        if($offers == null) {
+        if($request->query->get('booking_offer_search')) {
+            $requestParams = $request->query->get('booking_offer_search');
+            $departureSpot = $requestParams['departureSpot'] ?? null;
+            $destination = $requestParams['destination'] ?? null;
+            $departureDate = $requestParams['departureDate'] ?? null;
+            $comebackDate = $requestParams['comebackDate'] ?? null;
+            $offers = $offerService->findOffers($departureSpot,
+                $destination,
+                $departureDate,
+                $comebackDate);
+        } else {
             $offers = $offerService->findOffers();
         }
         $bookingOffer = new BookingOffer();

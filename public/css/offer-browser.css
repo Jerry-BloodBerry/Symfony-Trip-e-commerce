@@ -71,3 +71,59 @@ form[name="booking_offer_filters"] select {
 form[name="booking_offer_filters"] select:hover {
     cursor: pointer;
 }
+#filters-submit-container {
+    text-align: center;
+}
+#filters-submit-container button {
+    background-color: #ffffff;
+    color: rgb(0,58,110);
+    border: 2px solid rgb(0,58,110);
+    border-radius: 22px;
+    padding: .5rem 2rem;
+    transition: .2s ease-out;
+    font-size: .8rem;
+    font-weight: 600;
+}
+#filters-submit-container button:hover {
+    background-color: rgb(0,58,110);
+    color: #ffffff;
+}
+
+/*Offers column*/
+#offers-column {
+    padding: 2rem 2rem;
+}
+#sorting-row {
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: .55rem;
+}
+#sorting-row select {
+    /* Remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: "Montserrat", sans-serif;
+    background: transparent url("data:image/svg+xml;utf8,<svg fill='rgb(0,58,110)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat center right;
+    color: #1d2124;
+    font-size: .8rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    width: 8rem;
+}
+#sorting-row label {
+    margin-right: .5rem;
+}
+.offer-table-row {
+    margin-top: 2rem;
+}
+.offer-image-container {
+    width: 33.33%;
+}
+.offer-image-container img {
+    width: 100%;
+}
+.offer-info-container {
+    width: 50%;
+    border: 1px solid red;
+    padding: 1rem;
+}

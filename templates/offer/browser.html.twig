@@ -2,27 +2,28 @@
 
 {% block title %}Browse Offers - Dream Holiday{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/offer-browser.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/offer_card.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker3.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/offer-browser.css') }}">
 {% endblock %}
 {% block page_content %}
     <div id="side-menu">
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-3 hidden-md-down" id="filters-column">
+                <div class="col-lg-3 d-none d-lg-block" id="filters-column">
                     {{ form_start(filtersForm) }}
                     <div id="filters-header-container">
                         <h3>Filters</h3>
                         <div class="text-right">
-                            <button>Reset</button>
+                            {{ form_widget(filtersForm.reset) }}
                         </div>
                     </div>
                     <div class="filter-form-section">
                         <h4>{{ form_label(filtersForm.offerType) }}</h4>
-                        {% for i in 1 .. filtersForm.offerType|length %}
+                        {% for offer_type_field in filtersForm.offerType %}
                             <div class="form-check">
-                                {{ form_widget(filtersForm.offerType[i]) }}
-                                {{ form_label(filtersForm.offerType[i]) }}
+                                {{ form_widget(offer_type_field) }}
+                                {{ form_label(offer_type_field) }}
                             </div>
                         {% endfor %}
                         <h4>Price range</h4>
@@ -51,11 +52,30 @@
                             {{ form_label(filtersForm.destination) }}
                             {{ form_widget(filtersForm.destination) }}
                         </div>
+                        <div id="filters-submit-container">
+                            {{ form_widget(filtersForm.submit) }}
+                        </div>
                     </div>
                     {{ form_end(filtersForm) }}
                 </div>
-                <div class="col-10 col-sm-10 col-md-10 col-lg-8 col-xl-8">
-                    Offers go here
+                <div class="col-9 col-sm-9 col-md-9 col-lg-6 col-xl-6" id="offers-column">
+                    <div class="row justify-content-end" id="sorting-row">
+                        <label for="sorting-select">Sort by:</label>
+                        <select id="sorting-select">
+                            <option>Price</option>
+                            <option>Popularity</option>
+                            <option>Depart date</option>
+                            <option>Return date</option>
+                        </select>
+                    </div>
+                    <div class="row offer-table-row">
+                        <div class="offer-image-container">
+                            <img src="{{ asset('images/country_cards/Spain_card.jpg') }}" alt="Spain card"/>
+                        </div>
+                        <div class="offer-info-container">
+                            aaa
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

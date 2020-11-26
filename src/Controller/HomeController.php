@@ -29,6 +29,7 @@ class HomeController extends AbstractController
             'attr' => [
                 'class' => 'form-inline'
             ],
+            'action' => $this->generateUrl('offer_browse'),
             'method' => 'GET',
             'destinations' => $destinations
         ]);
