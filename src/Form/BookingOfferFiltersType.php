@@ -7,6 +7,7 @@ use App\Entity\BookingOfferType;
 use App\Entity\Destination;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
@@ -22,21 +23,25 @@ class BookingOfferFiltersType extends AbstractType
         $builder
             ->add('priceMin', NumberType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Min'
                 ],
                 'label_attr' => [
                     'class' => 'sr-only'
                 ],
+                'label' => 'Minimum Price',
                 'mapped' => false,
                 'required' => false
             ])
             ->add('priceMax', NumberType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Max'
                 ],
                 'label_attr' => [
                     'class' => 'sr-only'
                 ],
+                'label' => 'Maximum Price',
                 'mapped' => false,
                 'required' => false
             ])
@@ -85,7 +90,7 @@ class BookingOfferFiltersType extends AbstractType
                 ],
                 'required' => false
             ])
-            ->add('offerType', EntityType::class, [
+            ->add('offerTypes', EntityType::class, [
                 'class' => BookingOfferType::class,
                 'choices' => $options['offer_types'],
                 'choice_attr' => function() {
@@ -95,11 +100,38 @@ class BookingOfferFiltersType extends AbstractType
                     'class' => 'form-check-label'
                 ],
                 'expanded' => true,
-                'multiple' => true
+                'multiple' => true,
+                'mapped' => false
             ])
             ->add('submit', SubmitType::class)
             ->add('reset', ResetType::class)
         ;
+        $builder->get('departureDate')->addModelTransformer( new CallbackTransformer(
+            function ($date) {
+                if($date!=null)
+                    return $date->format('yyyy/mm/dd');
+                return null;
+            },
+            function ($date) {
+                if($date!=null) {
+                    return new \DateTime($date);
+                }
+                return null;
+            }
+        ));
+        $builder->get('comebackDate')->addModelTransformer( new CallbackTransformer(
+            function ($date) {
+                if($date!=null)
+                    return $date->format('yyyy/mm/dd');
+                return null;
+            },
+            function ($date) {
+                if($date!=null) {
+                    return new \DateTime($date);
+                }
+                return null;
+            }
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

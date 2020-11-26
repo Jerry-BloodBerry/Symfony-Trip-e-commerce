@@ -19,8 +19,8 @@
                         </div>
                     </div>
                     <div class="filter-form-section">
-                        <h4>{{ form_label(filtersForm.offerType) }}</h4>
-                        {% for offer_type_field in filtersForm.offerType %}
+                        <h4>{{ form_label(filtersForm.offerTypes) }}</h4>
+                        {% for offer_type_field in filtersForm.offerTypes %}
                             <div class="form-check">
                                 {{ form_widget(offer_type_field) }}
                                 {{ form_label(offer_type_field) }}

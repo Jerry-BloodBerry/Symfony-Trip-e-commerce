@@ -178,3 +178,21 @@ form[name="booking_offer_filters"] select:hover {
     color: #a09f9f;
     font-weight: 400;
 }
+@media(max-width: 562px) {
+    .offer-image-container, .offer-info-container {
+        display: block;
+        width: 100%;
+    }
+    .offer-info-container {
+        border: 1px solid #a09f9f;
+        border-top: none;
+        border-bottom: none;
+    }
+    .offer-price-container {
+        display: block;
+        width: 100%;
+        border: 1px solid #a09f9f;
+        border-top: none;
+        border-radius: 0 0 .25rem .25rem;
+    }
+}
