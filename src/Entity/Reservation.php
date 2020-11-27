@@ -6,7 +6,7 @@ use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ReservationRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository", repositoryClass=ReservationRepository::class)
  */
 class Reservation
 {
@@ -33,6 +33,16 @@ class Reservation
      * @ORM\Column(type="datetime")
      */
     private $dateOfBooking;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $adultNumber;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $childNumber;
 
     /**
      * @ORM\Column(type="boolean")
@@ -78,7 +88,7 @@ class Reservation
         return $this->dateOfBooking;
     }
 
-    public function setDateOfBooking(\DateTimeInterface $dateOfBooking): self
+    public function setDateOfBooking(?\DateTimeInterface $dateOfBooking): self
     {
         $this->dateOfBooking = $dateOfBooking;
 
@@ -90,7 +100,7 @@ class Reservation
         return $this->isPaidFor;
     }
 
-    public function setIsPaidFor(bool $isPaidFor): self
+    public function setIsPaidFor(?bool $isPaidFor): self
     {
         $this->isPaidFor = $isPaidFor;
 
@@ -102,10 +112,32 @@ class Reservation
         return $this->bankTransferDate;
     }
 
-    public function setBankTransferDate(\DateTimeInterface $bankTransferDate): self
+    public function setBankTransferDate(?\DateTimeInterface $bankTransferDate): self
     {
         $this->bankTransferDate = $bankTransferDate;
 
+        return $this;
+    }
+
+    public function getChildNumber():?int
+    {
+        return $this->childNumber;
+    }
+
+    public function setChildNumber(?int $childNumber): self
+    {
+        $this->childNumber = $childNumber;
+        return $this;
+    }
+
+    public function getAdultNumber(): ?int
+    {
+        return $this->adultNumber;
+    }
+
+    public function setAdultNumber(?int $adultNumber): self
+    {
+        $this->adultNumber = $adultNumber;
         return $this;
     }
 }

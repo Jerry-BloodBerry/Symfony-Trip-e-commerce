@@ -24,9 +24,14 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
     {
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::SPAIN_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque autem cum delectus doloribus 
+                      error eum facilis in itaque laudantium natus nesciunt odit, officia quasi ratione recusandae rem, rerum unde.
+                      Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
+                      Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
             $this->getReference(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
             'H- Summer n\' Chill',
             1520.00,
+            620.00,
             2,
             new DateTime('2020-11-23'),
             new DateTime('2021-03-05'),
@@ -41,9 +46,14 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::TURKEY_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque autem cum delectus doloribus 
+                      error eum facilis in itaque laudantium natus nesciunt odit, officia quasi ratione recusandae rem, rerum unde.
+                      Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
+                      Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
             $this->getReference(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
             'H- Le famous Turk',
             1200.00,
+            500.00,
             3,
             new DateTime('2020-07-05'),
             new DateTime('2021-02-05'),
@@ -58,9 +68,13 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::INDIA_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
+                      Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
+                      repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
             $this->getReference(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
             'H- Maharaja\'s Rest',
             2100.00,
+            1800.00,
             4,
             new DateTime('2020-08-15'),
             new DateTime('2021-01-15'),
@@ -75,9 +89,13 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::JAPAN_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
+                      Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
+                      repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
             $this->getReference(BookingOfferTypeFixtures::ALL_INCLUSIVE_REFERENCE),
             'R- Akasaka Onsen Resort',
             3550.00,
+            3350.00,
             5,
             new DateTime('2020-05-05'),
             new DateTime('2020-12-06'),
@@ -92,9 +110,14 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::AUSTRALIA_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque autem cum delectus doloribus 
+                      error eum facilis in itaque laudantium natus nesciunt odit, officia quasi ratione recusandae rem, rerum unde.
+                      Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
+                      Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
             $this->getReference(BookingOfferTypeFixtures::CRUISES_REFERENCE),
             'Y- Sydney\'s prime',
             2700.00,
+            1900.00,
             6,
             new DateTime('2020-04-10'),
             new DateTime('2020-12-10'),
@@ -109,9 +132,13 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::ITALY_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
+                      Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
+                      repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
             $this->getReference(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
             'H- Il Mafioso',
             1200.00,
+            980.00,
             7,
             new DateTime('2020-05-05'),
             new DateTime('2020-12-05'),
@@ -126,9 +153,14 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::THAILAND_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque autem cum delectus doloribus 
+                      error eum facilis in itaque laudantium natus nesciunt odit, officia quasi ratione recusandae rem, rerum unde.
+                      Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
+                      Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
             $this->getReference(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
             'H- Buddha\'s way',
             1580.00,
+            940.00,
             8,
             new DateTime('2020-09-05'),
             new DateTime('2021-02-05'),
@@ -143,9 +175,14 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::CHINA_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque autem cum delectus doloribus 
+                      error eum facilis in itaque laudantium natus nesciunt odit, officia quasi ratione recusandae rem, rerum unde.
+                      Beatae cumque debitis iure nihil officiis perferendis soluta unde! Alias animi iure maxime repudiandae. 
+                      Assumenda atque blanditiis dolorum esse, expedita, ipsum iste laboriosam libero magnam, magni odit quae quos sed?',
             $this->getReference(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
             'H- Bei-JING',
             1520.00,
+            800.00,
             9,
             new DateTime('2020-11-10'),
             new DateTime('2021-01-05'),
@@ -160,9 +197,13 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 
         $bookingOffer = $this->createBookingOffer(
             $this->getReference(DestinationFixture::ARGENTINA_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
+                      Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
+                      repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
             $this->getReference(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
             'H- Patagonia',
             2800.00,
+            2400.00,
             10,
             new DateTime('2020-11-22'),
             new DateTime('2021-04-05'),
@@ -178,13 +219,15 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    private function createBookingOffer($destination, $offerType, $offerName, $offerPrice, $packageId, $bookingStartDate, $bookingEndDate, $departureDate, $comebackDate, $departureSpot, $comebackSpot, $isFeatured): BookingOffer
+    private function createBookingOffer($destination, $description, $offerType, $offerName, $offerPrice, $childPrice, $packageId, $bookingStartDate, $bookingEndDate, $departureDate, $comebackDate, $departureSpot, $comebackSpot, $isFeatured): BookingOffer
     {
         $bookingOffer = new BookingOffer();
         $bookingOffer->setDestination($destination);
+        $bookingOffer->setDescription($description);
         $bookingOffer->setOfferType($offerType);
         $bookingOffer->setOfferName($offerName);
         $bookingOffer->setOfferPrice($offerPrice);
+        $bookingOffer->setChildPrice($childPrice);
         $bookingOffer->setPackageId($packageId);
         $bookingOffer->setBookingStartDate($bookingStartDate);
         $bookingOffer->setBookingEndDate($bookingEndDate);
@@ -193,6 +236,7 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $bookingOffer->setDepartureSpot($departureSpot);
         $bookingOffer->setComebackSpot($comebackSpot);
         $bookingOffer->setIsFeatured($isFeatured);
+        $bookingOffer->setPhotosDirectory('images/offers_cards/' . $bookingOffer->getOfferName());
         return $bookingOffer;
     }
 

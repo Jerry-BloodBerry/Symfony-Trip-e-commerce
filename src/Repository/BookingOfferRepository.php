@@ -6,7 +6,9 @@ use App\Entity\BookingOffer;
 use App\Entity\CustomersRating;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Doctrine\Common\Persistence\ManagerRegistry;
+
 use function Sodium\add;
 
 /**
@@ -24,7 +26,7 @@ class BookingOfferRepository extends ServiceEntityRepository
         $this->registry=$registry;
     }
 
-    private static function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null)
+    private static function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
     {
         $criteria = new Criteria();
         if($departureSpot != null)
@@ -39,10 +41,19 @@ class BookingOfferRepository extends ServiceEntityRepository
             $criteria->andWhere(Criteria::expr()->gte('offerPrice', $priceMin));
         if($priceMax != null)
             $criteria->andWhere(Criteria::expr()->lte('offerPrice', $priceMax));
+        if($bookingOfferTypes != null) {
+            $orStatements = [];
+            foreach ($bookingOfferTypes as $type) {
+                $orStatements[] = Criteria::expr()->eq('offerType', $type);
+            }
+            if (!empty($orStatements)) {
+                $criteria->andWhere(new CompositeExpression(CompositeExpression::TYPE_OR, $orStatements));
+            }
+        }
         return $criteria;
     }
 
-    public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null)
+    public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
     {
         $qb = $this->createQueryBuilder('offer')->addCriteria(self::createSearchCriteria(
             $departureSpot,
@@ -50,7 +61,9 @@ class BookingOfferRepository extends ServiceEntityRepository
             $departureDate,
             $comebackDate,
             $priceMin,
-            $priceMax));
+            $priceMax,
+            $bookingOfferTypes
+        ));
         $result=$qb->getQuery()->getResult();
         foreach ($result as $row){
             $package_id = $row->getPackageId();
@@ -58,6 +71,13 @@ class BookingOfferRepository extends ServiceEntityRepository
             $row->setRating($rating);
         }
         return $result;
+    }
+
+    public function findOffer($id) :?BookingOffer{
+        $offer = $this->find($id);
+        $rating = $this->findOfferRating($offer->getPackageId());
+        $offer->setRating($rating);
+        return $offer;
     }
 
     private function findOfferRating(int $packageId): ?int{
