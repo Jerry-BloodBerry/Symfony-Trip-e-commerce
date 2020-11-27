@@ -19,7 +19,7 @@ final class BookingOfferService
         $this->itemRepository = $bookingOfferRepository;
     }
 
-    public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null)
+    public function findOffers($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
     {
         return $this->itemRepository->findOffers(
             $departureSpot,
@@ -27,7 +27,8 @@ final class BookingOfferService
             $departureDate,
             $comebackDate,
             $priceMin,
-            $priceMax
+            $priceMax,
+            $bookingOfferTypes
         );
     }
 }

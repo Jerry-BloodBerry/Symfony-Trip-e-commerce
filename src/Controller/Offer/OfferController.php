@@ -51,10 +51,10 @@ class OfferController extends AbstractController
                 $bookingOffer->getDepartureDate(),
                 $bookingOffer->getComebackDate(),
                 $priceMin,
-                $priceMax
+                $priceMax,
+                $offerTypes
             );
         }
-
         return $this->render('offer/browser.html.twig', [
             'offers' => $offers,
             'parameters' => $request->attributes->all(),
