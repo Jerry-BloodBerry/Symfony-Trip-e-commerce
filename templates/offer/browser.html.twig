@@ -48,13 +48,18 @@
                         </div>
                         <div class="offer-info-container">
                             <div class="country-continent">{{ offer.destination }} / {{ offer.destination.continent }}</div>
-                            <div class="offer-rating">
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="far fa-star"></span>
-                            </div>
+                            {% if offer.rating %}
+                                <div class="offer-rating">
+                                    {% for i in 1..offer.rating %}
+                                        <span class="fas fa-star"></span>
+                                    {% endfor %}
+                                    {% if offer.rating<5 %}
+                                        {% for i in 1..(5-offer.rating) %}
+                                        <span class="far fa-star"></span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
                             <div class="offer-name">{{ offer.offerName }}</div>
                             <div class="offer-info-list">
                                 <div class="offer-info-list-item">
