@@ -79,6 +79,12 @@ class BookingOffer
      */
     private $isFeatured;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     */
+    private $photosDirectory;
+
     private $rating;
 
     public function __construct()
@@ -241,6 +247,18 @@ class BookingOffer
     public function setIsFeatured(bool $isFeatured): self
     {
         $this->isFeatured = $isFeatured;
+
+        return $this;
+    }
+
+    public function getPhotosDirectory(): ?string
+    {
+        return $this->isFeatured;
+    }
+
+    public function setPhotosDirectory(string $photosDirectory): self
+    {
+        $this->photosDirectory = $photosDirectory;;
 
         return $this;
     }
