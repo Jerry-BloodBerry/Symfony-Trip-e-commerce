@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CustomersRatingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @ORM\Entity(repositoryClass=CustomersRatingRepository::class)
@@ -24,13 +25,12 @@ class CustomersRating
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=BookingOffer::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $booking_offer;
+    private $package;
 
     /**
-     * @ORM\Column(type="decimal", precision=2, scale=1)
+     * @ORM\Column(type="integer")
      */
     private $rating;
 
@@ -56,14 +56,14 @@ class CustomersRating
         return $this;
     }
 
-    public function getBookingOffer(): ?BookingOffer
+    public function getPackage(): ?int
     {
-        return $this->booking_offer;
+        return $this->package;
     }
 
-    public function setBookingOffer(?BookingOffer $booking_offer): self
+    public function setPackage(?int $package_id): self
     {
-        $this->booking_offer = $booking_offer;
+        $this->package = $package_id;
 
         return $this;
     }
