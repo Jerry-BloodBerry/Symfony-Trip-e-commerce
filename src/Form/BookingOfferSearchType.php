@@ -70,11 +70,13 @@ class BookingOfferSearchType extends AbstractType
             $builder->get('departureDate')->addModelTransformer( new CallbackTransformer(
                 function ($date) {
                     if($date!=null)
-                        return $date->format('yyyy/mm/dd');
+                        return $date->format('d/m/Y');
                     return null;
                 },
                 function ($date) {
                     if($date!=null) {
+                        $date = explode('/',$date);
+                        $date = $date[2] . '/' . $date[1] . '/' . $date[0];
                         return new \DateTime($date);
                     }
                     return null;
@@ -83,11 +85,13 @@ class BookingOfferSearchType extends AbstractType
             $builder->get('comebackDate')->addModelTransformer( new CallbackTransformer(
                 function ($date) {
                     if($date!=null)
-                        return $date->format('yyyy/mm/dd');
+                        return $date->format('d/m/Y');
                     return null;
                 },
                 function ($date) {
                     if($date!=null) {
+                        $date = explode('/',$date);
+                        $date = $date[2] . '/' . $date[1] . '/' . $date[0];
                         return new \DateTime($date);
                     }
                     return null;
