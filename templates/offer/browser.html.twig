@@ -35,6 +35,12 @@
                             </select>
                         </div>
                     </div>
+                    {% if offers|length == 0 %}
+                        <div class="row">
+                            <h3 class="text-center mt-4 d-block w-100">Sorry, nothing was found...</h3>
+                            <p class="text-center d-block w-100">Please try changing or removing some of the filters.</p>
+                        </div>
+                    {% endif %}
                     {% for offer in offers %}
                     <div class="row offer-table-row">
                         <div class="offer-image-container">
