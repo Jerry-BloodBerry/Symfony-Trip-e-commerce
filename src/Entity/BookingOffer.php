@@ -184,7 +184,7 @@ class BookingOffer
         return $this->departureDate;
     }
 
-    public function setDepartureDate(DateTimeInterface $departureDate): self
+    public function setDepartureDate(?DateTimeInterface $departureDate): self
     {
         $this->departureDate = $departureDate;
 
@@ -196,7 +196,7 @@ class BookingOffer
         return $this->comebackDate;
     }
 
-    public function setComebackDate(DateTimeInterface $comebackDate): self
+    public function setComebackDate(?DateTimeInterface $comebackDate): self
     {
         $this->comebackDate = $comebackDate;
 

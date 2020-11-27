@@ -4,6 +4,7 @@
 namespace App\Controller\Offer;
 
 use App\Entity\BookingOffer;
+use App\Entity\Destination;
 use App\Form\BookingOfferFiltersType;
 use App\Service\BookingOfferService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +25,7 @@ class OfferController extends AbstractController
      */
     public function displayOfferList(Request $request, BookingOfferService $offerService)
     {
+        $bookingOffer = new BookingOffer();
         if($request->query->get('booking_offer_search')) {
             $requestParams = $request->query->get('booking_offer_search');
             $departureSpot = $requestParams['departureSpot'] ?? null;
@@ -34,11 +36,25 @@ class OfferController extends AbstractController
                 $destination,
                 $departureDate,
                 $comebackDate);
+            $bookingOffer->setDepartureSpot($departureSpot);
+            $bookingOffer->setDestination($this->getDoctrine()->getRepository(Destination::class)->find($destination));
+            if($departureDate!=null) {
+                $date = explode('/',$departureDate);
+                $date = $date[2] . '/' . $date[1] . '/' . $date[0];
+                $bookingOffer->setDepartureDate(new \DateTime($date));
+            }
+            if($comebackDate!=null) {
+                $date = explode('/',$comebackDate);
+                $date = $date[2] . '/' . $date[1] . '/' . $date[0];
+                $bookingOffer->setComebackDate(new \DateTime($date));
+            }
+
         } else {
             $offers = $offerService->findOffers();
         }
-        $bookingOffer = new BookingOffer();
-        $filtersForm = $this->createForm(BookingOfferFiltersType::class, $bookingOffer);
+        $filtersForm = $this->createForm(BookingOfferFiltersType::class, $bookingOffer, [
+            'method' => 'GET'
+        ]);
         $filtersForm->handleRequest($request);
 
         if($filtersForm->isSubmitted() && $filtersForm->isValid()) {
