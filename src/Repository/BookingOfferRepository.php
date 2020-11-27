@@ -73,6 +73,13 @@ class BookingOfferRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function findOffer($id) :?BookingOffer{
+        $offer = $this->find($id);
+        $rating = $this->findOfferRating($offer->getPackageId());
+        $offer->setRating($rating);
+        return $offer;
+    }
+
     private function findOfferRating(int $packageId): ?int{
         return $this->registry->getRepository(CustomersRating::class)->findAvgRatingForPackage($packageId);
     }
