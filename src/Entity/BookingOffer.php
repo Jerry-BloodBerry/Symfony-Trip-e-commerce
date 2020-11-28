@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\DocBlock\Description;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingOfferRepository")
@@ -39,10 +40,20 @@ class BookingOffer
     private $offerPrice;
 
     /**
+     * @ORM\Column(type="decimal", precision=6, scale=2)
+     */
+    private $childPrice;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Destination", inversedBy="bookingOffers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $destination;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
 
     /**
      * @ORM\Column(type="datetime")
@@ -79,6 +90,12 @@ class BookingOffer
      */
     private $isFeatured;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     */
+    private $photosDirectory;
+
     private $rating;
 
     public function __construct()
@@ -113,14 +130,26 @@ class BookingOffer
         return $this;
     }
 
-    public function getOfferPrice(): ?string
+    public function getOfferPrice(): ?float
     {
         return $this->offerPrice;
     }
 
-    public function setOfferPrice(int $offerPrice): self
+    public function setOfferPrice(float $offerPrice): self
     {
         $this->offerPrice = $offerPrice;
+
+        return $this;
+    }
+
+    public function getChildPrice(): ?float
+    {
+        return $this->offerPrice;
+    }
+
+    public function setChildPrice(float $childPrice): self
+    {
+        $this->childPrice = $childPrice;
 
         return $this;
     }
@@ -146,6 +175,17 @@ class BookingOffer
     {
         $this->destination = $destination;
 
+        return $this;
+    }
+
+    public function getDescription() :?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
         return $this;
     }
 
@@ -241,6 +281,18 @@ class BookingOffer
     public function setIsFeatured(bool $isFeatured): self
     {
         $this->isFeatured = $isFeatured;
+
+        return $this;
+    }
+
+    public function getPhotosDirectory(): ?string
+    {
+        return $this->photosDirectory;
+    }
+
+    public function setPhotosDirectory(string $photosDirectory): self
+    {
+        $this->photosDirectory = $photosDirectory;;
 
         return $this;
     }

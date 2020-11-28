@@ -16,6 +16,8 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         $reservation = $this->createReservation(
             $this->getReference(UserFixture::USER1_REFERENCE),
             $this->getReference(BookingOfferFixture::BEIJING_REFERENCE),
+            1,
+            0,
             new DateTime('2020-11-22')
         );
         $manager->persist($reservation);
@@ -23,6 +25,8 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         $reservation = $this->createPaidReservation(
             $this->getReference(UserFixture::USER1_REFERENCE),
             $this->getReference(BookingOfferFixture::PATAGONIA_REFERENCE),
+            2,
+            2,
             new DateTime('2020-11-22'),
             new DateTime('2020-11-24')
         );
@@ -31,6 +35,8 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         $reservation = $this->createReservation(
             $this->getReference(UserFixture::USER2_REFERENCE),
             $this->getReference(BookingOfferFixture::PATAGONIA_REFERENCE),
+            5,
+            0,
             new DateTime('2020-11-23')
         );
         $manager->persist($reservation);
@@ -38,6 +44,8 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         $reservation = $this->createPaidReservation(
             $this->getReference(UserFixture::USER2_REFERENCE),
             $this->getReference(BookingOfferFixture::BEIJING_REFERENCE),
+            3,
+            2,
             new DateTime('2020-11-22'),
             new DateTime('2020-11-22')
         );
@@ -46,6 +54,8 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         $reservation = $this->createReservation(
             $this->getReference(UserFixture::USER2_REFERENCE),
             $this->getReference(BookingOfferFixture::MAHARAJA_REFERENCE),
+            2,
+            0,
             new DateTime('2020-11-22')
         );
         $manager->persist($reservation);
@@ -53,19 +63,21 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    private function createReservation($user, $bookingOffer, $dateOfBooking, $paid = false): Reservation
+    private function createReservation($user, $bookingOffer, $adultNumber, $childNumber, $dateOfBooking, $paid = false): Reservation
     {
         $reservation = new Reservation();
         $reservation->setUser($user);
         $reservation->setBookingOffer($bookingOffer);
+        $reservation->setAdultNumber($adultNumber);
+        $reservation->setChildNumber($childNumber);
         $reservation->setDateOfBooking($dateOfBooking);
         $reservation->setIsPaidFor($paid);
         return $reservation;
     }
 
-    private function createPaidReservation($user, $bookingOffer, $dateOfBooking, $bankTransferDate): Reservation
+    private function createPaidReservation($user, $bookingOffer, $adultNumber, $childNumber, $dateOfBooking, $bankTransferDate): Reservation
     {
-        $reservation = $this->createReservation($user, $bookingOffer, $dateOfBooking, true);
+        $reservation = $this->createReservation($user, $bookingOffer, $adultNumber, $childNumber, $dateOfBooking, true);
         $reservation->setBankTransferDate($bankTransferDate);
         return $reservation;
     }
