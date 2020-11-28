@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\DocBlock\Description;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingOfferRepository")
@@ -92,7 +91,6 @@ class BookingOffer
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
      */
     private $photosDirectory;
 
