@@ -10,6 +10,7 @@
 }
 .f-offer-card {
     width: 18rem;
+    height: 100%;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     margin-left: 1rem;
@@ -23,6 +24,9 @@
     color: #1d2124;
     font-weight: 600;
     text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .f-offer-card img.card-img-top {
     height: 12rem;

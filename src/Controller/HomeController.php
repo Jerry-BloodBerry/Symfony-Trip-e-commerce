@@ -43,8 +43,10 @@ class HomeController extends AbstractController
                'comebackDate' => $bookingOffer->getComebackDate()
             ]);
         }
+        $featuredOffers = $this->getDoctrine()->getRepository(BookingOffer::class)->findBy(['isFeatured' => 1]);
         return $this->render('index/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'featuredOffers' => $featuredOffers
         ]);
     }
 }
