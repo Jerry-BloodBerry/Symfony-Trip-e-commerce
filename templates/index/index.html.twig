@@ -53,7 +53,7 @@
                 {% for offer in featuredOffers %}
                     <a href="{{ path('offer_single', {'id': offer.id}) }}" class="f-offer-card-link">
                         <div class="card f-offer-card">
-                            <img class="card-img-top" src="{{ asset('images/offers_cards/' ~ offer.offerName ~'/1.jpg') }}"
+                            <img class="card-img-top" src="{{ offer.photosDirectory }}/1.jpg"
                                  alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title" title="{{ offer.offerName }}">{{ offer.offerName }}</h5>
@@ -61,8 +61,7 @@
                                     {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
                                     {{ difference.days }} days
                                 </p>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                    of the card's content.</p>
+                                <div class="card-text card-offer-description">{{ offer.description }}</div>
                                 <span class="fas fa-star"></span>
                                 <span class="fas fa-star"></span>
                                 <span class="fas fa-star"></span>
@@ -82,17 +81,17 @@
                     class="subtitle-ndash">&ndash;&ndash;</span></p>
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-calendar-day"></i> First
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="{{ path('offer_browse', {'offerType': 'First Minute'}) }}"><i class="fas fa-calendar-day"></i> First
                     minute</a>
-                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-stopwatch"></i> Last
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="{{ path('offer_browse', {'offerType': 'Last Minute'}) }}"><i class="fas fa-stopwatch"></i> Last
                     minute</a>
-                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-star"></i> All inclusive</a>
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="{{ path('offer_browse', {'offerType': 'All Inclusive'}) }}"><i class="fas fa-star"></i> All inclusive</a>
             </div>
             <div class="row justify-content-center">
-                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-child"></i> For children</a>
-                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-users"></i> Group
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="{{ path('offer_browse', {'offerType': 'For Children'}) }}"><i class="fas fa-child"></i> For children</a>
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="{{ path('offer_browse', {'offerType': 'Group Tours'}) }}"><i class="fas fa-users"></i> Group
                     Tours</a>
-                <a class="col-3 col-lg-2 text-center offer-type-btn" href="#"><i class="fas fa-anchor"></i> Cruises</a>
+                <a class="col-3 col-lg-2 text-center offer-type-btn" href="{{ path('offer_browse', {'offerType': 'Cruises'}) }}"><i class="fas fa-anchor"></i> Cruises</a>
             </div>
         </div>
     </div>
@@ -137,22 +136,23 @@
 {% endblock %}
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{ asset('javascript/lineLimiter.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        let yyyy = today.getFullYear();
-
-        today = mm + '/' + dd + '/' + yyyy;
-        $('.datepicker').datepicker({
-            weekStart: 1,
-            startDate: '-0d',
-            daysOfWeekHighlighted: "6,0",
-            format: "dd/mm/yyyy",
-            autoclose: true,
-            todayHighlight: true,
-            clearBtn: true,
-            orientation: "bottom left",
-        });
+        $(function() {
+            $('.datepicker').datepicker({
+                weekStart: 1,
+                startDate: '-0d',
+                daysOfWeekHighlighted: "6,0",
+                format: "dd/mm/yyyy",
+                autoclose: true,
+                todayHighlight: true,
+                clearBtn: true,
+                orientation: "bottom left",
+            });
+            $('.card-offer-description').each(function () {
+                console.log(this);
+                limitLines(this,5);
+            });
+        })
     </script>
 {% endblock %}

@@ -40,7 +40,7 @@
 .f-offer-card div.card-body span.fa-star {
     color: #FFD43B;
 }
-.f-offer-card div.card-body p {
+.f-offer-card div.card-body {
     font-size: .9rem;
     text-align: justify;
 }
