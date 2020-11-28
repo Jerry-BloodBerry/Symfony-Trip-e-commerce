@@ -7,6 +7,7 @@ use App\Entity\BookingOffer;
 use App\Entity\Destination;
 use App\Form\BookingOfferFiltersType;
 use App\Service\BookingOfferService;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,7 @@ class OfferController extends AbstractController
      * @param Request $request
      * @param BookingOfferService $offerService
      * @return Response
+     * @throws Exception
      */
     public function displayOfferList(Request $request, BookingOfferService $offerService)
     {
@@ -75,6 +77,19 @@ class OfferController extends AbstractController
             'offers' => $offers,
             'parameters' => $request->attributes->all(),
             'filtersForm' => $filtersForm
+        ]);
+    }
+
+    /**
+     * @Route ("/{id}", name="single")
+     * @param int $id
+     * @return Response
+     */
+    public function displayOffer($id)
+    {
+        $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($id);
+        return $this->render('offer/single_offer.html.twig', [
+            'offer' => $offer
         ]);
     }
 }

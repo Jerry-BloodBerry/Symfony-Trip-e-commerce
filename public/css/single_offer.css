@@ -1,0 +1,43 @@
+#offer-header h1{
+    font-family: "Roboto Condensed", sans-serif;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    padding: 2rem 1rem .5rem 1rem;
+    font-weight: 600;
+    display: inline-block;
+}
+#offer-header .stars-container {
+    display: inline-block;
+    height: 100%;
+    color: #FFD43B;
+}
+.gallery-container {
+    padding: 0 1rem .5rem 1rem;
+}
+.gallery-hero {
+    width: 100%;
+}
+.gallery-hero img {
+    max-width: 800px;
+}
+.gallery-secondary {
+    padding-top: .5rem;
+    text-align: center;
+}
+.gallery-secondary img {
+    width: 18%;
+    margin-right: 1%;
+}
+.gallery-secondary img:last-child {
+    margin-right: 0;
+}
+#reservation-column {
+    max-width: 250px;
+    padding: 0 1rem 1rem 1rem;
+}
+#reservation-column .reservation-form-container {
+    border: 2px solid rgb(0,58,110);
+}
+#description-container {
+    padding: .5rem 1rem 0 1rem;
+}

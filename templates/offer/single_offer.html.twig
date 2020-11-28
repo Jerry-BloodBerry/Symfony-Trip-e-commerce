@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ offer.offerName }} - Dream Holiday
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/single_offer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/booking_filters_form.css') }}">
+{% endblock %}
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="row">
+                <div id="offer-header">
+                    <h1>{{ offer.offerName }}</h1>
+                    <div class="stars-container">
+                        {% if offer.rating %}
+                            {% for i in 1..offer.rating %}
+                                <span class="fas fa-star"></span>
+                            {% endfor %}
+                            {% if offer.rating<5 %}
+                                {% for i in 1..(5-offer.rating) %}
+                                    <span class="far fa-star"></span>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="gallery-container">
+                <div class="gallery-hero col-lg-8">
+                    <img src="{{ asset('images/country_cards/Turkey_card.jpg') }}"
+                         alt="{{ offer.offerName }}">
+                </div>
+                <div class="col-lg-3" id="reservation-column">
+                    <div class="reservation-form-container">
+                        aaa
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-secondary">
+            <img src="https://via.placeholder.com/150" alt="placeholder image">
+            <img src="https://via.placeholder.com/150" alt="placeholder image">
+            <img src="https://via.placeholder.com/150" alt="placeholder image">
+            <img src="https://via.placeholder.com/150" alt="placeholder image">
+            <img src="https://via.placeholder.com/150" alt="placeholder image">
+        </div>
+        <div id="description-container">
+            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consectetur hic labore nulla
+                repudiandae! A aliquam aspernatur beatae consectetur culpa debitis eaque earum et illo incidunt
+                ipsam, labore minus non quam ratione rerum soluta veritatis voluptatem. Accusantium architecto
+                asperiores atque consectetur, deleniti dignissimos dolor esse, fugiat id ipsum magnam molestias
+                nulla perspiciatis quibusdam voluptatibus. Accusantium aliquam dicta doloremque eaque et, eum
+                iure labore maiores minima molestias nemo neque officiis perspiciatis quis rerum sapiente, sed
+                tempora vel velit vero!</p>
+        </div>
+    </div>
+{% endblock %}
+

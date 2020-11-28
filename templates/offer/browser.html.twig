@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/offer_card.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/offer-browser.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/booking_filters_form.css') }}"
 {% endblock %}
 {% block page_content %}
     <div id="side-menu">
@@ -41,59 +42,61 @@
                     {% endif %}
                     <div id="offers-wrapper">
                         {% for offer in offers %}
-                        <div class="row offer-table-row"
-                             data-price="{{ offer.offerPrice }}"
-                             data-rating="{% if offer.rating %}{{ offer.rating }}{% else %}0{% endif %}">
-                            <div class="offer-image-container">
-                                <img src="{{ asset('images/country_cards/Spain_card.jpg') }}" alt="Spain card"/>
-                            </div>
-                            <div class="offer-info-container">
-                                <div class="country-continent">{{ offer.destination }} / {{ offer.destination.continent }}</div>
-                                {% if offer.rating %}
-                                    <div class="offer-rating">
-                                        {% for i in 1..offer.rating %}
-                                            <span class="fas fa-star"></span>
-                                        {% endfor %}
-                                        {% if offer.rating<5 %}
-                                            {% for i in 1..(5-offer.rating) %}
-                                            <span class="far fa-star"></span>
-                                            {% endfor %}
+                            <div class="row offer-table-row"
+                                 data-price="{{ offer.offerPrice }}"
+                                 data-rating="{% if offer.rating %}{{ offer.rating }}{% else %}0{% endif %}">
+                                <a href="{{ path('offer_single', {'id': offer.id}) }}" class="offer-link">
+                                    <div class="offer-image-container">
+                                        <img src="{{ asset('images/country_cards/Spain_card.jpg') }}" alt="Spain card"/>
+                                    </div>
+                                    <div class="offer-info-container">
+                                        <div class="country-continent">{{ offer.destination }} / {{ offer.destination.continent }}</div>
+                                        {% if offer.rating %}
+                                            <div class="offer-rating">
+                                                {% for i in 1..offer.rating %}
+                                                    <i class="fas fa-star"></i>
+                                                {% endfor %}
+                                                {% if offer.rating<5 %}
+                                                    {% for i in 1..(5-offer.rating) %}
+                                                    <i class="far fa-star"></i>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
                                         {% endif %}
-                                    </div>
-                                {% endif %}
-                                <div class="offer-name">{{ offer.offerName }}</div>
-                                <div class="offer-info-list">
-                                    <div class="offer-info-list-item">
-                                        <div class="icon-container">
-                                            <i class="fas fa-calendar-check"></i>
+                                        <div class="offer-name">{{ offer.offerName }}</div>
+                                        <div class="offer-info-list">
+                                            <div class="offer-info-list-item">
+                                                <div class="icon-container">
+                                                    <i class="fas fa-calendar-check"></i>
+                                                </div>
+                                                {{ offer.departureDate|date("d.m.Y") }} - {{ offer.comebackDate|date("d.m.Y") }}
+                                            </div>
+                                            <div class="offer-info-list-item">
+                                                <div class="icon-container">
+                                                    <i class="fas fa-clock"></i>
+                                                </div>
+                                                {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
+                                                {{ difference.days }} days
+                                            </div>
+                                            <div class="offer-info-list-item">
+                                                <div class="icon-container">
+                                                    <i class="fas fa-plane-departure"></i>
+                                                </div>
+                                                Warsaw Chopin Airport
+                                            </div>
+                                            <div class="offer-info-list-item">
+                                                <div class="icon-container">
+                                                    {% include 'offer/offer_type_icons.html.twig' with {'offerType': offer.offerType} %}
+                                                </div>
+                                                {{ offer.offerType }}
+                                            </div>
                                         </div>
-                                        {{ offer.departureDate|date("d.m.Y") }} - {{ offer.comebackDate|date("d.m.Y") }}
                                     </div>
-                                    <div class="offer-info-list-item">
-                                        <div class="icon-container">
-                                            <i class="fas fa-clock"></i>
-                                        </div>
-                                        {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
-                                        {{ difference.days }} days
+                                    <div class="offer-price-container justify-content-end">
+                                        <p>&dollar;{{ offer.offerPrice|number_format(0, '.', ',') }}<span>/person</span></p>
                                     </div>
-                                    <div class="offer-info-list-item">
-                                        <div class="icon-container">
-                                            <i class="fas fa-plane-departure"></i>
-                                        </div>
-                                        Warsaw Chopin Airport
-                                    </div>
-                                    <div class="offer-info-list-item">
-                                        <div class="icon-container">
-                                            {% include 'offer/offer_type_icons.html.twig' with {'offerType': offer.offerType} %}
-                                        </div>
-                                        {{ offer.offerType }}
-                                    </div>
-                                </div>
+                                </a>
                             </div>
-                            <div class="offer-price-container justify-content-end">
-                                <p>&dollar;{{ offer.offerPrice|number_format(0, '.', ',') }}<span>/person</span></p>
-                            </div>
-                        </div>
                         {% endfor %}
                     </div>
                 </div>
