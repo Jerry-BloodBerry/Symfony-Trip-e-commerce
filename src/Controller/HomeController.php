@@ -5,7 +5,6 @@ namespace App\Controller;
 
 
 use App\Entity\BookingOffer;
-use App\Entity\Destination;
 use App\Form\BookingOfferSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,15 +22,12 @@ class HomeController extends AbstractController
     public function index(Request $request)
     {
         $bookingOffer = new BookingOffer();
-        $destinations = $this->getDoctrine()->getRepository(Destination::class)->findAll();
-        $destinations = Destination::sortDestinationsByName($destinations);
         $form = $this->createForm(BookingOfferSearchType::class, $bookingOffer, [
             'attr' => [
                 'class' => 'form-inline'
             ],
             'action' => $this->generateUrl('offer_browse'),
-            'method' => 'GET',
-            'destinations' => $destinations
+            'method' => 'GET'
         ]);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
