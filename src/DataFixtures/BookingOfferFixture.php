@@ -236,7 +236,7 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
         $bookingOffer->setDepartureSpot($departureSpot);
         $bookingOffer->setComebackSpot($comebackSpot);
         $bookingOffer->setIsFeatured($isFeatured);
-        $bookingOffer->setPhotosDirectory('images/offers_cards/' . $bookingOffer->getOfferName());
+        $bookingOffer->setPhotosDirectory('images/offers_cards/' . $packageId);
         return $bookingOffer;
     }
 
