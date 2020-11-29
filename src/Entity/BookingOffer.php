@@ -44,7 +44,7 @@ class BookingOffer
     private $childPrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Destination", inversedBy="bookingOffers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Destination")
      * @ORM\JoinColumn(nullable=false)
      */
     private $destination;
@@ -142,7 +142,7 @@ class BookingOffer
 
     public function getChildPrice(): ?float
     {
-        return $this->offerPrice;
+        return $this->childPrice;
     }
 
     public function setChildPrice(float $childPrice): self
