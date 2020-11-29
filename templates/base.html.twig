@@ -54,13 +54,13 @@
                                         Holiday
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">First Minute</a>
-                                        <a class="dropdown-item" href="#">Last Minute</a>
-                                        <a class="dropdown-item" href="#">All Inclusive</a>
-                                        <a class="dropdown-item" href="#">For Children</a>
-                                        <a class="dropdown-item" href="#">Group Tours</a>
-                                        <a class="dropdown-item" href="#">Cruises</a>
-                                        <a class="dropdown-item" href="#">Bargain Zone</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'First Minute'}) }}">First Minute</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'Last Minute'}) }}">Last Minute</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'All Inclusive'}) }}">All Inclusive</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'For Children'}) }}">For Children</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'Group Tours'}) }}">Group Tours</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'Cruises'}) }}">Cruises</a>
+                                        <a class="dropdown-item" href="{{ path('offer_browse', {'offerType': 'Bargain Zone'}) }}">Bargain Zone</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
