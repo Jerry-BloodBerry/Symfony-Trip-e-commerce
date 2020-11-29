@@ -195,3 +195,6 @@ form[name="booking_offer_search"] .input-group select:hover {
 #why-us-section img {
     width: 300px;
 }
+.error {
+    border-bottom: 2px solid red;
+}
