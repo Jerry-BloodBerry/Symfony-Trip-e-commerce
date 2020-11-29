@@ -1,6 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block page_content %}
     {% for reservation in reservations %}
-        {{ reservation.id }}
+        <div id="offer-header">
+            <h1>{{ reservation.destination }}</h1>
+            <h4>{{ reservation.bookingOffer.departureDate|date("d.m.Y") }}-{{ reservation.bookingOffer.comebackDate|date("d.m.Y") }}</h4>
+            <h5>Departure airport - {{ reservation.bookingOffer.departureSpot }}</h5>
+            <h5>Comeback airport - {{ reservation.bookingOffer.comebackSpot }}</h5>
+        </div>
+        <p>Total cost: {{ reservation.totalCost }}$</p>
+        {% if reservation.isPaidFor == true %}
+            <p>Reservations was paid for on {{ reservation.bankTransferDate|date("d.m.Y")}}.</p>
+        {% else %}
+            <p>Reservations was not paid for.</p>
+        {% endif %}
+        {% if reservation.adultNumber == 1 %}
+            <p>{{ reservation.adultNumber }} adult passenger
+        {% else %}
+            <p>{{ reservation.adultNumber }} adult passengers
+        {% endif %}
+        {% if reservation.childNumber == 1 %}
+            and {{ reservation.adultNumber }} child.
+        {% elseif reservation.childNumber > 1 %}
+            and {{ reservation.adultNumber }} children.
+        {% endif %}
+        <p><a href="{{ path('rateOffer', {'id': reservation.bookingOffer.Id}) }}">Rate offer</a>
+        </p>
     {% endfor %}
 {% endblock %}

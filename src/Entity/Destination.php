@@ -25,11 +25,6 @@ class Destination
     private $destinationName;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BookingOffer", mappedBy="destination")
-     */
-    private $bookingOffers;
-
-    /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\File(mimeTypes={ "image/jpeg", "image/jpg", "image/png"},
@@ -45,7 +40,6 @@ class Destination
 
     public function __construct()
     {
-        $this->bookingOffers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,37 +55,6 @@ class Destination
     public function setDestinationName(string $destinationName): self
     {
         $this->destinationName = $destinationName;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|BookingOffer[]
-     */
-    public function getBookingOffers(): Collection
-    {
-        return $this->bookingOffers;
-    }
-
-    public function addBookingOffer(BookingOffer $bookingOffer): self
-    {
-        if (!$this->bookingOffers->contains($bookingOffer)) {
-            $this->bookingOffers[] = $bookingOffer;
-            $bookingOffer->setDestination($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBookingOffer(BookingOffer $bookingOffer): self
-    {
-        if ($this->bookingOffers->contains($bookingOffer)) {
-            $this->bookingOffers->removeElement($bookingOffer);
-            // set the owning side to null (unless already changed)
-            if ($bookingOffer->getDestination() === $this) {
-                $bookingOffer->setDestination(null);
-            }
-        }
 
         return $this;
     }
