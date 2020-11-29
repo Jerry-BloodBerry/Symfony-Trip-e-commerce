@@ -128,9 +128,9 @@
                             <div class="col-md-3 col-lg-2">
                                 <h5 class="mt-4 ml-2">Promotions</h5>
                                 <ul class="list list-unstyled ml-2">
-                                    <li class="mt-1 footer-link"><a href="#">First Minute</a></li>
-                                    <li class="footer-link"><a href="#">Last Minute</a></li>
-                                    <li class="footer-link"><a href="#">Bargain Zone</a></li>
+                                    <li class="mt-1 footer-link"><a href="{{ path('offer_browse', {'offerType': 'First Minute'}) }}">First Minute</a></li>
+                                    <li class="footer-link"><a href="{{ path('offer_browse', {'offerType': 'Last Minute'}) }}">Last Minute</a></li>
+                                    <li class="footer-link"><a href="{{ path('offer_browse', {'offerType': 'Bargain Zone'}) }}">Bargain Zone</a></li>
                                     <li class="footer-link"><a href="#">All our promotions</a></li>
                                 </ul>
                             </div>
