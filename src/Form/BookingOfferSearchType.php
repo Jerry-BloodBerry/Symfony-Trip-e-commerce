@@ -39,9 +39,8 @@ class BookingOfferSearchType extends AbstractType
                 'required' => false
             ])
             ->add('departureSpot', ChoiceType::class, [
-                'choices' => [
-                    'From' => ''
-                ],
+                'choices' => $options['departureSpots'],
+                'placeholder' => 'From',
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -103,7 +102,8 @@ class BookingOfferSearchType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => BookingOffer::class,
-            'destinations' => null
+            'destinations' => null,
+            'departureSpots' => null
         ]);
     }
 }

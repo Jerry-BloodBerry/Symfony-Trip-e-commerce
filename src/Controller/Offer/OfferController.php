@@ -37,8 +37,13 @@ class OfferController extends AbstractController
         } else {
             $offers = $offerService->findOffers();
         }
+        $allOffers = $this->getDoctrine()->getRepository(BookingOffer::class)->findAll();
+        foreach ($allOffers as $offer) {
+            $departureSpots[$offer->getDepartureSpot()] = $offer->getDepartureSpot();
+        }
         $filtersForm = $this->createForm(BookingOfferFiltersType::class, $bookingOffer, [
-            'method' => 'GET'
+            'method' => 'GET',
+            'departureSpots' => $departureSpots
         ]);
         $filtersForm->handleRequest($request);
         if($filtersForm->isSubmitted() && $filtersForm->isValid()) {
