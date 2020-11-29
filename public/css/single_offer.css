@@ -1,14 +1,18 @@
+#main-content-container {
+    background-color: rgb(0,58,110);
+}
 #offer-header {
     background-color: rgb(0,58,110);
     color: white;
+    padding: 1rem;
 }
 #offer-header h1{
     font-family: "Roboto Condensed", sans-serif;
     text-transform: uppercase;
     font-size: 1.5rem;
-    padding: 1rem 1rem .5rem 1rem;
     font-weight: 600;
     display: inline-block;
+    margin-bottom: 0;
 }
 #offer-header .stars-container {
     display: inline-block;
@@ -16,12 +20,11 @@
     color: #FFD43B;
 }
 .gallery-container {
-    padding: 0 1rem 0 0;
+    padding: 0 1rem;
     background-color: #ffffff;
 }
 .gallery-hero {
     width: 100%;
-    text-align: center;
 }
 .gallery-hero img {
     width: 100%;
@@ -42,11 +45,13 @@
     margin-right: 0;
 }
 #reservation-column {
+    background-color: rgb(0,58,110);
 }
 .reservation-form-container {
     border: 3px solid #ffffff;
     background-color: #ffffff;
     padding: 1rem 1rem;
+    margin: 0 1rem;
 }
 .reservation-form-container h2 {
     font-family: "Roboto Condensed", sans-serif;
@@ -61,4 +66,50 @@
     font-size: 1.5rem;
     font-family: "Roboto Condensed", sans-serif;
     text-transform: uppercase;
+}
+.input-group {
+    width: 90%;
+    margin-top: .5rem;
+}
+.input-group input {
+    border-top-left-radius: .25rem !important;
+    border-bottom-left-radius: .25rem !important;
+}
+.offer-info-list {
+    font-size: .8rem;
+    color: #a09f9f;
+    margin: .5rem auto;
+    padding: 0 .5rem;
+}
+.offer-info-list .offer-info-list-item {
+    margin-bottom: .3rem;
+}
+.offer-info-list .offer-info-list-item .icon-container {
+    color: rgb(0,58,110);
+    padding-right: .5rem;
+    display: inline;
+}
+#reservation-btn-container {
+    text-align: center;
+    margin-top: 1rem;
+}
+#reservation-btn-container button {
+    width: 90%;
+    background-color: rgb(255, 201, 77);
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    border: none;
+    transition: .2s ease-out;
+}
+#reservation-btn-container button:hover {
+    background-color: darkorange;
+}
+@media(min-width: 918px) {
+    #main-content-container {
+        max-width: 1100px
+    }
 }

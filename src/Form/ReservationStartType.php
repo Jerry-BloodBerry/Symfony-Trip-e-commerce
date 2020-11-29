@@ -18,23 +18,21 @@ class ReservationStartType extends AbstractType
                 'data' => 2,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Number of adults'
+                    'placeholder' => 'Number of adults',
+                    'min' => 1
                 ],
+                'html5' => true,
                 'label' => 'Number of adults',
-                'label_attr' => [
-                    'class' => 'sr-only'
-                ]
             ])
             ->add('childNumber', NumberType::class, [
                 'data' => 0,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Number of children'
+                    'placeholder' => 'Number of children',
+                    'min' => 0
                 ],
+                'html5' => true,
                 'label' => 'Number of children',
-                'label_attr' => [
-                    'class' => 'sr-only'
-                ]
             ])
             ->add('submit', SubmitType::class)
         ;
