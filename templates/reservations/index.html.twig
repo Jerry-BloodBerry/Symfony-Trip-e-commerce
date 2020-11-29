@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+{% block page_content %}
+    {% for reservation in reservations %}
+        {{ reservation.id }}
+    {% endfor %}
+{% endblock %}
