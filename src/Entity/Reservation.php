@@ -27,7 +27,7 @@ class Reservation
      * @ORM\ManyToOne(targetEntity=BookingOffer::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $booking_offer;
+    private $bookingOffer;
 
     /**
      * @ORM\Column(type="datetime")
@@ -73,12 +73,12 @@ class Reservation
 
     public function getBookingOffer(): ?BookingOffer
     {
-        return $this->booking_offer;
+        return $this->bookingOffer;
     }
 
-    public function setBookingOffer(?BookingOffer $booking_offer): self
+    public function setBookingOffer(?BookingOffer $bookingOffer): self
     {
-        $this->booking_offer = $booking_offer;
+        $this->bookingOffer = $bookingOffer;
 
         return $this;
     }
