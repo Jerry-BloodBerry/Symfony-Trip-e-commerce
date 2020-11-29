@@ -9,7 +9,8 @@
 {% endblock %}
 {% block page_content %}
     <div class="container-fluid">
-        <div class="row">
+        <div class="row justify-content-center mt-2">
+            <div class="col-10 col-lg-9 col-xl-7" style="background-color: rgb(0,58,110)">
                 <div id="offer-header">
                     <h1>{{ offer.offerName }}</h1>
                     <div class="stars-container">
@@ -25,35 +26,42 @@
                         {% endif %}
                     </div>
                 </div>
-        </div>
-        <div class="row">
-            <div class="gallery-container">
-                <div class="gallery-hero col-lg-8">
-                    <img src="{{ asset('images/country_cards/Turkey_card.jpg') }}"
-                         alt="{{ offer.offerName }}">
+                <div class="row">
+                    <div class="gallery-container col-lg-8 pr-0">
+                        <div class="gallery-hero">
+                            <img src="{{ asset(offer.photosDirectory) }}/1.jpg"
+                                 alt="{{ offer.offerName }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-none d-lg-block" id="reservation-column">
+                        <div class="reservation-form-container">
+                            <h2>Book now</h2>
+                            <div id="reservation-form">
+                                {% set form_desktop = reservationForm.createView %}
+                                {{ form_start(form_desktop) }}
+                                {{ form_end(form_desktop) }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-3" id="reservation-column">
-                    <div class="reservation-form-container">
-                        aaa
+                <div class="row" id="secondary-gallery-container">
+                    <div class="gallery-secondary col-12">
+                        <img src="https://via.placeholder.com/150" alt="placeholder image">
+                        <img src="https://via.placeholder.com/150" alt="placeholder image">
+                        <img src="https://via.placeholder.com/150" alt="placeholder image">
+                        <img src="https://via.placeholder.com/150" alt="placeholder image">
+                        <img src="https://via.placeholder.com/150" alt="placeholder image">
+                        <img src="https://via.placeholder.com/150" alt="placeholder image">
+                        <img src="https://via.placeholder.com/150" alt="placeholder image">
+                    </div>
+                </div>
+                <div class="row" id="description-container">
+                    <div class="col-12 px-lg-0">
+                        <h3>Offer Description</h3>
+                        <p>{{ offer.description }}</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="gallery-secondary">
-            <img src="https://via.placeholder.com/150" alt="placeholder image">
-            <img src="https://via.placeholder.com/150" alt="placeholder image">
-            <img src="https://via.placeholder.com/150" alt="placeholder image">
-            <img src="https://via.placeholder.com/150" alt="placeholder image">
-            <img src="https://via.placeholder.com/150" alt="placeholder image">
-        </div>
-        <div id="description-container">
-            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consectetur hic labore nulla
-                repudiandae! A aliquam aspernatur beatae consectetur culpa debitis eaque earum et illo incidunt
-                ipsam, labore minus non quam ratione rerum soluta veritatis voluptatem. Accusantium architecto
-                asperiores atque consectetur, deleniti dignissimos dolor esse, fugiat id ipsum magnam molestias
-                nulla perspiciatis quibusdam voluptatibus. Accusantium aliquam dicta doloremque eaque et, eum
-                iure labore maiores minima molestias nemo neque officiis perspiciatis quis rerum sapiente, sed
-                tempora vel velit vero!</p>
         </div>
     </div>
 {% endblock %}
