@@ -6,7 +6,9 @@ namespace App\Controller\Offer;
 use App\Entity\BookingOffer;
 use App\Entity\BookingOfferType;
 use App\Entity\Destination;
+use App\Entity\Reservation;
 use App\Form\BookingOfferFiltersType;
+use App\Form\ReservationStartType;
 use App\Service\BookingOfferService;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,8 +41,13 @@ class OfferController extends AbstractController
         } else {
             $offers = $offerService->findOffers();
         }
+        $allOffers = $this->getDoctrine()->getRepository(BookingOffer::class)->findAll();
+        foreach ($allOffers as $offer) {
+            $departureSpots[$offer->getDepartureSpot()] = $offer->getDepartureSpot();
+        }
         $filtersForm = $this->createForm(BookingOfferFiltersType::class, $bookingOffer, [
-            'method' => 'GET'
+            'method' => 'GET',
+            'departureSpots' => $departureSpots
         ]);
         $filtersForm->handleRequest($request);
         if($filtersForm->isSubmitted() && $filtersForm->isValid()) {
@@ -61,8 +68,12 @@ class OfferController extends AbstractController
     public function displayOffer($id)
     {
         $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($id);
+        $reservation = new Reservation();
+        $reservation->setBookingOffer($offer);
+        $reservationForm = $this->createForm(ReservationStartType::class, $reservation);
         return $this->render('offer/single_offer.html.twig', [
-            'offer' => $offer
+            'offer' => $offer,
+            'reservationForm' => $reservationForm
         ]);
     }
 

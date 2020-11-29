@@ -15,7 +15,7 @@
                     {% set filters_desktop=filtersForm.createView %}
                     {% include 'offer/filters_form.html.twig' with {'filtersForm': filters_desktop}%}
                 </div>
-                <div class="col-11 col-sm-11 col-md-9 col-lg-6 col-xl-6" id="offers-column">
+                <div class="col-11 col-sm-11 col-md-9 col-lg-9 col-xl-6" id="offers-column">
                     <div class="row justify-content-between" id="sorting-row">
                         <div class="d-none d-lg-block"></div>
                         <div class="d-lg-none">
@@ -47,7 +47,7 @@
                                  data-rating="{% if offer.rating %}{{ offer.rating }}{% else %}0{% endif %}">
                                 <a href="{{ path('offer_single', {'id': offer.id}) }}" class="offer-link">
                                     <div class="offer-image-container">
-                                        <img src="{{ asset('images/country_cards/Spain_card.jpg') }}" alt="Spain card"/>
+                                        <img src="../{{ offer.photosDirectory }}/1.jpg" alt="{{ offer.offerName }}"/>
                                     </div>
                                     <div class="offer-info-container">
                                         <div class="country-continent">{{ offer.destination }} / {{ offer.destination.continent }}</div>
@@ -82,7 +82,7 @@
                                                 <div class="icon-container">
                                                     <i class="fas fa-plane-departure"></i>
                                                 </div>
-                                                Warsaw Chopin Airport
+                                                {{ offer.departureSpot }}
                                             </div>
                                             <div class="offer-info-list-item">
                                                 <div class="icon-container">
@@ -108,7 +108,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true" style="color: red">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -134,6 +134,30 @@
                 clearBtn: true,
                 orientation: "bottom left",
             });
+            let departureDateInput = $('#booking_offer_filters_departureDate');
+            let comebackDateInput = $('#booking_offer_filters_comebackDate');
+            departureDateInput.datepicker().on('changeDate', function(e) {
+                let minDate = new Date(e.date.valueOf() + 1000 * 3600 * 24);
+                comebackDateInput.datepicker('setStartDate', minDate);
+            })
+            comebackDateInput.datepicker().on('changeDate', function(e) {
+                let maxDate = new Date(e.date.valueOf() - 1000 * 3600 * 24);
+                departureDateInput.datepicker('setEndDate', maxDate)
+            })
+            if(departureDateInput.val() !== '' && comebackDateInput.val() !== '') {
+                let minDate = new Date(departureDateInput.data('datepicker').viewDate.valueOf() + 1000 * 3600 * 24);
+                comebackDateInput.datepicker('setStartDate', minDate);
+                let maxDate = new Date(comebackDateInput.data('datepicker').viewDate.valueOf() - 1000 * 3600 * 24);
+                departureDateInput.datepicker('setEndDate', maxDate);
+            }
+            else if(departureDateInput.val() !== '' && comebackDateInput.val() === '') {
+                let minDate = new Date(departureDateInput.data('datepicker').viewDate.valueOf() + 1000 * 3600 * 24);
+                comebackDateInput.datepicker('setStartDate', minDate);
+            }
+            else {
+                let maxDate = new Date(comebackDateInput.data('datepicker').viewDate.valueOf() - 1000 * 3600 * 24);
+                departureDateInput.datepicker('setEndDate', maxDate);
+            }
             $('#sorting-select').on('change', function () {
                 let prop = $('#sorting-select option:selected').val();
                 sortOffersByProperty(prop);

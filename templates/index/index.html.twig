@@ -149,8 +149,15 @@
                 clearBtn: true,
                 orientation: "bottom left",
             });
+            $('#booking_offer_search_departureDate').datepicker().on('changeDate', function(e) {
+                let minDate = new Date(e.date.valueOf() + 1000 * 3600 * 24);
+                $('#booking_offer_search_comebackDate').datepicker('setStartDate', minDate);
+            })
+            $('#booking_offer_search_comebackDate').datepicker().on('changeDate', function(e) {
+                let maxDate = new Date(e.date.valueOf() - 1000 * 3600 * 24);
+                $('#booking_offer_search_departureDate').datepicker('setEndDate', maxDate)
+            })
             $('.card-offer-description').each(function () {
-                console.log(this);
                 limitLines(this,5);
             });
         })

@@ -22,12 +22,17 @@ class HomeController extends AbstractController
     public function index(Request $request)
     {
         $bookingOffer = new BookingOffer();
+        $offers = $this->getDoctrine()->getRepository(BookingOffer::class)->findAll();
+        foreach ($offers as $offer) {
+            $departureSpots[$offer->getDepartureSpot()] = $offer->getDepartureSpot();
+        }
         $form = $this->createForm(BookingOfferSearchType::class, $bookingOffer, [
             'attr' => [
                 'class' => 'form-inline'
             ],
             'action' => $this->generateUrl('offer_browse'),
-            'method' => 'GET'
+            'method' => 'GET',
+            'departureSpots' => $departureSpots
         ]);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
