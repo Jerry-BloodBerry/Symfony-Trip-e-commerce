@@ -34,6 +34,8 @@ class OfferController extends AbstractController
             $offers = $this->getOffersBasedOnRequestQuery($offerService, $request, $bookingOffer);
         } elseif ($request->query->get('offerType')) {
             $offers = $this->getOffersBasedOnOfferType($offerService, $request->query->get('offerType'));
+        } elseif ($request->query->get('destinationName')) {
+            $offers = $this->getOffersBasedOnDestination($offerService, $request->query->get('destinationName'));
         } else {
             $offers = $offerService->findOffers();
         }
@@ -113,6 +115,17 @@ class OfferController extends AbstractController
         $offerType = $this->getDoctrine()->getRepository(BookingOfferType::class)->findOneBy(['typeName' => $offerTypeName]);
         if($offerType!=null) {
             $offers = $offerService->findOffers(null, null, null, null, null, null, [$offerType]);
+        } else {
+            $offers = null;
+        }
+        return $offers;
+    }
+
+    private function getOffersBasedOnDestination(BookingOfferService $offerService, string $destinationName)
+    {
+        $destination = $this->getDoctrine()->getRepository(Destination::class)->findOneBy(['destinationName' => $destinationName]);
+        if($destination!=null) {
+            $offers = $offerService->findOffers(null, $destination, null, null, null, null, null);
         } else {
             $offers = null;
         }
