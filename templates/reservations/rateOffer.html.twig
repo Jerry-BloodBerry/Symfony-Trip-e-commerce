@@ -1,3 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block page_content %}
+    <h2>Rate offer</h2>
+    <h4>{{ offer.destination }}, {{ offer.departureDate|date("d.m.Y") }}-{{ offer.comebackDate|date("d.m.Y") }}</h4>
+        {% set form_desktop = rateOfferForm.createView %}
+        {{ form_start(form_desktop) }}
+        {{ form_end(form_desktop) }}
 {% endblock %}
