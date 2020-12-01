@@ -12,6 +12,7 @@ use App\Form\ReservationStartType;
 use App\Service\BookingOfferService;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,9 +72,16 @@ class OfferController extends AbstractController
         $reservation = new Reservation();
         $reservation->setBookingOffer($offer);
         $reservationForm = $this->createForm(ReservationStartType::class, $reservation);
+        $finder = new Finder();
+        $finder->files()->in($offer->getPhotosDirectory());
+        $photosCount = 0;
+        if($finder->hasResults()) {
+            $photosCount = $finder->count();
+        }
         return $this->render('offer/single_offer.html.twig', [
             'offer' => $offer,
-            'reservationForm' => $reservationForm
+            'reservationForm' => $reservationForm,
+            'photosCount' => $photosCount
         ]);
     }
 

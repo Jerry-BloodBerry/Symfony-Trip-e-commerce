@@ -83,13 +83,9 @@
                 </div>
                 <div class="row" id="secondary-gallery-container">
                     <div class="gallery-secondary col-12">
-                        <img src="https://via.placeholder.com/150" alt="placeholder image">
-                        <img src="https://via.placeholder.com/150" alt="placeholder image">
-                        <img src="https://via.placeholder.com/150" alt="placeholder image">
-                        <img src="https://via.placeholder.com/150" alt="placeholder image">
-                        <img src="https://via.placeholder.com/150" alt="placeholder image">
-                        <img src="https://via.placeholder.com/150" alt="placeholder image">
-                        <img src="https://via.placeholder.com/150" alt="placeholder image">
+                        {% for i in 0..photosCount - 2 %}
+                            <img src="{{ asset(offer.photosDirectory) }}/{{ i+2 }}.jpg" alt="placeholder image" class="mb-2">
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="row" id="description-container">
