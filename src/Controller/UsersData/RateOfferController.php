@@ -24,17 +24,13 @@ class RateOfferController extends AbstractController
         $packageId = $offer->getPackageId();
         $customersRating = new CustomersRating();
         $customersRating->setPackage($packageId);
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         $customersRating->setUser($user);
         $rateOfferForm = $this->createForm(RateOfferType::class, $customersRating, [
             'method' => 'GET'
         ]);
         $rateOfferForm->handleRequest($request);
         if ($rateOfferForm->isSubmitted() && $rateOfferForm->isValid()) {
-            $rating = $rateOfferForm->get('rating')->getData();
-            $customersRating->setRating($rating);
-            $comment = $rateOfferForm->get('comment')->getData();
-            $customersRating->setComment($comment);
             $em = $this->getDoctrine()->getManager();
             $em->persist($customersRating);
             $em->flush();

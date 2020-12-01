@@ -6,9 +6,8 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use App\Entity\CustomersRating;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,27 +17,26 @@ class RateOfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rating', NumberType::class, [
-                'required' => true,
+            ->add('rating', HiddenType::class, [
                 'label' => 'Your rating',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Your rating'
-                ],
+                'label_attr' => [
+                    'class' => 'sr-only'
+                ]
             ])
-            ->add('comment', TextType::class, [
+            ->add('comment', TextareaType::class, [
                 'required' => false,
                 'label' => 'Comment',
+                'label_attr' => [
+                    'class' => 'sr-only'
+                ],
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Comment'
+                    'placeholder' => 'Comment',
+                    'rows' => 6
                 ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Rate offer',
-                'attr' => [
-                    'class' => 'btn btn-login'
-                ]
+                'label' => 'Rate offer'
             ]);
     }
     public function configureOptions(OptionsResolver $resolver)
