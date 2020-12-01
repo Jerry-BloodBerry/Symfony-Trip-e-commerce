@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\CustomersRating;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * @method CustomersRating|null find($id, $lockMode = null, $lockVersion = null)
@@ -36,17 +37,20 @@ class CustomersRatingRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?CustomersRating
+
+    public function findIfOfferIsRated($user, $packageId): bool
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+
+        $rating = $this->createQueryBuilder('c')
+            ->andWhere('c.user = :user')
+            ->andWhere('c.package = :packageId')
+            ->setParameter('user', $user)
+            ->setParameter('packageId', $packageId)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
+        return $rating != null;
     }
-    */
+
     public function findAvgRatingForPackage($packageId): ?int{
         $qb = $this->createQueryBuilder('rating')
             ->andWhere('rating.package = :val')

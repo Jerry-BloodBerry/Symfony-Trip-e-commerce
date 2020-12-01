@@ -61,19 +61,19 @@ class CustomersRating
         return $this->package;
     }
 
-    public function setPackage(?int $package_id): self
+    public function setPackage(?int $packageId): self
     {
-        $this->package = $package_id;
+        $this->package = $packageId;
 
         return $this;
     }
 
-    public function getRating(): ?string
+    public function getRating(): ?int
     {
         return $this->rating;
     }
 
-    public function setRating(string $rating): self
+    public function setRating(int $rating): self
     {
         $this->rating = $rating;
 
@@ -85,7 +85,7 @@ class CustomersRating
         return $this->comment;
     }
 
-    public function setComment(string $comment): self
+    public function setComment(?string $comment): self
     {
         $this->comment = $comment;
 

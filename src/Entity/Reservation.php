@@ -24,10 +24,10 @@ class Reservation
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=BookingOffer::class)
+     * @ORM\ManyToOne(targetEntity=BookingOffer::class, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $booking_offer;
+    private $bookingOffer;
 
     /**
      * @ORM\Column(type="datetime")
@@ -54,6 +54,10 @@ class Reservation
      */
     private $bankTransferDate;
 
+    private $destination;
+
+    private $totalCost;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,12 +77,12 @@ class Reservation
 
     public function getBookingOffer(): ?BookingOffer
     {
-        return $this->booking_offer;
+        return $this->bookingOffer;
     }
 
-    public function setBookingOffer(?BookingOffer $booking_offer): self
+    public function setBookingOffer(?BookingOffer $bookingOffer): self
     {
-        $this->booking_offer = $booking_offer;
+        $this->bookingOffer = $bookingOffer;
 
         return $this;
     }
@@ -138,6 +142,28 @@ class Reservation
     public function setAdultNumber(?int $adultNumber): self
     {
         $this->adultNumber = $adultNumber;
+        return $this;
+    }
+
+    public function getDestination():?string
+    {
+        return $this->destination;
+    }
+
+    public function setDestination(?string $destination): self
+    {
+        $this->destination = $destination;
+        return $this;
+    }
+
+    public function getTotalCost():?float
+    {
+        return $this->totalCost;
+    }
+
+    public function setTotalCost(?float $totalCost): self
+    {
+        $this->totalCost = $totalCost;
         return $this;
     }
 }
