@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a29e5a00dee1a9b0fec898110a32a58",
+    "content-hash": "44512bafac68c537565b75481f7d5d5b",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -432,12 +432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "79cba0bc0e653005fc9ab5a23624828a803f41fb"
+                "reference": "98233abd3730604620444b11a0746d669913b3dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/79cba0bc0e653005fc9ab5a23624828a803f41fb",
-                "reference": "79cba0bc0e653005fc9ab5a23624828a803f41fb",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/98233abd3730604620444b11a0746d669913b3dc",
+                "reference": "98233abd3730604620444b11a0746d669913b3dc",
                 "shasum": ""
             },
             "require": {
@@ -536,7 +536,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-16T22:44:46+00:00"
+            "time": "2020-11-29T01:41:16+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -544,12 +544,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "ec69ba812cbf768c0fdabfc1cff663d14ae7109c"
+                "reference": "132e3c14bfafc7ffaf9e3781c0ed87df609562cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/ec69ba812cbf768c0fdabfc1cff663d14ae7109c",
-                "reference": "ec69ba812cbf768c0fdabfc1cff663d14ae7109c",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/132e3c14bfafc7ffaf9e3781c0ed87df609562cf",
+                "reference": "132e3c14bfafc7ffaf9e3781c0ed87df609562cf",
                 "shasum": ""
             },
             "require": {
@@ -646,7 +646,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-11T11:06:52+00:00"
+            "time": "2020-11-24T09:55:36+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -1181,12 +1181,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "b1ac293a5026664a7f6eef24c95967f22969c5cd"
+                "reference": "404edd418b983d14a35c62ab297a4ead66ed2063"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/b1ac293a5026664a7f6eef24c95967f22969c5cd",
-                "reference": "b1ac293a5026664a7f6eef24c95967f22969c5cd",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/404edd418b983d14a35c62ab297a4ead66ed2063",
+                "reference": "404edd418b983d14a35c62ab297a4ead66ed2063",
                 "shasum": ""
             },
             "require": {
@@ -1266,7 +1266,7 @@
                 "issues": "https://github.com/doctrine/orm/issues",
                 "source": "https://github.com/doctrine/orm/tree/2.7"
             },
-            "time": "2020-11-10T19:37:36+00:00"
+            "time": "2020-11-25T22:04:56+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -2737,19 +2737,18 @@
         },
         {
             "name": "symfony/apache-pack",
-            "version": "dev-master",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/apache-pack.git",
-                "reference": "d7e64ecf8e5974738924b84cedc70cacc8afa47f"
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/apache-pack/zipball/d7e64ecf8e5974738924b84cedc70cacc8afa47f",
-                "reference": "d7e64ecf8e5974738924b84cedc70cacc8afa47f",
+                "url": "https://api.github.com/repos/symfony/apache-pack/zipball/3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c",
                 "shasum": ""
             },
-            "default-branch": true,
             "type": "symfony-pack",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2758,23 +2757,9 @@
             "description": "A pack for Apache support in Symfony",
             "support": {
                 "issues": "https://github.com/symfony/apache-pack/issues",
-                "source": "https://github.com/symfony/apache-pack/tree/main"
+                "source": "https://github.com/symfony/apache-pack/tree/master"
             },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-02-11T16:22:56+00:00"
+            "time": "2017-12-12T01:46:35+00:00"
         },
         {
             "name": "symfony/asset",
@@ -6803,12 +6788,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "e133d1fd8c9f22dd9bc43d1b7fc46e0f35692226"
+                "reference": "c5379903e5640e5f29024e71aa0817f7bd56102b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e133d1fd8c9f22dd9bc43d1b7fc46e0f35692226",
-                "reference": "e133d1fd8c9f22dd9bc43d1b7fc46e0f35692226",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/c5379903e5640e5f29024e71aa0817f7bd56102b",
+                "reference": "c5379903e5640e5f29024e71aa0817f7bd56102b",
                 "shasum": ""
             },
             "require": {
@@ -6874,7 +6859,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-09T13:33:24+00:00"
+            "time": "2020-11-27T13:05:37+00:00"
         },
         {
             "name": "webimpress/safe-writer",
@@ -7510,16 +7495,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.23.0",
+            "version": "v1.24.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "ffaee624a20a462ec2da82942d3c9d8fc8dd1421"
+                "reference": "87620ef23319ebbdfc5b51dd6b6e7d12003f4564"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/ffaee624a20a462ec2da82942d3c9d8fc8dd1421",
-                "reference": "ffaee624a20a462ec2da82942d3c9d8fc8dd1421",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/87620ef23319ebbdfc5b51dd6b6e7d12003f4564",
+                "reference": "87620ef23319ebbdfc5b51dd6b6e7d12003f4564",
                 "shasum": ""
             },
             "require": {
@@ -7529,6 +7514,7 @@
                 "symfony/config": "^3.4|^4.0|^5.0",
                 "symfony/console": "^3.4|^4.0|^5.0",
                 "symfony/dependency-injection": "^3.4|^4.0|^5.0",
+                "symfony/deprecation-contracts": "^2.2",
                 "symfony/filesystem": "^3.4|^4.0|^5.0",
                 "symfony/finder": "^3.4|^4.0|^5.0",
                 "symfony/framework-bundle": "^3.4|^4.0|^5.0",
@@ -7549,7 +7535,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-main": "1.0-dev"
                 }
             },
             "autoload": {
@@ -7577,7 +7563,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.23.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.24.2"
             },
             "funding": [
                 {
@@ -7593,7 +7579,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-28T15:35:16+00:00"
+            "time": "2020-11-27T17:49:17+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
@@ -7711,7 +7697,7 @@
         },
         {
             "name": "symfony/test-pack",
-            "version": "dev-master",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/test-pack.git",
@@ -7973,7 +7959,6 @@
     "stability-flags": {
         "easycorp/easyadmin-bundle": 20,
         "sensio/framework-extra-bundle": 20,
-        "symfony/apache-pack": 20,
         "doctrine/doctrine-fixtures-bundle": 20
     },
     "prefer-stable": false,
