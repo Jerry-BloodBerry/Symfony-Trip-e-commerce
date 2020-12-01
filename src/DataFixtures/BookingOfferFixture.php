@@ -12,7 +12,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
 {
     public const SUMMER_CHILL_REFERENCE = 'H- Summer n\' Chill';
     public const FAMOUS_TURK_REFERENCE = 'H- Le famous Turk';
-    public const MAHARAJA_REFERENCE = 'H- Maharaja\'s Rest';
+    public const MAHARAJA_REFERENCE1 = 'H- Maharaja\'s Rest1';
+    public const MAHARAJA_REFERENCE2 = 'H- Maharaja\'s Rest2';
     public const AKASAKA_REFERENCE = 'R- Akasaka Onsen Resort';
     public const SYDNEY_REFERENCE = 'Y- Sydney\'s prime';
     public const MAFIOSO_REFERENCE = 'H- Il Mafioso';
@@ -84,7 +85,28 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Balice Airport',
             false
         );
-        $this->addReference(self::MAHARAJA_REFERENCE, $bookingOffer);
+        $this->addReference(self::MAHARAJA_REFERENCE1, $bookingOffer);
+        $manager->persist($bookingOffer);
+
+        $bookingOffer = $this->createBookingOffer(
+            $this->getReference(DestinationFixture::INDIA_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
+                      Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
+                      repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
+            $this->getReference(BookingOfferTypeFixtures::LAST_MINUTE_REFERENCE),
+            'H- Maharaja\'s Rest',
+            2100.00,
+            1800.00,
+            4,
+            new DateTime('2020-08-15'),
+            new DateTime('2021-01-15'),
+            new DateTime('2021-01-16'),
+            new DateTime('2021-01-30'),
+            'Warsaw Chopin Airport',
+            'Warsaw Chopin Airport',
+            false
+        );
+        $this->addReference(self::MAHARAJA_REFERENCE2, $bookingOffer);
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
@@ -144,8 +166,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             new DateTime('2020-12-05'),
             new DateTime('2020-12-06'),
             new DateTime('2020-12-20'),
-            'Warsaw Chopin Airport',
-            'Warsaw Chopin Airport',
+            'Modlin Airport',
+            'Modlin Airport',
             false
         );
         $this->addReference(self::MAFIOSO_REFERENCE, $bookingOffer);
