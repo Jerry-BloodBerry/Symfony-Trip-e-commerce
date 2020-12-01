@@ -26,10 +26,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="gallery-container col-lg-8 px-0">
+                    <div class="gallery-container col-lg-8 px-0 position-relative">
                         <div class="gallery-hero">
                             <img src="{{ asset(offer.photosDirectory) }}/1.jpg"
                                  alt="{{ offer.offerName }}">
+                            <button class="d-lg-none mobile-reservation-btn"
+                                    data-toggle="modal"
+                                    data-target="#reservationFormModal">
+                                Book now!
+                            </button>
                         </div>
                     </div>
                     <div class="col-lg-4 d-none d-lg-block" id="reservation-column">
@@ -37,46 +42,7 @@
                             <h2>Book now</h2>
                             <div id="reservation-form">
                                 {% set form_desktop = reservationForm.createView %}
-                                {{ form_start(form_desktop) }}
-                                <div class="form-group">
-                                    {{ form_label(form_desktop.adultNumber) }}
-                                    {{ form_widget(form_desktop.adultNumber) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ form_label(form_desktop.childNumber) }}
-                                    {{ form_widget(form_desktop.childNumber) }}
-                                </div>
-                                <div class="offer-info-list">
-                                    <div class="offer-info-list-item">
-                                        <div class="icon-container">
-                                            <i class="fas fa-calendar-check"></i>
-                                        </div>
-                                        {{ offer.departureDate|date("d.m.Y") }} - {{ offer.comebackDate|date("d.m.Y") }}
-                                    </div>
-                                    <div class="offer-info-list-item">
-                                        <div class="icon-container">
-                                            <i class="fas fa-clock"></i>
-                                        </div>
-                                        {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
-                                        {{ difference.days }} days
-                                    </div>
-                                    <div class="offer-info-list-item">
-                                        <div class="icon-container">
-                                            <i class="fas fa-plane-departure"></i>
-                                        </div>
-                                        {{ offer.departureSpot }}
-                                    </div>
-                                    <div class="offer-info-list-item">
-                                        <div class="icon-container">
-                                            {% include 'offer/offer_type_icons.html.twig' with {'offerType': offer.offerType} %}
-                                        </div>
-                                        {{ offer.offerType }}
-                                    </div>
-                                </div>
-                                <div id="reservation-btn-container">
-                                    {{ form_widget(form_desktop.submit) }}
-                                </div>
-                                {{ form_end(form_desktop) }}
+                                {% include 'offer/start_reservation_form.html.twig' with {'form': form_desktop, 'offer': offer}%}
                             </div>
                         </div>
                     </div>
@@ -93,6 +59,22 @@
                         <h3>Offer Description</h3>
                         <p>{{ offer.description }}</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="reservationFormModal" tabindex="-1" role="dialog" aria-labelledby="reservationFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reservationFormModalLabel">Book now</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: red">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% set form_mobile=reservationForm.createView %}
+                    {% include 'offer/start_reservation_form.html.twig' with {'form': form_mobile}%}
                 </div>
             </div>
         </div>
