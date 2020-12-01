@@ -18,18 +18,6 @@ class CustomersRatingFixture extends Fixture implements DependentFixtureInterfac
             5
         );
         $manager->persist($rating);
-        $rating = $this->createRating(
-            $this->getReference(UserFixture::USER2_REFERENCE),
-            10,
-            5
-        );
-        $manager->persist($rating);
-        $rating = $this->createRating(
-            $this->getReference(UserFixture::USER2_REFERENCE),
-            9,
-            4
-        );
-        $manager->persist($rating);
         $rating = $this->createRatingWithComment(
             $this->getReference(UserFixture::USER1_REFERENCE),
             4,

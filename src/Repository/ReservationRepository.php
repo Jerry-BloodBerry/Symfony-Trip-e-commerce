@@ -19,11 +19,11 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
-    public function findByUserId($userId)
+    public function findReservationsByUser($user)
     {
         $reservations =  $this->createQueryBuilder('r')
             ->andWhere('r.user = :val')
-            ->setParameter('val', $userId)
+            ->setParameter('val', $user)
             ->getQuery()
             ->getResult();
         foreach ($reservations as $reservation){

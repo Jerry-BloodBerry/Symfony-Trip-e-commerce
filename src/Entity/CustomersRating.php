@@ -61,9 +61,9 @@ class CustomersRating
         return $this->package;
     }
 
-    public function setPackage(?int $package_id): self
+    public function setPackage(?int $packageId): self
     {
-        $this->package = $package_id;
+        $this->package = $packageId;
 
         return $this;
     }
