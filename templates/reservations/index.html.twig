@@ -1,29 +1,30 @@
 {% extends 'base.html.twig' %}
 {% block page_content %}
-    {% for reservation in reservations %}
+    {% for i in range(0, reservations|length-1) %}
         <div id="offer-header">
-            <h1>{{ reservation.destination }}</h1>
-            <h4>{{ reservation.bookingOffer.departureDate|date("d.m.Y") }}-{{ reservation.bookingOffer.comebackDate|date("d.m.Y") }}</h4>
-            <h5>Departure airport - {{ reservation.bookingOffer.departureSpot }}</h5>
-            <h5>Comeback airport - {{ reservation.bookingOffer.comebackSpot }}</h5>
+            <h1>{{ reservations[i].destination }}</h1>
+            <h4>{{ reservations[i].bookingOffer.departureDate|date("d.m.Y") }}-{{ reservations[i].bookingOffer.comebackDate|date("d.m.Y") }}</h4>
+            <h5>Departure airport - {{ reservations[i].bookingOffer.departureSpot }}</h5>
+            <h5>Comeback airport - {{ reservations[i].bookingOffer.comebackSpot }}</h5>
         </div>
-        <p>Total cost: {{ reservation.totalCost }}$</p>
-        {% if reservation.isPaidFor == true %}
-            <p>Reservations was paid for on {{ reservation.bankTransferDate|date("d.m.Y")}}.</p>
+        <p>Total cost: {{ reservations[i].totalCost }}$</p>
+        {% if reservations[i].isPaidFor == true %}
+            <p>Reservations was paid for on {{ reservations[i].bankTransferDate|date("d.m.Y")}}.</p>
         {% else %}
             <p>Reservations was not paid for.</p>
         {% endif %}
-        {% if reservation.adultNumber == 1 %}
-            <p>{{ reservation.adultNumber }} adult passenger
+        {% if reservations[i].adultNumber == 1 %}
+            <p>{{ reservations[i].adultNumber }} adult passenger
         {% else %}
-            <p>{{ reservation.adultNumber }} adult passengers
+            <p>{{ reservations[i].adultNumber }} adult passengers
         {% endif %}
-        {% if reservation.childNumber == 1 %}
-            and {{ reservation.adultNumber }} child.
-        {% elseif reservation.childNumber > 1 %}
-            and {{ reservation.adultNumber }} children.
+        {% if reservations[i].childNumber == 1 %}
+            and {{ reservations[i].adultNumber }} child.
+        {% elseif reservations[i].childNumber > 1 %}
+            and {{ reservations[i].adultNumber }} children.
         {% endif %}
-        <p><a href="{{ path('rateOffer', {'id': reservation.bookingOffer.Id}) }}">Rate offer</a>
-        </p>
+        {% if isRatingAvailable[i] == true %}
+            <p><a href="{{ path('rateOffer', {'id': reservations[i].bookingOffer.Id}) }}">Rate offer</a></p>
+        {% endif %}
     {% endfor %}
 {% endblock %}
