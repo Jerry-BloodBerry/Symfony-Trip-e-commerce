@@ -143,12 +143,21 @@ body {
 .newsletter-submit-container {
     background-color: darkorange;
     border-color: darkorange;
+    padding-left: 0;
+    padding-right: 0;
 }
 .newsletter-submit-btn {
-    padding: 0 0;
+    padding: 0 .5rem;
     background-color: transparent;
     border: none;
     color: #FFFFFF;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
+}
+.toast-header {
+    background-color: darkorange;
+    color: #ffffff;
+}
+.toast-header img {
+    height: 20px;
 }

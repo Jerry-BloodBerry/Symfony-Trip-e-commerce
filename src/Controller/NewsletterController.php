@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Newsletter;
 use App\Form\NewsletterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -21,8 +22,7 @@ class NewsletterController extends AbstractController
             'action' => $this->generateUrl('newsletter_signup'),
             'method' => 'POST'
         ]);
-        if($this->getUser()!=null)
-        {
+        if ($this->getUser() != null) {
             $news_form->get('email')->setData($this->getUser()->getEmail());
         }
         $news_form->handleRequest($request);
@@ -36,9 +36,25 @@ class NewsletterController extends AbstractController
     /**
      * @Route("/signup", name="signup")
      * @param Request $request
+     * @return RedirectResponse
      */
     public function signUp(Request $request)
     {
-        dd($request);
+        if ($request->request->get('newsletter')) {
+            $formData = $request->request->get('newsletter');
+            $email = $formData['email'];
+            if(!$this->getDoctrine()->getRepository(Newsletter::class)->findOneBy(['email' => $email])) {
+                $em = $this->getDoctrine()->getManager();
+                $newsletterSubscription = new Newsletter();
+                $newsletterSubscription->setEmail($email);
+                $em->persist($newsletterSubscription);
+                $em->flush();
+                $this->addFlash('notice', 'Thank you! You will now receive information about changes in our offer.');
+            } else {
+                $this->addFlash('notice', 'Thank you! You are already a newsletter subscriber.');
+            }
+        }
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
 }
