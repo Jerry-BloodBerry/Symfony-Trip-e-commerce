@@ -53,6 +53,7 @@
 .gallery-secondary img {
     width: 12%;
     margin-right: 1%;
+    height: 128px;
 }
 .gallery-secondary img:last-child {
     margin-right: 0;
