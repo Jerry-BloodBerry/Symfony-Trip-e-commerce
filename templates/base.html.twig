@@ -144,6 +144,9 @@
                             </div>
                             <div class="col-lg-3">
                                 <h5 class="mt-4">Sign up for Newsletter</h5>
+                                <div id="newsletter-form-container" class="text-center">
+                                    {{ render(controller('App\\Controller\\NewsletterController::renderForm')) }}
+                                </div>
                             </div>
                         </div>
                         <div class="row text-center">
