@@ -45,7 +45,7 @@ class SettingsType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'Passwords do not match.',
                 'options' => ['attr' => ['class' => 'form-control']],
-                'required' => true,
+                'required' => false,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
             ])
@@ -60,7 +60,7 @@ class SettingsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => null,
         ]);
     }
 }
