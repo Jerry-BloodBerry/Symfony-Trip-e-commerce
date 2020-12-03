@@ -17,7 +17,7 @@ class ReservationController extends AbstractController
     {
         $auth_checker = $this->get('security.authorization_checker');
         if($auth_checker->isGranted('ROLE_USER')) {
-            $user = $this->get('security.token_storage')->getToken()->getUser();
+            $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
             $reservations = $em->getRepository(Reservation::class)->findReservationsByUser($user);
 

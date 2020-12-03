@@ -8,6 +8,24 @@ $('#registration_password_first').keyup(function(){
    }
 });
 
+$('#settings_password_first').keyup(function(){
+    let password = $('#settings_password_first').val();
+    if(checkPasswordStrength(password)===false)
+    {
+        $('#settings_submit').attr('disabled',true);
+    } else {
+        $('#settings_submit').removeAttr('disabled');
+    }
+    if(isEmpty(password))
+    {
+        $('#settings_submit').attr('disabled',false);
+    }
+});
+
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
+
 function checkPasswordStrength(password) {
     let strength = 0;
 
