@@ -21,7 +21,8 @@ class RateOfferType extends AbstractType
                 'label' => 'Your rating',
                 'label_attr' => [
                     'class' => 'sr-only'
-                ]
+                ],
+                'data' => 3
             ])
             ->add('comment', TextareaType::class, [
                 'required' => false,
