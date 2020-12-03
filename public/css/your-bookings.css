@@ -1,0 +1,18 @@
+#title-row {
+    border-bottom: 1px solid rgb(0,58,110);
+}
+#title {
+    margin-bottom: 0;
+    margin-top: 1rem;
+}
+.reservation-table-row {
+    margin-top: 2rem;
+}
+.reservation-info-container {
+    padding: 1rem 2rem;
+}
+.reservation-info-item {
+    display: inline-block;
+    padding: .5rem 2rem;
+    border: 1px solid #ced4da;
+}
