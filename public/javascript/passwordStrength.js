@@ -16,7 +16,15 @@ $('#settings_password_first').keyup(function(){
     } else {
         $('#settings_submit').removeAttr('disabled');
     }
+    if(isEmpty(password))
+    {
+        $('#settings_submit').attr('disabled',false);
+    }
 });
+
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
 
 function checkPasswordStrength(password) {
     let strength = 0;
