@@ -53,6 +53,14 @@ class OfferController extends AbstractController
             'method' => 'GET',
             'departureSpots' => $departureSpots
         ]);
+        if($request->query->get('offerType')) {
+            $fetchedType = $this->getDoctrine()->getRepository(BookingOfferType::class)
+                ->findOneBy(['typeName' => $request->query->get('offerType')]);
+            if($fetchedType) {
+                $typeId = $fetchedType->getId();
+                $filtersForm->get('offerTypes')->get("$typeId")->setData(true);
+            }
+        }
         $filtersForm->handleRequest($request);
         if ($filtersForm->isSubmitted() && $filtersForm->isValid()) {
             $offers = $this->getOffersBasedOnFormSubmission($offerService, $filtersForm, $bookingOffer);
