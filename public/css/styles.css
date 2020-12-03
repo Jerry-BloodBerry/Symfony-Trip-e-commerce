@@ -134,6 +134,8 @@ body {
 }
 #newsletter-form-container form input {
     height: 100%;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
 }
 #newsletter-form-container .envelope-container {
     background-color: #00d4ff;
