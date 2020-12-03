@@ -20,7 +20,8 @@ class NewsletterType extends AbstractType
                     'class' => 'sr-only'
                 ],
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'email@example.com'
                 ]
             ])
             ->add('submit', SubmitType::class, [
