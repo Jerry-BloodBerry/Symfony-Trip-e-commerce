@@ -13,6 +13,9 @@
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+#main-column {
+    max-width: 800px;
+}
 .form-group label, .form-check *, #password-cond-list{
     font-size: .9rem;
 }

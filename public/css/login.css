@@ -13,6 +13,9 @@
     -webkit-transform: translate(-50%, -75%);
     transform: translate(-50%, -75%);
 }
+#main-column {
+    max-width: 800px;
+}
 .form-check
 {
     width: 94%;
