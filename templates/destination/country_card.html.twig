@@ -1,10 +1,9 @@
-<div class="col-lg-4">
-    <a class="card-link" href="#">
-        <div class="card">
-            <img src="{{ asset(country_image) }}" class="card-img-top" alt="..." style="height:193px;">
-            <div class="card-body">
-                <a class="card-title" href="{{ path('offer_browse', {'destinationName': country_name}) }}">{{ country_name }}</a>
-            </div>
+<a href="{{ path('offer_browse', {'destinationName': destination.destinationName}) }}" class="f-offer-card-link d-inline-flex">
+    <div class="card f-offer-card d-flex">
+        <img class="card-img-top" src="{{ asset(destination.image) }}"
+             alt="{{ destination.destinationName }}">
+        <div class="card-body">
+            <h5 class="card-title" title="{{ destination.destinationName }}">{{ destination.destinationName }}</h5>
         </div>
-    </a>
-</div>
+    </div>
+</a>
