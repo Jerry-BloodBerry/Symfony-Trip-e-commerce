@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign in - Dream Holiday{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+{% endblock %}
+{% block body %}
+<div id="hero">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10 col-sm-8 col-md-6 col-lg-6">
+                {% set form = form.createView %}
+                {{ form_start(form) }}
+                <div class="row login-form-row justify-content-center">
+                    <div class="col-lg-6 form-space">
+                        <h5 class="form-title">Enter password to access settings</h5>
+                        <div class="form-group">
+                            <label for="inputPassword">{{ form_label(form.password) }}</label>
+                            {{ form_widget(form.password) }}
+                        </div>
+                        <div class="form-check">
+                        </div>
+                        <div class="my-custom-class-for-errors">
+                            {# {% if error %}
+                                <small id="emailHelp" class="form-text text-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</small>
+                            {% endif %} #}
+                        </div>
+                        <div class="text-center" id="auth-button-container">
+                            {{ form_widget(form.submit) }}
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

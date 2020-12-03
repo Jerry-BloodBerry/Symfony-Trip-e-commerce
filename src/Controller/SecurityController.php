@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AuthType;
 use App\Form\LoginType;
 
 use App\Form\RegistrationType;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
@@ -87,5 +89,32 @@ class SecurityController extends AbstractController
             'form' => $form->createView(),
             'errors' => $errors
         ]);
+    }
+    /**
+     * @Route("/auth", name="auth")
+     * @param Request $request
+     * @param LoginFormAuthenticator $formAuthenticator
+     * @return Response
+     */
+    public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator, AuthenticationUtils $authenticationUtils)
+    {
+        $auth_checker = $this->get('security.authorization_checker');
+        if($auth_checker->isGranted('ROLE_USER')) {
+            $user = $this->getUser();
+            $form = $this->createForm(AuthType::class);
+            $form->createView();
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $authFields = $request->request->get('auth');
+                if ($formAuthenticator->checkCredentials($authFields, $user))
+                    return $this->redirectToRoute('settings');
+            }
+            return $this->render('security/auth.html.twig', [
+                'form' => $form,
+            ]);
+        }
+        else{
+            return $this->redirectToRoute("app_login");
+        }
     }
 }

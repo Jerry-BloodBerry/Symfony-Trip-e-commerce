@@ -8,6 +8,16 @@ $('#registration_password_first').keyup(function(){
    }
 });
 
+$('#settings_password_first').keyup(function(){
+    let password = $('#settings_password_first').val();
+    if(checkPasswordStrength(password)===false)
+    {
+        $('#settings_submit').attr('disabled',true);
+    } else {
+        $('#settings_submit').removeAttr('disabled');
+    }
+});
+
 function checkPasswordStrength(password) {
     let strength = 0;
 

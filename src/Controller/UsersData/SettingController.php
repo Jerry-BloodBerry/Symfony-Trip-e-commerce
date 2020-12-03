@@ -4,13 +4,16 @@
 namespace App\Controller\UsersData;
 
 
+use App\Form\AuthType;
 use App\Form\SettingsType;
+use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SettingController extends AbstractController
 {
@@ -19,56 +22,44 @@ class SettingController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function editData(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $auth_checker = $this->get('security.authorization_checker');
-        if($auth_checker->isGranted('ROLE_USER')) {
             $user = $this->getUser();
-            $firstName = $user->getFirstName();
-            $lastName = $user->getLastName();
-            $email = $user->getEmail();
-            $settingsForm = $this->createForm(SettingsType::class, [
-                'method' => 'GET'
-            ]);
+            $settingsForm = $this->createForm(SettingsType::class);
+            $settingsForm->createView();
             $settingsForm->handleRequest($request);
             if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-
-                $user = $this->UpdateUserData($settingsForm, $passwordEncoder);
-                //dd($user);
+                $settingsFields = $request->request->get('settings');
+                $user = $this->UpdateUserData($settingsFields, $passwordEncoder);
                 $em->persist($user);
                 $em->flush();
                 return $this->redirectToRoute("home");
             }
-
             return $this->render('settings/index.html.twig', [
                 'controller_name' => 'SettingController',
-                'firstName' => $firstName,
-                'lastName' => $lastName,
-                'email' => $email,
+                'firstName' => $user->getFirstName(),
+                'lastName' => $user->getLastName(),
+                'email' => $user->getEmail(),
                 'settingsForm' => $settingsForm
             ]);
-        }
-        else
-            return $this->redirectToRoute("app_login");
     }
-    private function UpdateUserData($settingsForm, UserPasswordEncoderInterface $passwordEncoder){
+    private function UpdateUserData($fields, UserPasswordEncoderInterface $passwordEncoder)
+    {
         $user = $this->getUser();
-
-        $firstNameForm = $settingsForm->get('firstName')->getData();
-        if($firstNameForm != $user->getFirstName())
-            $user->setFirstName($firstNameForm);
-        $lastNameForm = $settingsForm->get('lastName')->getData();
-        if($lastNameForm != $user->getLastName())
-            $user->setLastName($lastNameForm);
-        $emailForm = $settingsForm->get('email')->getData();
-        if($emailForm != $user->getEmail())
-            $user->setEmail($emailForm);
-
-        if($settingsForm->get('password')->getData() != null)
+        $firstNameField = $fields['firstName'];
+        if($firstNameField != $user->getFirstName() and $firstNameField != null)
+            $user->setFirstName($firstNameField);
+        $lastNameField =  $fields['lastName'];
+        if($lastNameField != $user->getLastName() and $lastNameField != null)
+            $user->setLastName($lastNameField);
+        $emailField = $fields['email'];
+        if($emailField != $user->getEmail() and $emailField != null)
+            $user->setEmail($emailField);
+        if($fields['password']['first'] != null)
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,
-                $settingsForm->get('password')->getData()
+                $fields['password']['first']
             ));
 
         return $user;
