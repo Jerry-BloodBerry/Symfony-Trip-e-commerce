@@ -50,7 +50,9 @@
                 <div class="row" id="secondary-gallery-container">
                     <div class="gallery-secondary col-12">
                         {% for i in 0..photosCount - 2 %}
-                            <img src="{{ asset(offer.photosDirectory) }}/{{ i+2 }}.jpg" alt="placeholder image" class="mb-2">
+                            <img src="{{ asset(offer.photosDirectory) }}/{{ i+2 }}.jpg"
+                                 alt="gallery image {{ i+2 }}"
+                                 class="mb-2" onclick="$('#secondaryImageModal{{ i+2 }}').modal('show')">
                         {% endfor %}
                     </div>
                 </div>
@@ -79,5 +81,21 @@
             </div>
         </div>
     </div>
+    {% for i in 0..photosCount - 2 %}
+        <div class="modal fade secondary-img-modal" id="secondaryImageModal{{ i+2 }}" tabindex="-1" role="dialog" aria-labelledby="secondaryImageModal{{ i+2 }}Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color: red">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{{ asset(offer.photosDirectory) }}/{{ i+2 }}.jpg" alt="gallery image {{ i+2 }}" class="w-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
 
