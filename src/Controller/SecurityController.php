@@ -104,13 +104,18 @@ class SecurityController extends AbstractController
             $form = $this->createForm(AuthType::class);
             $form->createView();
             $form->handleRequest($request);
+            $errors = [];
             if ($form->isSubmitted() && $form->isValid()) {
                 $authFields = $request->request->get('auth');
                 if ($formAuthenticator->checkCredentials($authFields, $user))
                     return $this->redirectToRoute('settings');
+                else {
+                    $errors [] = 'Incorrect password';
+                }
             }
             return $this->render('security/auth.html.twig', [
                 'form' => $form,
+                'errors' => $errors
             ]);
         }
         else{
