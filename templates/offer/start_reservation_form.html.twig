@@ -1,11 +1,11 @@
 {{ form_start(form) }}
 <div class="form-group">
     {{ form_label(form.adultNumber) }}
-    {{ form_widget(form.adultNumber) }}
+    {{ form_widget(form.adultNumber, {'attr': {'data-adult-price': offer.offerPrice}}) }}
 </div>
 <div class="form-group">
     {{ form_label(form.childNumber) }}
-    {{ form_widget(form.childNumber) }}
+    {{ form_widget(form.childNumber, {'attr': {'data-child-price': offer.childPrice}}) }}
 </div>
 <div class="offer-info-list">
     <div class="offer-info-list-item">
@@ -33,6 +33,9 @@
         </div>
         {{ offer.offerType }}
     </div>
+</div>
+<div>
+    <p class="text-right total-price-label"><span id="total-value">&dollar;{{ offer.offerPrice }}</span><span class="per-person">/person</span></p>
 </div>
 <div id="reservation-btn-container">
     {{ form_widget(form.submit) }}
