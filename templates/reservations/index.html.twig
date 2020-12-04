@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block title %}Reservations - Dream Holiday{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/your-bookings.css') }}">
     <link rel="stylesheet" href="{{ asset('css/offer-browser-item.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/your-bookings.css') }}">
 {% endblock %}
 {% block page_content %}
     <div class="container-fluid">
@@ -24,6 +24,9 @@
                             <div class="row offer-table-row">
                                 <div class="offer-image-container">
                                     <img src="../{{ reservations[i].bookingOffer.photosDirectory }}/1.jpg" alt="{{ reservations[i].bookingOffer.offerName }}"/>
+                                    {% if isRatingAvailable[i] == true %}
+                                        <a href="{{ path('rateOffer', {'id': reservations[i].bookingOffer.Id}) }}">Rate offer</a>
+                                    {% endif %}
                                 </div>
                                 <div class="offer-info-container">
                                     <div class="country-continent">{{ reservations[i].bookingOffer.destination }} / {{ reservations[i].bookingOffer.destination.continent }}</div>
