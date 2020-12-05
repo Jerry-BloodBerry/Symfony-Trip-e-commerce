@@ -54,6 +54,11 @@ class Reservation
      */
     private $bankTransferDate;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $bankTransferTitle;
+
     private $destination;
 
     private $totalCost;
@@ -166,4 +171,20 @@ class Reservation
         $this->totalCost = $totalCost;
         return $this;
     }
+
+    public function getBankTransferTitle(): ?string
+    {
+        return $this->bankTransferTitle;
+    }
+
+    public function setBankTransferTitle(): self
+    {
+        $this->bankTransferTitle = $this->generateRandomString();
+        return $this;
+    }
+
+    function generateRandomString($length = 8) {
+        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+    }
+
 }

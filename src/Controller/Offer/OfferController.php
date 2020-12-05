@@ -10,10 +10,11 @@ use App\Entity\Reservation;
 use App\Form\BookingOfferFiltersType;
 use App\Form\ReservationStartType;
 use App\Service\BookingOfferService;
+use DateTime;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Form\ConfirmReservationType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,10 +55,10 @@ class OfferController extends AbstractController
             'method' => 'GET',
             'departureSpots' => $departureSpots
         ]);
-        if($request->query->get('offerType')) {
+        if ($request->query->get('offerType')) {
             $fetchedType = $this->getDoctrine()->getRepository(BookingOfferType::class)
                 ->findOneBy(['typeName' => $request->query->get('offerType')]);
-            if($fetchedType) {
+            if ($fetchedType) {
                 $typeId = $fetchedType->getId();
                 $filtersForm->get('offerTypes')->get("$typeId")->setData(true);
             }
@@ -75,30 +76,27 @@ class OfferController extends AbstractController
 
     /**
      * @Route ("/reservationSummary/{offerId}/adults/{adultNumber}/children/{childNumber}", name="reservationSummary")
+     * @param Request $request
      * @param int $offerId
      * @param int $adultNumber
      * @param int $childNumber
      * @return Response
      */
-    public function displayReservationSummary(int $offerId, int $adultNumber, int $childNumber){
+    public function displayReservationSummary(Request $request, int $offerId, int $adultNumber, int $childNumber)
+    {
         $reservation = new Reservation();
         $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($offerId);
         $reservation->setBookingOffer($offer);
         $reservation->setAdultNumber($adultNumber);
         $reservation->setChildNumber($childNumber);
+        $reservation->setBankTransferTitle();
         $reservation->setTotalCost($this->getReservationTotalCost($reservation));
         $reservation->setUser($this->getUser());
-        $form = $this->createFormBuilder($reservation)
-            ->add('submit', SubmitType::class, [
-                'label' => 'Confirm reservation',
-                'attr' => [
-                    'class' => 'btn btn-login'
-                ]
-            ])
-            ->getForm();
+        $form = $this->createForm(ConfirmReservationType::class, $reservation);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $reservation->setDateOfBooking(new \DateTime('NOW'));
+            $reservation->setDateOfBooking(new DateTime('NOW'));
             $reservation->setIsPaidFor(false);
             $em->persist($reservation);
             $em->flush();
@@ -134,7 +132,7 @@ class OfferController extends AbstractController
                 'offerId' => $id,
                 'adultNumber' => $reservation->getAdultNumber(),
                 'childNumber' => $reservation->getChildNumber()
-                ]);
+            ]);
         }
         return $this->render('offer/single_offer.html.twig', [
             'offer' => $offer,
@@ -144,12 +142,11 @@ class OfferController extends AbstractController
     }
 
 
-
     private function getWellFormattedDate(string $date)
     {
         $reformatted = explode('/', $date);
         $reformatted = $reformatted[2] . '/' . $reformatted[1] . '/' . $reformatted[0];
-        return new \DateTime($reformatted);
+        return new DateTime($reformatted);
     }
 
     private function getOffersBasedOnFormSubmission(BookingOfferService $offerService, FormInterface $filtersForm, BookingOffer $bookingOffer)
@@ -211,9 +208,10 @@ class OfferController extends AbstractController
         return $offers;
     }
 
-    private function getReservationTotalCost($reservation){
+    private function getReservationTotalCost($reservation)
+    {
         $adultPrice = $reservation->getBookingOffer()->getOfferPrice();
         $childPrice = $reservation->getBookingOffer()->getChildPrice();
-        return $reservation->getAdultNumber()*$adultPrice+$reservation->getChildNumber()*$childPrice;
+        return $reservation->getAdultNumber() * $adultPrice + $reservation->getChildNumber() * $childPrice;
     }
 }

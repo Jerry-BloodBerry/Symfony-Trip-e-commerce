@@ -16,7 +16,8 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
     public const MAHARAJA_REFERENCE2 = 'H- Maharaja\'s Rest2';
     public const AKASAKA_REFERENCE = 'R- Akasaka Onsen Resort';
     public const SYDNEY_REFERENCE = 'Y- Sydney\'s prime';
-    public const MAFIOSO_REFERENCE = 'H- Il Mafioso';
+    public const MAFIOSO_REFERENCE1 = 'H- Il Mafioso1';
+    public const MAFIOSO_REFERENCE2 = 'H- Il Mafioso2';
     public const BUDDHA_REFERENCE = 'H- Buddha\'s way';
     public const BEIJING_REFERENCE = 'H- Bei-JING';
     public const PATAGONIA_REFERENCE = 'H- Patagonia';
@@ -162,6 +163,27 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             1200.00,
             980.00,
             7,
+            new DateTime('2019-05-05'),
+            new DateTime('2019-12-05'),
+            new DateTime('2019-12-06'),
+            new DateTime('2019-12-20'),
+            'Modlin Airport',
+            'Modlin Airport',
+            false
+        );
+        $this->addReference(self::MAFIOSO_REFERENCE1, $bookingOffer);
+        $manager->persist($bookingOffer);
+
+        $bookingOffer = $this->createBookingOffer(
+            $this->getReference(DestinationFixture::ITALY_REFERENCE),
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sequi soluta. 
+                      Corporis, deserunt incidunt laboriosam magnam nemo nobis porro quae 
+                      repellat repudiandae rerum? Consequatur eaque exercitationem nulla sed ut?',
+            $this->getReference(BookingOfferTypeFixtures::FIRST_MINUTE_REFERENCE),
+            'H- Il Mafioso',
+            1200.00,
+            980.00,
+            7,
             new DateTime('2020-05-05'),
             new DateTime('2020-12-05'),
             new DateTime('2020-12-06'),
@@ -170,7 +192,7 @@ class BookingOfferFixture extends Fixture implements DependentFixtureInterface
             'Modlin Airport',
             false
         );
-        $this->addReference(self::MAFIOSO_REFERENCE, $bookingOffer);
+        $this->addReference(self::MAFIOSO_REFERENCE2, $bookingOffer);
         $manager->persist($bookingOffer);
 
         $bookingOffer = $this->createBookingOffer(
