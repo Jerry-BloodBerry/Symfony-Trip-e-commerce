@@ -32,6 +32,16 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         );
         $manager->persist($reservation);
 
+        $reservation = $this->createPaidReservation(
+            $this->getReference(UserFixture::USER2_REFERENCE),
+            $this->getReference(BookingOfferFixture::MAFIOSO_REFERENCE1),
+            1,
+            2,
+            new DateTime('2019-06-22'),
+            new DateTime('2019-06-24')
+        );
+        $manager->persist($reservation);
+
         $reservation = $this->createReservation(
             $this->getReference(UserFixture::USER2_REFERENCE),
             $this->getReference(BookingOfferFixture::PATAGONIA_REFERENCE),

@@ -3,7 +3,6 @@
 
 namespace App\Controller\UsersData;
 
-
 use App\Form\SettingsType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

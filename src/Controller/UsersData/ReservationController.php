@@ -15,6 +15,7 @@ class ReservationController extends AbstractController
      */
     public function index()
     {
+        $_SESSION['display_rate_offer'] = TRUE;
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $reservations = $em->getRepository(Reservation::class)->findReservationsByUser($user);
