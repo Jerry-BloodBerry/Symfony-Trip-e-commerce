@@ -13,7 +13,7 @@ use App\Service\BookingOfferService;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Form\ConfirmReservationType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,12 +75,13 @@ class OfferController extends AbstractController
 
     /**
      * @Route ("/reservationSummary/{offerId}/adults/{adultNumber}/children/{childNumber}", name="reservationSummary")
+     * @param Request $request
      * @param int $offerId
      * @param int $adultNumber
      * @param int $childNumber
      * @return Response
      */
-    public function displayReservationSummary(int $offerId, int $adultNumber, int $childNumber){
+    public function displayReservationSummary(Request $request, int $offerId, int $adultNumber, int $childNumber){
         $reservation = new Reservation();
         $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($offerId);
         $reservation->setBookingOffer($offer);
@@ -88,14 +89,8 @@ class OfferController extends AbstractController
         $reservation->setChildNumber($childNumber);
         $reservation->setTotalCost($this->getReservationTotalCost($reservation));
         $reservation->setUser($this->getUser());
-        $form = $this->createFormBuilder($reservation)
-            ->add('submit', SubmitType::class, [
-                'label' => 'Confirm reservation',
-                'attr' => [
-                    'class' => 'btn btn-login'
-                ]
-            ])
-            ->getForm();
+        $form = $this->createForm(ConfirmReservationType::class, $reservation);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $reservation->setDateOfBooking(new \DateTime('NOW'));
