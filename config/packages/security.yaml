@@ -34,3 +34,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/rateOffer, roles: ROLE_USER }
+        - { path: ^/settings, roles: ROLE_USER }
+        - { path: ^/auth, roles: ROLE_USER}
+        - { path: ^/reservations, roles: ROLE_USER }
+        - { path: ^/offer/reservationSummary, roles: ROLE_USER }

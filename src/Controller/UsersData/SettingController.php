@@ -4,16 +4,12 @@
 namespace App\Controller\UsersData;
 
 
-use App\Form\AuthType;
 use App\Form\SettingsType;
-use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SettingController extends AbstractController
 {
@@ -24,6 +20,8 @@ class SettingController extends AbstractController
      */
     public function editData(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        if ((isset($_SESSION['display_settings']) && $_SESSION['display_settings'] === TRUE) || !empty($request->request->all())){
+            unset($_SESSION['display_settings']);
             $user = $this->getUser();
             $settingsForm = $this->createForm(SettingsType::class);
             $settingsForm->createView();
@@ -43,20 +41,24 @@ class SettingController extends AbstractController
                 'email' => $user->getEmail(),
                 'settingsForm' => $settingsForm
             ]);
+        } else {
+            return $this->redirectToRoute("auth");
+        }
     }
+
     private function UpdateUserData($fields, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = $this->getUser();
         $firstNameField = $fields['firstName'];
-        if($firstNameField != $user->getFirstName())
+        if ($firstNameField != $user->getFirstName())
             $user->setFirstName($firstNameField);
-        $lastNameField =  $fields['lastName'];
-        if($lastNameField != $user->getLastName())
+        $lastNameField = $fields['lastName'];
+        if ($lastNameField != $user->getLastName())
             $user->setLastName($lastNameField);
         $emailField = $fields['email'];
-        if($emailField != $user->getEmail())
+        if ($emailField != $user->getEmail())
             $user->setEmail($emailField);
-        if($fields['password']['first'] != null)
+        if ($fields['password']['first'] != null)
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,
                 $fields['password']['first']

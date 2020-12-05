@@ -15,28 +15,23 @@ class ReservationController extends AbstractController
      */
     public function index()
     {
-        $auth_checker = $this->get('security.authorization_checker');
-        if($auth_checker->isGranted('ROLE_USER')) {
-            $user = $this->getUser();
-            $em = $this->getDoctrine()->getManager();
-            $reservations = $em->getRepository(Reservation::class)->findReservationsByUser($user);
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $reservations = $em->getRepository(Reservation::class)->findReservationsByUser($user);
 
-            $isRatingAvailable = [];
-            foreach ($reservations as $reservation) {
-                $offer = $reservation->getBookingOffer();
-                $offerComebackDate = $offer->getComebackDate()->format('Y-m-d');
-                $packageId = $offer->getPackageId();
-                $isOfferRated = $em->getRepository(CustomersRating::class)->findIfOfferIsRated($user, $packageId);
-                $isRatingAvailable[] = (!$isOfferRated and $offerComebackDate < date("Y-m-d"));
-            }
-            return $this->render('reservations/index.html.twig', [
-                'controller_name' => 'ReservationController',
-                'reservations' => $reservations,
-                'isRatingAvailable' => $isRatingAvailable
-            ]);
+        $isRatingAvailable = [];
+        foreach ($reservations as $reservation) {
+            $offer = $reservation->getBookingOffer();
+            $offerComebackDate = $offer->getComebackDate()->format('Y-m-d');
+            $packageId = $offer->getPackageId();
+            $isOfferRated = $em->getRepository(CustomersRating::class)->findIfOfferIsRated($user, $packageId);
+            $isRatingAvailable[] = (!$isOfferRated and $offerComebackDate < date("Y-m-d"));
         }
-        else
-            return $this->redirectToRoute("app_login");
+        return $this->render('reservations/index.html.twig', [
+            'controller_name' => 'ReservationController',
+            'reservations' => $reservations,
+            'isRatingAvailable' => $isRatingAvailable
+        ]);
     }
 
 
