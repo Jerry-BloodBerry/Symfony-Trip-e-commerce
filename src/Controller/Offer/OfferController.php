@@ -8,7 +8,6 @@ use App\Entity\BookingOfferType;
 use App\Entity\Destination;
 use App\Entity\Reservation;
 use App\Form\BookingOfferFiltersType;
-use App\Form\ConfirmReservationType;
 use App\Form\ReservationStartType;
 use App\Service\BookingOfferService;
 use Exception;
@@ -75,7 +74,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route ("/reservationSummary/{offerId}-{adultNumber}-{childNumber}", name="reservationSummary")
+     * @Route ("/reservationSummary/{offerId}/adults/{adultNumber}/children/{childNumber}", name="reservationSummary")
      * @param int $offerId
      * @param int $adultNumber
      * @param int $childNumber
