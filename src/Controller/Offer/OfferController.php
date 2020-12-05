@@ -14,6 +14,7 @@ use App\Service\BookingOfferService;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,22 +90,26 @@ class OfferController extends AbstractController
         $reservation->setChildNumber($childNumber);
         $reservation->setTotalCost($this->getReservationTotalCost($reservation));
         $reservation->setUser($this->getUser());
-
-
-        $reservationForm = $this->createForm(ConfirmReservationType::class);
-        $reservationForm->handleRequest($request);
-        if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
-            dd($reservation);
+        $form = $this->createFormBuilder($reservation)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Confirm reservation',
+                'attr' => [
+                    'class' => 'btn btn-login'
+                ]
+            ])
+            ->getForm();
+        dd($form);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             $reservation->setDateOfBooking(new \DateTime('NOW'));
             $reservation->setIsPaidFor(false);
-            $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();
             return $this->redirectToRoute("reservations");
         }
-        return $this->render('offer/reservationSummary.html.twig', [
+        return $this->render('offer/reservation_summary.html.twig', [
             'reservation' => $reservation,
-            'reservationForm' => $reservationForm
+            'form' => $form
         ]);
     }
 
