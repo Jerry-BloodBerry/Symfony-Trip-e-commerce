@@ -75,16 +75,15 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route ("/reservationSummary", name="reservationSummary")
-     * @param Request $request
+     * @Route ("/reservationSummary/{offerId}-{adultNumber}-{childNumber}", name="reservationSummary")
+     * @param int $offerId
+     * @param int $adultNumber
+     * @param int $childNumber
      * @return Response
      */
-    public function displayReservationSummary(Request $request){
+    public function displayReservationSummary(int $offerId, int $adultNumber, int $childNumber){
         $reservation = new Reservation();
-        $offerId = $request->attributes->get('offerId');
         $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($offerId);
-        $adultNumber = $request->attributes->get('adultNumber');
-        $childNumber = $request->attributes->get('childNumber');
         $reservation->setBookingOffer($offer);
         $reservation->setAdultNumber($adultNumber);
         $reservation->setChildNumber($childNumber);
@@ -98,7 +97,6 @@ class OfferController extends AbstractController
                 ]
             ])
             ->getForm();
-        dd($form);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $reservation->setDateOfBooking(new \DateTime('NOW'));
@@ -133,11 +131,11 @@ class OfferController extends AbstractController
         $reservationForm = $this->createForm(ReservationStartType::class, $reservation);
         $reservationForm->handleRequest($request);
         if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
-            return $this->forward('App\Controller\Offer\OfferController::displayReservationSummary', [
-                'offerId' => $reservation->getBookingOffer()->getId(),
+            return $this->redirectToRoute('offer_reservationSummary', [
+                'offerId' => $id,
                 'adultNumber' => $reservation->getAdultNumber(),
                 'childNumber' => $reservation->getChildNumber()
-            ]);
+                ]);
         }
         return $this->render('offer/single_offer.html.twig', [
             'offer' => $offer,
