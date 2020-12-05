@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ reservation.bookingOffer.offerName }} - Confirm reservation {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/single_offer.css') }}">
+{% endblock %}
+{% block page_content %}
+    {{ reservation.id }}
+{% endblock %}
