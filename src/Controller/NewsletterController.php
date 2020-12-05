@@ -22,9 +22,6 @@ class NewsletterController extends AbstractController
             'action' => $this->generateUrl('newsletter_signup'),
             'method' => 'POST'
         ]);
-        if ($this->getUser() != null) {
-            $news_form->get('email')->setData($this->getUser()->getEmail());
-        }
         $news_form->handleRequest($request);
         $errors = $validator->validate($news_object);
         return $this->render('newsletter/form.html.twig', [
