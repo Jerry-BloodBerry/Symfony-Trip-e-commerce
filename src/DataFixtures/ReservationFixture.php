@@ -83,6 +83,7 @@ class ReservationFixture extends Fixture implements DependentFixtureInterface
         $reservation->setChildNumber($childNumber);
         $reservation->setDateOfBooking($dateOfBooking);
         $reservation->setIsPaidFor($paid);
+        $reservation->setBankTransferTitle();
         return $reservation;
     }
 
