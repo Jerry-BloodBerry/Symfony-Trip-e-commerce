@@ -59,6 +59,7 @@
     font-family: "Montserrat", sans-serif;
     border: none;
     padding: .5rem 2rem;
+    transition: .2s ease-out;
 }
 .confirm-btn:hover {
     box-shadow: 8px 8px 8px 1px rgba(0, 0, 0, 0.2);
