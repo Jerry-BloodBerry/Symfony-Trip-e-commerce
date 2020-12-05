@@ -9,18 +9,18 @@
     <div id="hero">
         <div class="container-fluid">
             <div class="row register-form-row justify-content-center">
-                <div class="col-10 col-sm-8 col-md-6 col-lg-6">
+                <div class="col-10 col-sm-8 col-md-6 col-lg-9 col-xl-6" id="main-column">
                     {% set form = settingsForm.createView %}
                     {{ form_start(form) }}
-                    {% for error in form.vars.errors.form.getErrors(true) %}
-                        <div class="alert alert-danger" role="alert">{{ error.message }}</div>
-                    {% endfor %}
                     <div class="row justify-content-center">
                         <div class="col-lg-6 form-space">
                             <div id="form-header">
                                 <h3 class="form-title">Edit Data</h3>
                             </div>
                             <div id="form-body">
+                                {% for error in form.vars.errors.form.getErrors(true) %}
+                                    <div class="alert alert-danger" role="alert">{{ error.message }}</div>
+                                {% endfor %}
                                 <div class="form-group">
                                     <label for="inputFirstName">{{ form_label(form.firstName) }}</label>
                                     <div class="input-group">

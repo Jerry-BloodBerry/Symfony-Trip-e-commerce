@@ -33,12 +33,15 @@ class OfferController extends AbstractController
     public function displayOfferList(Request $request, BookingOfferService $offerService)
     {
         $bookingOffer = new BookingOffer();
-        if($request->query->get('booking_offer_search')) {
+        if ($request->query->get('booking_offer_search')) {
             $offers = $this->getOffersBasedOnRequestQuery($offerService, $request, $bookingOffer);
         } elseif ($request->query->get('offerType')) {
             $offers = $this->getOffersBasedOnOfferType($offerService, $request->query->get('offerType'));
         } elseif ($request->query->get('destinationName')) {
             $offers = $this->getOffersBasedOnDestination($offerService, $request->query->get('destinationName'));
+            $queryDestination = $this->getDoctrine()->getRepository(Destination::class)
+                ->findOneBy(['destinationName' => $request->query->get('destinationName')]);
+            $bookingOffer->setDestination($queryDestination);
         } else {
             $offers = $offerService->findOffers();
         }
@@ -50,8 +53,16 @@ class OfferController extends AbstractController
             'method' => 'GET',
             'departureSpots' => $departureSpots
         ]);
+        if($request->query->get('offerType')) {
+            $fetchedType = $this->getDoctrine()->getRepository(BookingOfferType::class)
+                ->findOneBy(['typeName' => $request->query->get('offerType')]);
+            if($fetchedType) {
+                $typeId = $fetchedType->getId();
+                $filtersForm->get('offerTypes')->get("$typeId")->setData(true);
+            }
+        }
         $filtersForm->handleRequest($request);
-        if($filtersForm->isSubmitted() && $filtersForm->isValid()) {
+        if ($filtersForm->isSubmitted() && $filtersForm->isValid()) {
             $offers = $this->getOffersBasedOnFormSubmission($offerService, $filtersForm, $bookingOffer);
         }
         return $this->render('offer/browser.html.twig', [
@@ -75,7 +86,7 @@ class OfferController extends AbstractController
         $finder = new Finder();
         $finder->files()->in($offer->getPhotosDirectory());
         $photosCount = 0;
-        if($finder->hasResults()) {
+        if ($finder->hasResults()) {
             $photosCount = $finder->count();
         }
         return $this->render('offer/single_offer.html.twig', [
@@ -87,7 +98,7 @@ class OfferController extends AbstractController
 
     private function getWellFormattedDate(string $date)
     {
-        $reformatted = explode('/',$date);
+        $reformatted = explode('/', $date);
         $reformatted = $reformatted[2] . '/' . $reformatted[1] . '/' . $reformatted[0];
         return new \DateTime($reformatted);
     }
@@ -115,10 +126,10 @@ class OfferController extends AbstractController
         $destination = $requestParams['destination'] ?? null;
         $departureDate = $requestParams['departureDate'] ?? null;
         $comebackDate = $requestParams['comebackDate'] ?? null;
-        if($departureDate!=null) {
+        if ($departureDate != null) {
             $bookingOffer->setDepartureDate($this->getWellFormattedDate($departureDate));
         }
-        if($comebackDate!=null) {
+        if ($comebackDate != null) {
             $bookingOffer->setComebackDate($this->getWellFormattedDate($comebackDate));
         }
         $bookingOffer->setDepartureSpot($departureSpot);
@@ -132,7 +143,7 @@ class OfferController extends AbstractController
     private function getOffersBasedOnOfferType(BookingOfferService $offerService, string $offerTypeName)
     {
         $offerType = $this->getDoctrine()->getRepository(BookingOfferType::class)->findOneBy(['typeName' => $offerTypeName]);
-        if($offerType!=null) {
+        if ($offerType != null) {
             $offers = $offerService->findOffers(null, null, null, null, null, null, [$offerType]);
         } else {
             $offers = null;
@@ -143,7 +154,7 @@ class OfferController extends AbstractController
     private function getOffersBasedOnDestination(BookingOfferService $offerService, string $destinationName)
     {
         $destination = $this->getDoctrine()->getRepository(Destination::class)->findOneBy(['destinationName' => $destinationName]);
-        if($destination!=null) {
+        if ($destination != null) {
             $offers = $offerService->findOffers(null, $destination, null, null, null, null, null);
         } else {
             $offers = null;
