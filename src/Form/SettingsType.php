@@ -20,7 +20,7 @@ class SettingsType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => 'First Name',
                 'attr' => [
                     'class' => 'form-control',
@@ -28,14 +28,14 @@ class SettingsType extends AbstractType
                 ]
             ])
             ->add('lastName', TextType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => 'Last Name',
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
             ->add('email', EmailType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => 'Email',
                 'attr' => [
                     'class' => 'form-control'

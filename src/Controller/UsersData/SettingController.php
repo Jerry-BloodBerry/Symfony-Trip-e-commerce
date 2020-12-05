@@ -48,13 +48,13 @@ class SettingController extends AbstractController
     {
         $user = $this->getUser();
         $firstNameField = $fields['firstName'];
-        if($firstNameField != $user->getFirstName() and $firstNameField != null)
+        if($firstNameField != $user->getFirstName())
             $user->setFirstName($firstNameField);
         $lastNameField =  $fields['lastName'];
-        if($lastNameField != $user->getLastName() and $lastNameField != null)
+        if($lastNameField != $user->getLastName())
             $user->setLastName($lastNameField);
         $emailField = $fields['email'];
-        if($emailField != $user->getEmail() and $emailField != null)
+        if($emailField != $user->getEmail())
             $user->setEmail($emailField);
         if($fields['password']['first'] != null)
             $user->setPassword($passwordEncoder->encodePassword(

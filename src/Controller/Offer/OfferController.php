@@ -8,11 +8,13 @@ use App\Entity\BookingOfferType;
 use App\Entity\Destination;
 use App\Entity\Reservation;
 use App\Form\BookingOfferFiltersType;
+use App\Form\ConfirmReservationType;
 use App\Form\ReservationStartType;
 use App\Service\BookingOfferService;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,21 +75,67 @@ class OfferController extends AbstractController
     }
 
     /**
+     * @Route ("/reservationSummary/{offerId}-{adultNumber}-{childNumber}", name="reservationSummary")
+     * @param int $offerId
+     * @param int $adultNumber
+     * @param int $childNumber
+     * @return Response
+     */
+    public function displayReservationSummary(int $offerId, int $adultNumber, int $childNumber){
+        $reservation = new Reservation();
+        $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($offerId);
+        $reservation->setBookingOffer($offer);
+        $reservation->setAdultNumber($adultNumber);
+        $reservation->setChildNumber($childNumber);
+        $reservation->setTotalCost($this->getReservationTotalCost($reservation));
+        $reservation->setUser($this->getUser());
+        $form = $this->createFormBuilder($reservation)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Confirm reservation',
+                'attr' => [
+                    'class' => 'btn btn-login'
+                ]
+            ])
+            ->getForm();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $reservation->setDateOfBooking(new \DateTime('NOW'));
+            $reservation->setIsPaidFor(false);
+            $em->persist($reservation);
+            $em->flush();
+            return $this->redirectToRoute("reservations");
+        }
+        return $this->render('offer/reservation_summary.html.twig', [
+            'reservation' => $reservation,
+            'form' => $form
+        ]);
+    }
+
+    /**
      * @Route ("/{id}", name="single")
+     * @param Request $request
      * @param int $id
      * @return Response
      */
-    public function displayOffer($id)
+    public function displayOffer(Request $request, $id)
     {
         $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($id);
-        $reservation = new Reservation();
-        $reservation->setBookingOffer($offer);
-        $reservationForm = $this->createForm(ReservationStartType::class, $reservation);
         $finder = new Finder();
         $finder->files()->in($offer->getPhotosDirectory());
         $photosCount = 0;
         if ($finder->hasResults()) {
             $photosCount = $finder->count();
+        }
+        $reservation = new Reservation();
+        $reservation->setBookingOffer($offer);
+        $reservationForm = $this->createForm(ReservationStartType::class, $reservation);
+        $reservationForm->handleRequest($request);
+        if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
+            return $this->redirectToRoute('offer_reservationSummary', [
+                'offerId' => $id,
+                'adultNumber' => $reservation->getAdultNumber(),
+                'childNumber' => $reservation->getChildNumber()
+                ]);
         }
         return $this->render('offer/single_offer.html.twig', [
             'offer' => $offer,
@@ -95,6 +143,8 @@ class OfferController extends AbstractController
             'photosCount' => $photosCount
         ]);
     }
+
+
 
     private function getWellFormattedDate(string $date)
     {
@@ -160,5 +210,11 @@ class OfferController extends AbstractController
             $offers = null;
         }
         return $offers;
+    }
+
+    private function getReservationTotalCost($reservation){
+        $adultPrice = $reservation->getBookingOffer()->getOfferPrice();
+        $childPrice = $reservation->getBookingOffer()->getChildPrice();
+        return $reservation->getAdultNumber()*$adultPrice+$reservation->getChildNumber()*$childPrice;
     }
 }
