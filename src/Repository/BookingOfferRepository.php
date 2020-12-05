@@ -9,8 +9,6 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-use function Sodium\add;
-
 /**
  * @method BookingOffer|null find($id, $lockMode = null, $lockVersion = null)
  * @method BookingOffer|null findOneBy(array $criteria, array $orderBy = null)
@@ -28,7 +26,9 @@ class BookingOfferRepository extends ServiceEntityRepository
 
     private static function createSearchCriteria($departureSpot = null, $destination = null, $departureDate = null, $comebackDate = null, $priceMin = null, $priceMax = null, $bookingOfferTypes = null)
     {
+        $currentDate = new \DateTime('now');
         $criteria = new Criteria();
+        $criteria->andWhere(Criteria::expr()->gt('bookingEndDate', $currentDate));
         if($departureSpot != null)
             $criteria->andWhere(Criteria::expr()->eq('departureSpot', $departureSpot));
         if($destination != null)
