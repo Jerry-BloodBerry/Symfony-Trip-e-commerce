@@ -12,27 +12,31 @@
                     <h1 id="title">Confirm Reservation</h1>
                 </div>
                 <div class="row" id="reservation-info-row">
-                    <div class="col-md-6 info-col">
-                        <div class="info-header-container">
-                            <h1>Your Information</h1>
-                        </div>
-                        <div id="user-info-list">
-                            <div class="info-list-item">
-                                <strong>Name:</strong> {{ app.user.firstName }} {{ app.user.lastName }}
+                    <div class="col-md-6 info-col d-flex justify-content-between flex-column">
+                        <div>
+                            <div class="info-header-container">
+                                <h1>Your Information</h1>
                             </div>
-                            <div class="info-list-item">
-                                <strong>Email:</strong> {{ app.user.email }}
+                            <div id="user-info-list">
+                                <div class="info-list-item">
+                                    <strong>Name:</strong> {{ app.user.firstName }} {{ app.user.lastName }}
+                                </div>
+                                <div class="info-list-item">
+                                    <strong>Email:</strong> {{ app.user.email }}
+                                </div>
                             </div>
                         </div>
-                        <div class="info-header-container">
-                            <h1>Bank Transfer Data</h1>
-                        </div>
-                        <div id="transfer-info-list">
-                            <div class="info-list-item">
-                                <strong>Transfer Title:</strong> {{ reservation.bankTransferTitle }}
+                        <div class="mt-4 mt-md-0">
+                            <div class="info-header-container">
+                                <h1>Bank Transfer Data</h1>
                             </div>
-                            <div class="info-list-item">
-                                <strong>Account Number:</strong> 11111 11111
+                            <div id="transfer-info-list">
+                                <div class="info-list-item">
+                                    <strong>Transfer Title:</strong> {{ reservation.bankTransferTitle }}
+                                </div>
+                                <div class="info-list-item">
+                                    <strong>Account Number:</strong> 11111 11111
+                                </div>
                             </div>
                         </div>
                     </div>

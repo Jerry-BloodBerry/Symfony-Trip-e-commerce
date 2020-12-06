@@ -19,7 +19,7 @@
 .info-col {
     padding: 1rem 1rem;
 }
-.info-header-container, #total-info-list {
+.info-header-container {
     border-bottom: 2px dashed #a09f9f;
 }
 .info-header-container>h1 {
