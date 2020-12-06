@@ -7,7 +7,7 @@
 {% block page_content %}
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-10 col-lg-9 col-xl-6 position-relative">
+            <div class="col-11 col-lg-10 col-xl-6 position-relative">
                 <div class="row" id="title-row">
                     <h1 class="text-center" id="title">Reservations</h1>
                 </div>
@@ -46,12 +46,6 @@
                                         </div>
                                         <div class="offer-info-list-item">
                                             <div class="icon-container">
-                                                {% include 'offer/offer_type_icons.html.twig' with {'offerType': reservations[i].bookingOffer.offerType} %}
-                                            </div>
-                                            {{ reservations[i].bookingOffer.offerType }}
-                                        </div>
-                                        <div class="offer-info-list-item">
-                                            <div class="icon-container">
                                                 <i class="fas fa-users"></i>
                                             </div>
                                             {% if reservations[i].adultNumber == 1 %}
@@ -78,6 +72,12 @@
                                             {% else %}
                                                 Reservation was not paid for
                                             {% endif %}
+                                        </div>
+                                        <div class="offer-info-list-item">
+                                            <div class="icon-container">
+                                                <i class="fas fa-money-check-alt"></i>
+                                            </div>
+                                            <strong>Transfer title</strong> &amp; account number: <strong>{{ reservations[i].bankTransferTitle }}</strong>, 11111 11111
                                         </div>
                                     </div>
                                 </div>
