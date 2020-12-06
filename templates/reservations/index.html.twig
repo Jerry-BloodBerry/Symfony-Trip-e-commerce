@@ -25,7 +25,7 @@
                                 <div class="offer-image-container">
                                     <img src="../{{ reservations[i].bookingOffer.photosDirectory }}/1.jpg" alt="{{ reservations[i].bookingOffer.offerName }}"/>
                                     {% if isRatingAvailable[i] == true %}
-                                        <a href="{{ path('rateOffer', {'id': reservations[i].bookingOffer.Id}) }}">Rate offer</a>
+                                        <a href="{{ path('rateOffer', {'reservationId': reservations[i].Id}) }}">Rate offer</a>
                                     {% endif %}
                                 </div>
                                 <div class="offer-info-container">
