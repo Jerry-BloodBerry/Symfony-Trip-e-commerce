@@ -116,7 +116,7 @@ class OfferController extends AbstractController
      */
     public function displayOffer(Request $request, $id)
     {
-        $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->find($id);
+        $offer = $this->getDoctrine()->getRepository(BookingOffer::class)->findOffer($id);
         $finder = new Finder();
         $finder->files()->in($offer->getPhotosDirectory());
         $photosCount = 0;

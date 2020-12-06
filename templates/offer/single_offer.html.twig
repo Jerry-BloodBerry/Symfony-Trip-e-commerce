@@ -11,8 +11,9 @@
         <div class="row justify-content-center mt-2">
             <div class="col-11 col-xl-10" id="main-content-container">
                 <div id="offer-header">
-                    <h1>{{ offer.offerName }}</h1>
-                    <div class="stars-container">
+                    <h1>{{ offer.offerName }} </h1>
+                    <div class="stars-container ml-2">
+                        <sup>
                         {% if offer.rating %}
                             {% for i in 1..offer.rating %}
                                 <span class="fas fa-star"></span>
@@ -23,6 +24,7 @@
                                 {% endfor %}
                             {% endif %}
                         {% endif %}
+                        </sup>
                     </div>
                 </div>
                 <div class="row">
