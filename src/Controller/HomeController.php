@@ -45,9 +45,13 @@ class HomeController extends AbstractController
             ]);
         }
         $featuredOffers = $this->getDoctrine()->getRepository(BookingOffer::class)->findBy(['isFeatured' => 1]);
+        $featuredWithRating = [];
+        foreach ($featuredOffers as $featuredOffer) {
+            $featuredWithRating [] = $this->getDoctrine()->getRepository(BookingOffer::class)->findOffer($featuredOffer->getId());
+        }
         return $this->render('index/index.html.twig', [
             'form' => $form->createView(),
-            'featuredOffers' => $featuredOffers
+            'featuredOffers' => $featuredWithRating
         ]);
     }
 }

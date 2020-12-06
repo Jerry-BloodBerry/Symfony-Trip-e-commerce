@@ -55,19 +55,28 @@
                         <div class="card f-offer-card">
                             <img class="card-img-top" src="{{ offer.photosDirectory }}/1.jpg"
                                  alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title" title="{{ offer.offerName }}">{{ offer.offerName }}</h5>
-                                <p class="card-offer-duration"><i class="fas fa-clock duration-icon"></i> Duration:
-                                    {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
-                                    {{ difference.days }} days
-                                </p>
-                                <div class="card-text card-offer-description">{{ offer.description }}</div>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="fas fa-star"></span>
-                                <span class="far fa-star"></span>
-                                <p class="card-offer-price">&dollar;{{ offer.offerPrice }}</p>
+                            <div class="card-body d-flex justify-content-between flex-column">
+                                <div>
+                                    <h5 class="card-title" title="{{ offer.offerName }}">{{ offer.offerName }}</h5>
+                                    <p class="card-offer-duration"><i class="fas fa-clock duration-icon"></i> Duration:
+                                        {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
+                                        {{ difference.days }} days
+                                    </p>
+                                    <div class="card-text card-offer-description">{{ offer.description }}</div>
+                                    {% if offer.rating %}
+                                        {% for i in 1..offer.rating %}
+                                            <span class="fas fa-star"></span>
+                                        {% endfor %}
+                                        {% if offer.rating<5 %}
+                                            {% for i in 1..(5-offer.rating) %}
+                                                <span class="far fa-star"></span>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <p class="card-offer-price">&dollar;{{ offer.offerPrice }}</p>
+                                </div>
                             </div>
                         </div>
                     </a>
