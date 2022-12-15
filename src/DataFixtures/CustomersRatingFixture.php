@@ -6,7 +6,7 @@ namespace App\DataFixtures;
 use App\Entity\CustomersRating;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class CustomersRatingFixture extends Fixture implements DependentFixtureInterface
 {

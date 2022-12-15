@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Newsletter;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class NewsletterFixture extends Fixture
 {

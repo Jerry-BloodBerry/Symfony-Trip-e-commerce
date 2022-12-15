@@ -4,8 +4,7 @@ namespace App\Repository;
 
 use App\Entity\CustomersRating;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
-use phpDocumentor\Reflection\Types\Boolean;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method CustomersRating|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,24 +18,6 @@ class CustomersRatingRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, CustomersRating::class);
     }
-
-    // /**
-    //  * @return CustomersRating[] Returns an array of CustomersRating objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
 
     public function findIfOfferIsRated($user, $packageId): bool
     {

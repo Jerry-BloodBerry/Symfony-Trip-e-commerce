@@ -5,8 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Destination;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Validator\Constraints\File;
+use Doctrine\Persistence\ObjectManager;
 
 class DestinationFixture extends Fixture implements DependentFixtureInterface
 {

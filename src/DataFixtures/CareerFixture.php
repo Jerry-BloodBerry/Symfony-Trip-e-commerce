@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Career;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class CareerFixture extends Fixture
 {
