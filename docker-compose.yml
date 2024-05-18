@@ -1,0 +1,53 @@
+volumes:
+  postgres-volume_data:
+
+services:
+  php:
+    container_name: php-fpm
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+      args:
+        TIMEZONE: ${TIMEZONE}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/var/www/app
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    depends_on:
+      - php
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "80:80"
+    env_file:
+      - .docker/.env.nginx.local
+  db:
+    image: postgres:12.19-bullseye
+    volumes:
+      - postgres-volume_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dreamholiday
+      TZ: UTC
+      PGTZ: UTC
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    environment:
+      TZ: UTC
