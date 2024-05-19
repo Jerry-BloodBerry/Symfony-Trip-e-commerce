@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class NewsletterController extends AbstractController
 {
-    public function renderForm(Request $request, ValidatorInterface $validator)
+    public function rendeNewsletterForm(Request $request, ValidatorInterface $validator)
     {
         $news_object = new Newsletter();
         $news_form = $this->createForm(NewsletterType::class, $news_object, [
@@ -40,7 +40,7 @@ class NewsletterController extends AbstractController
         if ($request->request->get('newsletter')) {
             $formData = $request->request->get('newsletter');
             $email = $formData['email'];
-            if(!$this->getDoctrine()->getRepository(Newsletter::class)->findOneBy(['email' => $email])) {
+            if (!$this->getDoctrine()->getRepository(Newsletter::class)->findOneBy(['email' => $email])) {
                 $em = $this->getDoctrine()->getManager();
                 $newsletterSubscription = new Newsletter();
                 $newsletterSubscription->setEmail($email);
