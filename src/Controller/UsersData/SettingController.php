@@ -1,26 +1,25 @@
 <?php
 
-
 namespace App\Controller\UsersData;
 
-use App\Form\SettingsType;
 use App\Entity\User;
+use App\Form\SettingsType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class SettingController extends AbstractController
 {
     /**
      * @Route("/settings", name="settings")
-     * @param Request $request
+     *
      * @return Response
      */
     public function editData(Request $request, UserPasswordHasherInterface $passwordHasher)
     {
-        if ((isset($_SESSION['display_settings']) && $_SESSION['display_settings'] === TRUE) || !empty($request->request->all())) {
+        if ((isset($_SESSION['display_settings']) && true === $_SESSION['display_settings']) || !empty($request->request->all())) {
             unset($_SESSION['display_settings']);
             /** @var User $user */
             $user = $this->getUser();
@@ -33,17 +32,19 @@ class SettingController extends AbstractController
                 $user = $this->UpdateUserData($settingsFields, $passwordHasher);
                 $em->persist($user);
                 $em->flush();
-                return $this->redirectToRoute("home");
+
+                return $this->redirectToRoute('home');
             }
+
             return $this->render('settings/index.html.twig', [
                 'controller_name' => 'SettingController',
                 'firstName' => $user->getFirstName(),
                 'lastName' => $user->getLastName(),
                 'email' => $user->getEmail(),
-                'settingsForm' => $settingsForm
+                'settingsForm' => $settingsForm,
             ]);
         } else {
-            return $this->redirectToRoute("auth");
+            return $this->redirectToRoute('auth');
         }
     }
 
@@ -52,21 +53,25 @@ class SettingController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         $firstNameField = $fields['firstName'];
-        if ($firstNameField != $user->getFirstName())
+        if ($firstNameField != $user->getFirstName()) {
             $user->setFirstName($firstNameField);
+        }
         $lastNameField = $fields['lastName'];
-        if ($lastNameField != $user->getLastName())
+        if ($lastNameField != $user->getLastName()) {
             $user->setLastName($lastNameField);
+        }
         $emailField = $fields['email'];
-        if ($emailField != $user->getEmail())
+        if ($emailField != $user->getEmail()) {
             $user->setEmail($emailField);
-        if ($fields['password']['first'] != null)
+        }
+        if (null != $fields['password']['first']) {
             $user->setPassword(
                 $passwordHasher->hashPassword(
                     $user,
                     $fields['password']['first']
                 )
             );
+        }
 
         return $user;
     }

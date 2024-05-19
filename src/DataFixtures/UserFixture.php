@@ -2,9 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixture extends Fixture
@@ -35,7 +35,6 @@ class UserFixture extends Fixture
         $manager->persist($admin);
 
         $manager->flush();
-
     }
 
     private function createUser(string $firstName, string $lastName, string $email): User
@@ -46,6 +45,7 @@ class UserFixture extends Fixture
         $user->setEmail($email);
         $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
         $user->setRegistrationDate(new \DateTime('now'));
+
         return $user;
     }
 
@@ -53,6 +53,7 @@ class UserFixture extends Fixture
     {
         $admin = $this->createUser($firstName, $lastName, $email);
         $admin->addRole('ROLE_ADMIN');
+
         return $admin;
     }
 }

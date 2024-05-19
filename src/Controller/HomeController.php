@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use App\Entity\BookingOffer;
 use App\Form\BookingOfferSearchType;
@@ -15,8 +13,9 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
-     * @param Request $request
+     *
      * @return Response
+     *
      * @throws \Exception
      */
     public function index(Request $request)
@@ -29,11 +28,11 @@ class HomeController extends AbstractController
         }
         $form = $this->createForm(BookingOfferSearchType::class, $bookingOffer, [
             'attr' => [
-                'class' => 'form-inline'
+                'class' => 'form-inline',
             ],
             'action' => $this->generateUrl('offer_browse'),
             'method' => 'GET',
-            'departureSpots' => $departureSpots
+            'departureSpots' => $departureSpots,
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -41,7 +40,7 @@ class HomeController extends AbstractController
                 'departureSpot' => null,
                 'destination' => $bookingOffer->getDestination(),
                 'departureDate' => $bookingOffer->getDepartureDate(),
-                'comebackDate' => $bookingOffer->getComebackDate()
+                'comebackDate' => $bookingOffer->getComebackDate(),
             ]);
         }
         $featuredOffers = $this->getDoctrine()->getRepository(BookingOffer::class)->findBy(['isFeatured' => 1]);
@@ -49,9 +48,10 @@ class HomeController extends AbstractController
         foreach ($featuredOffers as $featuredOffer) {
             $featuredWithRating[] = $this->getDoctrine()->getRepository(BookingOffer::class)->findOffer($featuredOffer->getId());
         }
+
         return $this->render('index/index.html.twig', [
             'form' => $form->createView(),
-            'featuredOffers' => $featuredWithRating
+            'featuredOffers' => $featuredWithRating,
         ]);
     }
 }

@@ -5,11 +5,10 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\AuthType;
 use App\Form\LoginType;
-
 use App\Form\RegistrationType;
 use App\Security\LoginFormAuthenticator;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,7 +37,7 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', [
             'form' => $form->createView(),
             'last_username' => $lastUsername,
-            'error' => $error
+            'error' => $error,
         ]);
     }
 
@@ -84,24 +83,21 @@ class SecurityController extends AbstractController
                 $formAuthenticator,
                 'main'
             );
-
         }
 
         return $this->render('security/register.html.twig', [
             'form' => $form->createView(),
-            'errors' => $errors
+            'errors' => $errors,
         ]);
     }
 
     /**
      * @Route("/auth", name="auth")
-     * @param Request $request
-     * @param LoginFormAuthenticator $formAuthenticator
+     *
      * @return Response
      */
     public function authenticate(Request $request, LoginFormAuthenticator $formAuthenticator, AuthenticationUtils $authenticationUtils)
     {
-
         $user = $this->getUser();
         $form = $this->createForm(AuthType::class);
         $form->createView();
@@ -110,15 +106,17 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $authFields = $request->request->get('auth');
             if ($formAuthenticator->checkCredentials($authFields, $user)) {
-                $_SESSION['display_settings'] = TRUE;
+                $_SESSION['display_settings'] = true;
+
                 return $this->redirectToRoute('settings');
             } else {
                 $errors[] = 'Incorrect password';
             }
         }
+
         return $this->render('security/auth.html.twig', [
             'form' => $form,
-            'errors' => $errors
+            'errors' => $errors,
         ]);
     }
 }

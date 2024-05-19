@@ -2,17 +2,16 @@
 
 namespace App\Security;
 
-
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
-use App\Repository\UserRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
@@ -31,25 +30,26 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return $request->attributes->get('_route') === 'app_login' && $request->isMethod('POST');
+        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
     public function getCredentials(Request $request)
     {
-        //this is called immediately when supports returns true
-        //dump($request->request->all());die;
+        // this is called immediately when supports returns true
+        // dump($request->request->all());die;
         $postData = $request->request->get('login');
         $email = $postData['email'];
         $pass = $postData['password'];
         $credentials = [
             'email' => $email,
-            'password' => $pass
+            'password' => $pass,
         ];
 
         $request->getSession()->set(
             Security::LAST_USERNAME,
             $credentials['email']
         );
+
         return $credentials;
     }
 
@@ -62,7 +62,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         return $this->passwordHasher->isPasswordValid($user, $credentials['password']);
     }
-
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
