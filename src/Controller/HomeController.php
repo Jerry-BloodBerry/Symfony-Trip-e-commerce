@@ -23,6 +23,7 @@ class HomeController extends AbstractController
     {
         $bookingOffer = new BookingOffer();
         $offers = $this->getDoctrine()->getRepository(BookingOffer::class)->findAll();
+        $departureSpots = [];
         foreach ($offers as $offer) {
             $departureSpots[$offer->getDepartureSpot()] = $offer->getDepartureSpot();
         }
