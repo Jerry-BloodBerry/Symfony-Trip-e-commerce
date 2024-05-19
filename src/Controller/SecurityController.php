@@ -53,7 +53,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordHasherInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator)
+    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator)
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
@@ -68,7 +68,7 @@ class SecurityController extends AbstractController
             $registrationFields = $request->request->get('registration');
 
             $formUser->setPassword(
-                $passwordEncoder->hashPassword(
+                $passwordHasher->hashPassword(
                     $formUser,
                     $registrationFields['password']['first']
                 )
