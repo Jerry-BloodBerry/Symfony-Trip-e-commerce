@@ -2,17 +2,17 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="Given e-mail is already taken.")
  * @ORM\Table(name="app_user")
  */
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id()
@@ -56,11 +56,6 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
      */
     private $reservations;
-
-    public function __construct()
-    {
-
-    }
 
     public function getId(): ?int
     {
@@ -126,9 +121,9 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt()
+    public function getSalt(): ?string
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        return null;
     }
 
     /**
@@ -166,7 +161,7 @@ class User implements UserInterface
 
     public function addRole(string $role): self
     {
-        $this->roles [] = $role;
+        $this->roles[] = $role;
 
         return $this;
     }
@@ -181,5 +176,10 @@ class User implements UserInterface
         $this->registrationDate = $registrationDate;
 
         return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }

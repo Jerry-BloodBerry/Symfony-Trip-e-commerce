@@ -8,13 +8,11 @@ use App\Form\LoginType;
 
 use App\Form\RegistrationType;
 use App\Security\LoginFormAuthenticator;
-use DateTime;
-use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -34,7 +32,7 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         $user = new User();
-        $user->setRegistrationDate(new DateTime('now'));
+        $user->setRegistrationDate(new \DateTime('now'));
         $form = $this->createForm(LoginType::class, $user);
 
         return $this->render('security/login.html.twig', [
@@ -49,13 +47,13 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        throw new Exception('Action forbidden');
+        throw new \Exception('Action forbidden');
     }
 
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator)
+    public function register(Request $request, UserPasswordHasherInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ValidatorInterface $validator)
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
@@ -69,11 +67,13 @@ class SecurityController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $registrationFields = $request->request->get('registration');
 
-            $formUser->setPassword($passwordEncoder->encodePassword(
-                $formUser,
-                $registrationFields['password']['first']
-            ));
-            $formUser->setRegistrationDate(new DateTime('now'));
+            $formUser->setPassword(
+                $passwordEncoder->hashPassword(
+                    $formUser,
+                    $registrationFields['password']['first']
+                )
+            );
+            $formUser->setRegistrationDate(new \DateTime('now'));
 
             $em->persist($formUser);
             $em->flush();
@@ -112,9 +112,8 @@ class SecurityController extends AbstractController
             if ($formAuthenticator->checkCredentials($authFields, $user)) {
                 $_SESSION['display_settings'] = TRUE;
                 return $this->redirectToRoute('settings');
-            }
-            else {
-                $errors [] = 'Incorrect password';
+            } else {
+                $errors[] = 'Incorrect password';
             }
         }
         return $this->render('security/auth.html.twig', [
