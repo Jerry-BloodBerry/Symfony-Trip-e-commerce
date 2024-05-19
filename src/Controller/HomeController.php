@@ -35,19 +35,18 @@ class HomeController extends AbstractController
             'departureSpots' => $departureSpots
         ]);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             return $this->forward('App\Controller\Offer\OfferController::getOffers', [
-               'departureSpot' => null,
-               'destination' => $bookingOffer->getDestination(),
-               'departureDate' => $bookingOffer->getDepartureDate(),
-               'comebackDate' => $bookingOffer->getComebackDate()
+                'departureSpot' => null,
+                'destination' => $bookingOffer->getDestination(),
+                'departureDate' => $bookingOffer->getDepartureDate(),
+                'comebackDate' => $bookingOffer->getComebackDate()
             ]);
         }
         $featuredOffers = $this->getDoctrine()->getRepository(BookingOffer::class)->findBy(['isFeatured' => 1]);
         $featuredWithRating = [];
         foreach ($featuredOffers as $featuredOffer) {
-            $featuredWithRating [] = $this->getDoctrine()->getRepository(BookingOffer::class)->findOffer($featuredOffer->getId());
+            $featuredWithRating[] = $this->getDoctrine()->getRepository(BookingOffer::class)->findOffer($featuredOffer->getId());
         }
         return $this->render('index/index.html.twig', [
             'form' => $form->createView(),
