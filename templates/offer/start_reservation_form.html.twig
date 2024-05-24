@@ -19,7 +19,8 @@
             <i class="fas fa-clock"></i>
         </div>
         {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
-        {{ difference.days }} days
+        {% set numberOfDays = max(1,difference.days)%}
+        {{ numberOfDays }} {% if numberOfDays == 1 %}day{% else %}days{% endif %}
     </div>
     <div class="offer-info-list-item">
         <div class="icon-container">

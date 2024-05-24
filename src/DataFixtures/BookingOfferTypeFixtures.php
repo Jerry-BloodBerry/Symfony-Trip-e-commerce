@@ -15,6 +15,15 @@ class BookingOfferTypeFixtures extends Fixture
     public const GROUP_TOURS_REFERENCE = 'group_tours';
     public const CRUISES_REFERENCE = 'cruises';
 
+    public const ALL_BOOKING_OFFER_TYPES = [
+        self::FIRST_MINUTE_REFERENCE,
+        self::LAST_MINUTE_REFERENCE,
+        self::ALL_INCLUSIVE_REFERENCE,
+        self::FOR_CHILDREN_REFERENCE,
+        self::GROUP_TOURS_REFERENCE,
+        self::CRUISES_REFERENCE,
+    ];
+
     public function load(ObjectManager $manager)
     {
         $offerType = new BookingOfferType();

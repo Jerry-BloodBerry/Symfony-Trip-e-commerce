@@ -60,7 +60,8 @@
                                     <h5 class="card-title" title="{{ offer.offerName }}">{{ offer.offerName }}</h5>
                                     <p class="card-offer-duration"><i class="fas fa-clock duration-icon"></i> Duration:
                                         {% set difference = date(offer.comebackDate).diff(date(offer.departureDate)) %}
-                                        {{ difference.days }} days
+                                        {% set numberOfDays = max(1,difference.days)%}
+                                        {{ numberOfDays }} {% if numberOfDays == 1 %}day{% else %}days{% endif %}
                                     </p>
                                     <div class="card-text card-offer-description">{{ offer.description }}</div>
                                     {% if offer.rating %}
